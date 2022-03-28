@@ -1,6 +1,6 @@
 body {
-    background-image: url("/Users/jchm/Project_weatherstationS/assets/images/cloud-2725520.jpg");
-    background-color: lightgray;
+    background-image: url("assets/images/LogoIWA.png");
+    background-coldor: lightgray;
 }
 
 #footer_container {
