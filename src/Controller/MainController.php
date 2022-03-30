@@ -14,7 +14,7 @@ class MainController extends AbstractController
 {
     public function __construct(private ManagerRegistry $doctrine) {}
 
-    #[Route('/main', name: 'app_main')]
+    #[Route('/main', name: 'main')]
     public function index(): Response
     {
         return $this->render('main/index.html.twig', [
@@ -22,7 +22,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/main/weather', methods:['GET'], name: 'app_weather')]
+    #[Route('/main/weather', methods:['GET'], name: 'weather')]
     public function weather(): Response
     {
         return $this->render('main/weather.html.twig', [
@@ -30,7 +30,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/main/admin', methods:['GET'], name: 'app_admin')]
+    #[Route('/main/admin', methods:['GET'], name: 'admin')]
     public function admin(): Response
     {
         return $this->render('main/admin.html.twig', [
@@ -38,7 +38,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/main/locations', methods:['GET'], name: 'app_locations')]
+    #[Route('/main/locations', methods:['GET'], name: 'locations')]
     public function locations(): Response
     {
         $geolocations = $this->doctrine->getRepository
