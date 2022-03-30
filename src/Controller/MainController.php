@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use app\Entity\Geolocation;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,6 +30,16 @@ class MainController extends AbstractController
     public function admin(): Response
     {
         return $this->render('main/admin.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
+
+    #[Route('/main/locations', methods:['GET'], name: 'app_locations')]
+    public function locations(): Response
+    {
+        $countrys = $this->getDoctrine()->getRepository
+        (Geolocations::class)->findAll();
+        return $this->render('main/locations.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }

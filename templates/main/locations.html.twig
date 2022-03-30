@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+
+        <table class="locations">
+            <thead>
+            <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Country</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for country in countrys %}
+            <tr>
+                <th scope="row">{% country.countryCode %}</th>
+                <td>{% country.country %}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

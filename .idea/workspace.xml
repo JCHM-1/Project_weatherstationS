@@ -2,14 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/controllers.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/webpack_encore.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/webpack_encore.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/packages/parameters.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20220330115105.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20220330120945.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20220330121235.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20220330121453.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20220330121832.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20220330123347.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Country.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Geolocation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/MessengerMessages.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Nearestlocation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Profile.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Station.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/ProfileRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/main/locations.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/doctrine.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,8 +156,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -160,7 +177,7 @@
       <workItem from="1648472324791" duration="201000" />
       <workItem from="1648472528381" duration="1306000" />
       <workItem from="1648473860886" duration="1744000" />
-      <workItem from="1648476965993" duration="1110000" />
+      <workItem from="1648476965993" duration="15231000" />
     </task>
     <servers />
   </component>
