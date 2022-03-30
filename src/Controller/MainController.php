@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
-use app\Entity\Geolocation;
-
+use App\Entity\Geolocation;
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
+    public function __construct(private ManagerRegistry $doctrine) {}
+
     #[Route('/main', name: 'app_main')]
     public function index(): Response
     {
@@ -37,11 +41,10 @@ class MainController extends AbstractController
     #[Route('/main/locations', methods:['GET'], name: 'app_locations')]
     public function locations(): Response
     {
-        $countrys = $this->getDoctrine()->getRepository
-        (Geolocations::class)->findAll();
-        return $this->render('main/locations.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        $geolocations = $this->doctrine->getRepository
+        (Geolocation::class)->findAll();
+        return $this->render('main/locations.html.twig', array
+        ('geolocations' => $geolocations));
     }
 
 }

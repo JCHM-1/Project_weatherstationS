@@ -6,18 +6,24 @@
 
     <div class="container shadow p-3 mb-5 bg-white rounded">
 
-        <table class="locations">
+        <table class="locations table table-striped table-bordered">
             <thead>
-            <tr>
-                <th scope="col">Code</th>
+            <tr class="table-primary">
+                <th scope="col">Id</th>
+                <th scope="col">StationName</th>
+                <th scope="col">County</th>
+                <th scope="col">Postcode</th>
                 <th scope="col">Country</th>
             </tr>
             </thead>
             <tbody>
-            {% for country in countrys %}
+            {% for location in geolocations %}
             <tr>
-                <th scope="row">{% country.countryCode %}</th>
-                <td>{% country.country %}</td>
+                <th scope="row">{{ location.id }}</th>
+                <td>{{ location.stationName }}</td>
+                <td>{{ location.county }}</td>
+                <td>{{ location.postcode }}</td>
+                <td>{{ location.country }}</td>
             </tr>
             {% endfor %}
             </tbody>
