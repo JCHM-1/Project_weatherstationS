@@ -13,6 +13,7 @@
 
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -35,12 +36,10 @@
                             <li><a class="nav-link active" aria-current="page" href="/main/weather">Weather</a></li>
                         </ul>
                     </div>
-                    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                        <ul class="navbar-nav ml-auto">
+                    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 justify-content-end">
+                        <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a
-                                        class="nav-link active"
-                                        aria-current="page"
+                                <a class="nav-link active" aria-current="page"
                                         href="/{{ app.user ? 'logout' : 'login' }}">
                                     {{ app.user ? 'Logout' : 'Login' }}
                                 </a>
@@ -57,9 +56,9 @@
 
 
 
-
+    <div class="container">
         {% block body %}{% endblock %}
-    
+    </div>
     
         {% block footer %}
         {# <div class="fixed-bottom" id="footer_container">

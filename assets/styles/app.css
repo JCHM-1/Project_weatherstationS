@@ -1,6 +1,6 @@
 body {
-    background-image: url("/Users/jchm/Project_weatherstationS/assets/images/cloud-2725520.jpg");
-    background-coldor: lightgray;
+    background-image: url("/Users/macbook/webtech/assets/images/cloud-2725520.jpg");
+    background-color: lightgray;
 }
 
 #footer_container {
@@ -20,4 +20,12 @@ body {
 #button_container {
     padding-top: 100px;
     padding-bottom: 100px;
+}
+
+#sign_in_button {
+    margin-top: 20px;   
+}
+
+#password {
+    margin-top: 20px;
 }
