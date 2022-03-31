@@ -22,6 +22,16 @@ class MainController extends AbstractController
         ]);
     }
 
+    #[Route('/main/postdata', name: 'data')]
+    public function retrieveData(): Response
+    {
+        echo "<pre>";
+        var_dump($_SERVER);
+        return $this->render('/main/retrieve.html.twig', [
+            'controller_name' => 'DataController',
+        ]);
+    }
+
     #[Route('/main/weather', methods:['GET'], name: 'weather')]
     public function weather(): Response
     {
