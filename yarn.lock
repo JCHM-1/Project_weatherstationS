@@ -969,7 +969,7 @@
     "loader-utils" "^2.0.0"
     "schema-utils" "^3.0.0"
 
-"@symfony/webpack-encore@^1.7.0":
+"@symfony/webpack-encore@^1.8.2":
   "integrity" "sha512-ZOsOqaZNP3BSQuISAsyH/Jv5+rDxbM4Wf6IsKo1y5Cm9BFIS2dPLsqDZfMbi6G2HdAHm88JqX/HGwxE73eADEw=="
   "resolved" "https://registry.npmjs.org/@symfony/webpack-encore/-/webpack-encore-1.8.2.tgz"
   "version" "1.8.2"
