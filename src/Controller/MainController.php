@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Geolocation;
-use Doctrine\Bundle\DoctrineBundle\Registry;
+use App\Entity\Profile;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,16 +22,6 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/main/postdata', name: 'data')]
-    public function retrieveData(): Response
-    {
-        echo "<pre>";
-        var_dump($_SERVER);
-        return $this->render('/main/retrieve.html.twig', [
-            'controller_name' => 'DataController',
-        ]);
-    }
-
     #[Route('/main/weather', methods:['GET'], name: 'weather')]
     public function weather(): Response
     {
@@ -40,12 +30,13 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/main/admin', methods:['GET'], name: 'admin')]
+    #[Route('/admin/profiles', methods:['GET'], name: 'profiles')]
     public function admin(): Response
     {
-        return $this->render('main/admin.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        $profiles = $this->doctrine->getRepository
+        (Profile::class)->findAll();
+        return $this->render('admin/profiles.html.twig', array
+        ('profiles' => $profiles));
     }
 
     #[Route('/main/locations', methods:['GET'], name: 'locations')]
