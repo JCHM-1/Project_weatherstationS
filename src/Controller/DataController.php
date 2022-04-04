@@ -15,7 +15,7 @@ class DataController extends AbstractController
     {
     }
 
-    #[Route('/postweather', name: 'data')]
+    #[Route('/postweather',  name: 'data', methods: ['POST'])]
     public function postdata(Request $request): void
     {
         $decodedRequest = json_decode($request);
