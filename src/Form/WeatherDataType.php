@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Weatherdata;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,8 +14,16 @@ class WeatherDataType extends AbstractType
     {
         $builder
             ->add('stn')
-            ->add('date', DateType::class)
-            ->add('time', TimeType::class)
+            ->add('date', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'html5' => false
+            ])
+            ->add('time', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'HH:mm:ss',
+                'html5' => false
+            ])
             ->add('temp')
             ->add('dewp')
             ->add('stp')
@@ -23,7 +32,7 @@ class WeatherDataType extends AbstractType
             ->add('wdsp')
             ->add('prcp')
             ->add('sndp')
-            ->add('frshtt', NumberType::class) // Want wordt aangeleverd als String
+            ->add('frshtt') // Want wordt aangeleverd als String
             ->add('cldc')
             ->add('wnddir');
     }
@@ -32,6 +41,7 @@ class WeatherDataType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Weatherdata::class,
+            'crsf_protection'=> false,
         ]);
     }
 }
