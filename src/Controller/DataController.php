@@ -38,6 +38,14 @@ class DataController extends AbstractController
                 echo '</pre>';
                 $input = New Weatherdata();
                 $input->setStn($weathersubdata['STN']);
+                $input->setDate(strtotime($weathersubdata['DATE']));
+                $input->setTime(strtotime($weathersubdata['TIME']));
+                $input->setTemp($weathersubdata['TEMP']);
+                $input->setDewp($weathersubdata['DEWP']);
+                $input->setStp($weathersubdata['STP']);
+                $input->setSlp($weathersubdata['SLP']);
+                $input->setVisib($weathersubdata[''])
+
 
                 $form = $this->createForm(WeatherDataType::class, new Weatherdata());
 
