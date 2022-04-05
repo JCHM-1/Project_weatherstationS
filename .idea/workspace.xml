@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="weathergen data processing">
+      <change afterPath="$PROJECT_DIR$/src/Form/WeatherDataType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/parameters.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DataController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,6 +173,7 @@
       <workItem from="1648476965993" duration="15231000" />
       <workItem from="1649086313064" duration="1472000" />
       <workItem from="1649087850271" duration="25131000" />
+      <workItem from="1649153908639" duration="5843000" />
     </task>
     <task id="LOCAL-00001" summary="Registratie pagina">
       <created>1648765507567</created>
@@ -202,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649106485352</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="weathergen data processing">
+      <created>1649153850634</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1649153850634</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +226,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
