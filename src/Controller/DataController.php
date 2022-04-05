@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Weatherdata;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,36 +16,50 @@ class DataController extends AbstractController
     {
     }
 
-    #[Route('/postweather',  name: 'data', methods: ['POST'])]
-    public function postdata(Request $request): void
-    {
-        $decodedRequest = json_decode($request);
+    public function index(){
+        return $this->render(view:'weather.html.twig');
+    }
 
-        for($i = 0; $i< sizeof($decodedRequest->WEATHERDATA); $i++){
+    #[Route('/postweatherdata', name: 'data')]
+    public function postdata(Request $request): Response
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $manager = $this->doctrine->getManager();
+            $decodedRequest = json_decode($request);
+
+            echo '<pre>';
+            var_dump($request);
+            echo '</pre>';
+
             $data = new WeatherData();
+
 
             // Klopt nog niet helemaal, hieronder
             // https://stackoverflow.com/questions/29308898/how-to-extract-and-access-data-from-json-with-php
-            $data->setStn($decodedRequest->WEATHERDATA[$i]->STN);
-            $data->setDate($decodedRequest->WEATHERDATA[$i]->DATE);
-            $data->setTime($decodedRequest->WEATHERDATA[$i]->TIME);
-            $data->setTemp($decodedRequest->WEATHERDATA[$i]->TEMP);
-            $data->setDewp($decodedRequest->WEATHERDATA[$i]->DEWP);
-            $data->setStp($decodedRequest->WEATHERDATA[$i]->STP);
-            $data->setSlp($decodedRequest->WEATHERDATA[$i]->SLP);
-            $data->setVisib($decodedRequest->WEATHERDATA[$i]->VISB);
-            $data->setWdsp($decodedRequest->WEATHERDATA[$i]->WDSP);
-            $data->setPrcp($decodedRequest->WEATHERDATA[$i]->PRCP);
-            $data->setSndp($decodedRequest->WEATHERDATA[$i]->SNDP);
-            $data->setFrshtt($decodedRequest->WEATHERDATA[$i]->FRSHTT);
-            $data->setCldc($decodedRequest->WEATHERDATA[$i]->CLDC);
-            $data->setWnddir($decodedRequest->WEATHERDATA[$i]->WNDDIR);
 
-            $manager = $this->doctrine->getManager();
+            //        foreach($decodedRequest as $i) {
+            //            $data->setStn($decodedRequest->WEATHERDATA[$i]->DATE);
+            //            $data->setDate($decodedRequest->WEATHERDATA[$i]->DATE);
+            //            $data->setTime($decodedRequest->WEATHERDATA[$i]->TIME);
+            //            $data->setTemp($decodedRequest->WEATHERDATA[$i]->TEMP);
+            //            $data->setDewp($decodedRequest->WEATHERDATA[$i]->DEWP);
+            //            $data->setStp($decodedRequest->WEATHERDATA[$i]->STP);
+            //            $data->setSlp($decodedRequest->WEATHERDATA[$i]->SLP);
+            //            $data->setVisib($decodedRequest->WEATHERDATA[$i]->VISB);
+            //            $data->setWdsp($decodedRequest->WEATHERDATA[$i]->WDSP);
+            //            $data->setPrcp($decodedRequest->WEATHERDATA[$i]->PRCP);
+            //            $data->setSndp($decodedRequest->WEATHERDATA[$i]->SNDP);
+            //            $data->setFrshtt($decodedRequest->WEATHERDATA[$i]->FRSHTT);
+            //            $data->setCldc($decodedRequest->WEATHERDATA[$i]->CLDC);
+            //            $data->setWnddir($decodedRequest->WEATHERDATA[$i]->WNDDIR);
+            //
+            //
+            //            $manager->persists($data);
+            //            $manager->flush();
+            //        }
 
-            $manager->persists($data);
-            $manager->flush();
-        }
+
+            return new Response('weatherdata posted');
 
 
 //        echo '<pre>';
@@ -53,7 +68,9 @@ class DataController extends AbstractController
 //        return $this->render('/main/retrieve.html.twig', [
 //            'controller_name' => 'MainController',
 //        ]);
-    }
 
+        }
+        return new Response('no weatherdata posted/');
+    }
 }
 
