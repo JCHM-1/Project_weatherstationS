@@ -104,8 +104,9 @@ class Weatherdata
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): \DateTimeInterface
     {
+
         return $this->date;
     }
 

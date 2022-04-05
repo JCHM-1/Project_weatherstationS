@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DataController extends AbstractController
 {
     private $entityManager;
+
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManger = $entityManager;
@@ -29,9 +30,20 @@ class DataController extends AbstractController
 
         $data = json_decode($request->getContent(), TRUE); //convert JSON into array
 
-        $form = $this->createForm(WeatherDataType::class, new Weatherdata());
 
-        $form->submit($data);
+        foreach ($data as $weatherdata) {
+            foreach($weatherdata as $weathersubdata) {
+                echo '<pre>';
+                echo $weathersubdata['STN'];
+                echo '</pre>';
+                $input = New Weatherdata();
+                $input->setStn($weathersubdata['STN']);
+
+                $form = $this->createForm(WeatherDataType::class, new Weatherdata());
+
+                $form->submit($weathersubdata);
+            }
+    }
 
         if(false === $form->isValid()){
             return new JsonResponse(
@@ -42,7 +54,7 @@ class DataController extends AbstractController
             );
         }
 
-        $this->entityManager->persist($form->getData());
+        $this->entityManager->persist($input);
         $this->entityManager->flush();
 
 
@@ -70,12 +82,11 @@ class DataController extends AbstractController
 //
 //            $data = new WeatherData();
 
-
         // Klopt nog niet helemaal, hieronder
         // https://stackoverflow.com/questions/29308898/how-to-extract-and-access-data-from-json-with-php
 
         //        foreach($decodedRequest as $i) {
-        //            $data->setStn($decodedRequest->WEATHERDATA[$i]->DATE);
+        //            $data->setStn($decodedRequest->WEATHERDATA[$i]->STN);
         //            $data->setDate($decodedRequest->WEATHERDATA[$i]->DATE);
         //            $data->setTime($decodedRequest->WEATHERDATA[$i]->TIME);
         //            $data->setTemp($decodedRequest->WEATHERDATA[$i]->TEMP);
@@ -89,7 +100,6 @@ class DataController extends AbstractController
         //            $data->setFrshtt($decodedRequest->WEATHERDATA[$i]->FRSHTT);
         //            $data->setCldc($decodedRequest->WEATHERDATA[$i]->CLDC);
         //            $data->setWnddir($decodedRequest->WEATHERDATA[$i]->WNDDIR);
-        //
         //
         //            $manager->persists($data);
         //            $manager->flush();
@@ -108,5 +118,6 @@ class DataController extends AbstractController
 
 
     }
+
 }
 
