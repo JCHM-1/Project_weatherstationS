@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Weatherdata;
 use App\Form\WeatherDataType;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,39 +34,50 @@ class DataController extends AbstractController
 
         foreach ($data as $weatherdata) {
             foreach($weatherdata as $weathersubdata) {
+
                 echo '<pre>';
                 echo $weathersubdata['STN'];
                 echo '</pre>';
+
                 $input = New Weatherdata();
                 $input->setStn($weathersubdata['STN']);
-                $input->setDate(strtotime($weathersubdata['DATE']));
-                $input->setTime(strtotime($weathersubdata['TIME']));
+                $date = DateTime::Create($weathersubdata['DATE']));
+
+                echo '<pre>';
+                echo $date;
+                echo '</pre>';
+
+                $input->setDate($date);
+                $input->setTime($weathersubdata['TIME']);
                 $input->setTemp($weathersubdata['TEMP']);
                 $input->setDewp($weathersubdata['DEWP']);
                 $input->setStp($weathersubdata['STP']);
                 $input->setSlp($weathersubdata['SLP']);
-                $input->setVisib($weathersubdata[''])
+                $input->setVisib($weathersubdata['VISIB']);
+                $input->setWdsp($weathersubdata['WDSP']);
+                $input->setPrcp($weathersubdata['PRCP']);
+                $input->setSndp($weathersubdata['SNDP']);
+                $input->setFrshtt($weathersubdata['FRSHTT']);
+                $input->setCldc($weathersubdata['CLDC']);
+                $input->setWnddir($weathersubdata['WNDDIR']);
 
 
-                $form = $this->createForm(WeatherDataType::class, new Weatherdata());
-
-                $form->submit($weathersubdata);
+//                $form = $this->createForm(WeatherDataType::class, new Weatherdata());
+//
+//                $form->submit($weathersubdata);
             }
-    }
-
-        if(false === $form->isValid()){
-            return new JsonResponse(
-                [
-                    'status' => 'error',
-                ],
-                JsonResponse::HTTP_BAD_REQUEST
-            );
         }
-
         $this->entityManager->persist($input);
         $this->entityManager->flush();
 
-
+//        if(false === $form->isValid()){
+//            return new JsonResponse(
+//                [
+//                    'status' => 'error',
+//                ],
+//                JsonResponse::HTTP_BAD_REQUEST
+//            );
+//        }
 
         return new JsonResponse(
             [
