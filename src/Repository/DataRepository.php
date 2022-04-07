@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Weatherdata;
+use App\Entity\Data;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Weatherdata|null find($id, $lockMode = null, $lockVersion = null)
- * @method Weatherdata|null findOneBy(array $criteria, array $orderBy = null)
- * @method Weatherdata[]    findAll()
- * @method Weatherdata[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Data|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Data|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Data[]    findAll()
+ * @method Data[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class WeatherdataRepository extends ServiceEntityRepository
+class DataRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Weatherdata::class);
+        parent::__construct($registry, Data::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Weatherdata $entity, bool $flush = true): void
+    public function add(Data $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class WeatherdataRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Weatherdata $entity, bool $flush = true): void
+    public function remove(Data $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,15 +46,15 @@ class WeatherdataRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Weatherdata[] Returns an array of Weatherdata objects
+    //  * @return Data[] Returns an array of Data objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
+            ->orderBy('d.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -63,10 +63,10 @@ class WeatherdataRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Weatherdata
+    public function findOneBySomeField($value): ?Data
     {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
