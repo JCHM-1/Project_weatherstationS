@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="">
+    <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="Registratie pagina">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/parameters.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DataController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220331121514.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220331133433.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20220406151721.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,6 +129,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/process" />
       <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
       <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/vendor/symfony-bundles/json-request-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="2710XJV0CY3oKp5XpnBZ0fXlJMN" />
@@ -165,6 +167,7 @@
       <workItem from="1648472528381" duration="1306000" />
       <workItem from="1648473860886" duration="1744000" />
       <workItem from="1648476965993" duration="15231000" />
+      <workItem from="1649290218797" duration="597000" />
     </task>
     <task id="LOCAL-00001" summary="Registratie pagina">
       <created>1648765507567</created>
