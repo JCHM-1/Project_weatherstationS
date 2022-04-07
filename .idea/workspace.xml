@@ -174,7 +174,8 @@
       <workItem from="1649087850271" duration="25131000" />
       <workItem from="1649153908639" duration="25818000" />
       <workItem from="1649229307218" duration="8967000" />
-      <workItem from="1649321376134" duration="1652000" />
+      <workItem from="1649321376134" duration="6503000" />
+      <workItem from="1649330877986" duration="322000" />
     </task>
     <task id="LOCAL-00001" summary="Registratie pagina">
       <created>1648765507567</created>
@@ -246,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649282216553</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="weathergen data processing">
+      <created>1649323039997</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1649323039997</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

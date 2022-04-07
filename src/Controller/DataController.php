@@ -17,9 +17,9 @@ class DataController extends AbstractController
 {
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $doctrine)
     {
-        $this->entityManger = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
 //    public function index(){
