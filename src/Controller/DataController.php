@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Weatherdata;
 use App\Form\WeatherDataType;
+use App\Repository\WeatherdataRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -26,7 +27,7 @@ class DataController extends AbstractController
 //    }
 
     #[Route('/postweatherdata', name: 'data')]
-    public function postdata(Request $request)
+    public function postdata(WeatherdataRepository $weatherdataRepository, Request $request)
     {
 
         $data = json_decode($request->getContent(), TRUE); //convert JSON into array
@@ -41,14 +42,10 @@ class DataController extends AbstractController
 
                 $input = New Weatherdata();
                 $input->setStn($weathersubdata['STN']);
-                $date = DateTime::Create($weathersubdata['DATE']));
-
-                echo '<pre>';
-                echo $date;
-                echo '</pre>';
-
+                $date = DateTime::CreateFromFormat('Y-m-d',$weathersubdata['DATE']);
+                $time = DateTime::CreateFromFormat('H:i:s',$weathersubdata['TIME']);
                 $input->setDate($date);
-                $input->setTime($weathersubdata['TIME']);
+                $input->setTime($time);
                 $input->setTemp($weathersubdata['TEMP']);
                 $input->setDewp($weathersubdata['DEWP']);
                 $input->setStp($weathersubdata['STP']);
@@ -65,10 +62,13 @@ class DataController extends AbstractController
 //                $form = $this->createForm(WeatherDataType::class, new Weatherdata());
 //
 //                $form->submit($weathersubdata);
+//                $this->entityManager->persist($input);
+//                $this->entityManager->flush();
+
+                $weatherdataRepository->add($input);
             }
         }
-        $this->entityManager->persist($input);
-        $this->entityManager->flush();
+
 
 //        if(false === $form->isValid()){
 //            return new JsonResponse(
