@@ -31,8 +31,8 @@
                 <tr>
                     <th scope="row">{{ data.id }}</th>
                     <td>{{ data.stn }}</td>
-                    <td>{{ data.date }}</td>
-                    <td>{{ data.time }}</td>
+                    <td>{{ data.date|date('Y-m-d') }}</td>
+                    <td>{{ data.time|date('H:i:s') }}</td>
                     <td>{{ data.temp }}</td>
                     <td>{{ data.dewp }}</td>
                     <td>{{ data.stp }}</td>
