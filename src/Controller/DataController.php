@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\DataRepository;
 use DateTime;
 use App\Entity\Data;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,7 +23,7 @@ class DataController extends AbstractController
     }
 
     #[Route('/main/postdata', name: 'data')]
-    public function postdata(Request $request, ManagerRegistry $doctrine): Response
+    public function postdata(Request $request, ManagerRegistry $doctrine,DataRepository $dataRepository): Response
     {
         $entityManager = $doctrine->getManager();
         $data = $request->toArray();
@@ -47,9 +48,10 @@ class DataController extends AbstractController
             $input->setFrshtt($data['WEATHERDATA'][$x]['FRSHTT']);
             $input->setCldc($data['WEATHERDATA'][$x]['CLDC']);
             $input->setWnddir($data['WEATHERDATA'][$x]['WNDDIR']);
-
-            $entityManager->persist($input);
-            $entityManager->flush();
+//
+////            $entityManager->add($input);
+////            $entityManager->flush();
+            $dataRepository->add($input);
 
 
 
