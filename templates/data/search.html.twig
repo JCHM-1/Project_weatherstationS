@@ -3,13 +3,13 @@
 {% block title %}Search{% endblock %}
 
 {% block body %}
+    <div class="container shadow p-3 mb-5 bg-white rounded">
     {% for message in app.flashes('error') %}
         <div class="alert alert-warning">
             {{ message }}
         </div>
     {% endfor %}
     {{ form(data_form) }}
-    <div class="container shadow p-3 mb-5 bg-white rounded">
         <table class="locations table table-striped table-bordered">
             <thead>
             <tr class="table-primary">
