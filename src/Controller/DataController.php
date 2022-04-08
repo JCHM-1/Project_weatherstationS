@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\DataRepository;
 use DateTime;
 use App\Entity\Data;
 use Doctrine\Persistence\ManagerRegistry;
@@ -23,7 +22,7 @@ class DataController extends AbstractController
     }
 
     #[Route('/main/postdata', name: 'data')]
-    public function postdata(Request $request, ManagerRegistry $doctrine,DataRepository $dataRepository): Response
+    public function postdata(Request $request, ManagerRegistry $doctrine): void
     {
         $entityManager = $doctrine->getManager();
         $data = $request->toArray();
@@ -48,10 +47,9 @@ class DataController extends AbstractController
             $input->setFrshtt($data['WEATHERDATA'][$x]['FRSHTT']);
             $input->setCldc($data['WEATHERDATA'][$x]['CLDC']);
             $input->setWnddir($data['WEATHERDATA'][$x]['WNDDIR']);
-//
-////            $entityManager->add($input);
-////            $entityManager->flush();
-            $dataRepository->add($input);
+
+            $entityManager->persist($input);
+            $entityManager->flush();
 
 
 
@@ -86,10 +84,6 @@ class DataController extends AbstractController
 //            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['CLDC']));
 //            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['WNDDIR']));
         }
-
-        return $this->render('/main/retrieve.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
     }
 
 }

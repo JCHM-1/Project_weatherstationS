@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Profile;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
@@ -19,6 +20,15 @@ class AdminController extends AbstractController
         $manager->flush();
         $this->addFlash('succes', 'Profile Removed');
         return $this->redirect($this->generateUrl('profiles'));
+    }
+
+    #[Route('/admin/profiles', methods:['GET'], name: 'profiles')]
+    public function admin(): Response
+    {
+        $profiles = $this->doctrine->getRepository
+        (Profile::class)->findAll();
+        return $this->render('admin/profiles.html.twig', array
+        ('profiles' => $profiles));
     }
 
 }
