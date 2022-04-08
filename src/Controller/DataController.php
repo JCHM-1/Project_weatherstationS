@@ -22,7 +22,7 @@ class DataController extends AbstractController
     }
 
     #[Route('/main/postdata', name: 'data')]
-    public function postdata(Request $request, ManagerRegistry $doctrine): Response
+    public function postdata(Request $request, ManagerRegistry $doctrine): void
     {
         $entityManager = $doctrine->getManager();
         $data = $request->toArray();
@@ -84,10 +84,6 @@ class DataController extends AbstractController
 //            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['CLDC']));
 //            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['WNDDIR']));
         }
-
-        return $this->render('/main/retrieve.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
     }
 
 }

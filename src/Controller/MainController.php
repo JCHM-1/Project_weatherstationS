@@ -32,15 +32,6 @@ class MainController extends AbstractController
         ('weatherdata' => $weatherdata));
     }
 
-    #[Route('/admin/profiles', methods:['GET'], name: 'profiles')]
-    public function admin(): Response
-    {
-        $profiles = $this->doctrine->getRepository
-        (Profile::class)->findAll();
-        return $this->render('admin/profiles.html.twig', array
-        ('profiles' => $profiles));
-    }
-
     #[Route('/main/locations', methods:['GET'], name: 'locations')]
     public function locations(): Response
     {
