@@ -2,141 +2,88 @@
 
 namespace App\Controller;
 
-use App\Entity\Weatherdata;
-use App\Form\WeatherDataType;
-use App\Repository\WeatherdataRepository;
 use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Data;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DataController extends AbstractController
 {
-    private $entityManager;
 
-    public function __construct(ManagerRegistry $doctrine)
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger)
     {
-        $this->entityManager = $entityManager;
+        $this->logger = $logger;
     }
 
-//    public function index(){
-//        return $this->render(view:'weather.html.twig');
-//    }
-
-    #[Route('/postweatherdata', name: 'data')]
-    public function postdata(WeatherdataRepository $weatherdataRepository, Request $request)
+    #[Route('/main/postdata', name: 'data')]
+    public function postdata(Request $request, ManagerRegistry $doctrine): void
     {
+        $entityManager = $doctrine->getManager();
+        $data = $request->toArray();
 
-        $data = json_decode($request->getContent(), TRUE); //convert JSON into array
+        for ($x=0; $x<count($data['WEATHERDATA']); $x++) {
 
+            $date = DateTime::createFromFormat('Y-m-d', $data['WEATHERDATA'][$x]['DATE']);
+            $time = DateTime::createFromFormat('H:i:s', $data['WEATHERDATA'][$x]['TIME']);
 
-        foreach ($data as $weatherdata) {
-            foreach($weatherdata as $weathersubdata) {
+            $input = new Data();
+            $input->setStn($data['WEATHERDATA'][$x]['STN']);
+            $input->setDate($date);
+            $input->setTime($time);
+            $input->setTemp($data['WEATHERDATA'][$x]['TEMP']);
+            $input->setDewp($data['WEATHERDATA'][$x]['DEWP']);
+            $input->setStp($data['WEATHERDATA'][$x]['STP']);
+            $input->setSlp($data['WEATHERDATA'][$x]['SLP']);
+            $input->setVisib($data['WEATHERDATA'][$x]['VISIB']);
+            $input->setWdsp($data['WEATHERDATA'][$x]['WDSP']);
+            $input->setPrcp($data['WEATHERDATA'][$x]['PRCP']);
+            $input->setSndp($data['WEATHERDATA'][$x]['SNDP']);
+            $input->setFrshtt($data['WEATHERDATA'][$x]['FRSHTT']);
+            $input->setCldc($data['WEATHERDATA'][$x]['CLDC']);
+            $input->setWnddir($data['WEATHERDATA'][$x]['WNDDIR']);
 
-                echo '<pre>';
-                echo $weathersubdata['STN'];
-                echo '</pre>';
-
-                $input = New Weatherdata();
-                $input->setStn($weathersubdata['STN']);
-                $date = DateTime::CreateFromFormat('Y-m-d',$weathersubdata['DATE']);
-                $time = DateTime::CreateFromFormat('H:i:s',$weathersubdata['TIME']);
-                $input->setDate($date);
-                $input->setTime($time);
-                $input->setTemp($weathersubdata['TEMP']);
-                $input->setDewp($weathersubdata['DEWP']);
-                $input->setStp($weathersubdata['STP']);
-                $input->setSlp($weathersubdata['SLP']);
-                $input->setVisib($weathersubdata['VISIB']);
-                $input->setWdsp($weathersubdata['WDSP']);
-                $input->setPrcp($weathersubdata['PRCP']);
-                $input->setSndp($weathersubdata['SNDP']);
-                $input->setFrshtt($weathersubdata['FRSHTT']);
-                $input->setCldc($weathersubdata['CLDC']);
-                $input->setWnddir($weathersubdata['WNDDIR']);
+            $entityManager->persist($input);
+            $entityManager->flush();
 
 
-//                $form = $this->createForm(WeatherDataType::class, new Weatherdata());
-//
-//                $form->submit($weathersubdata);
-//                $this->entityManager->persist($input);
-//                $this->entityManager->flush();
 
-                $weatherdataRepository->add($input);
-            }
+//            $this->logger->log('info', '---------------------------DATA----------------------------');
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['STN']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['DATE']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['TIME']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['TEMP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['DEWP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['STP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['SLP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['VISIB']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['WDSP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['PRCP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['SNDP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['FRSHTT']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['CLDC']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['WNDDIR']));
+//            $this->logger->log('info', '---------------------------TYPE----------------------------');
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['STN']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['DATE']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['TIME']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['TEMP']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['DEWP']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['STP']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['SLP']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['VISIB']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['WDSP']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['PRCP']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['SNDP']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['FRSHTT']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['CLDC']));
+//            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['WNDDIR']));
         }
-
-
-//        if(false === $form->isValid()){
-//            return new JsonResponse(
-//                [
-//                    'status' => 'error',
-//                ],
-//                JsonResponse::HTTP_BAD_REQUEST
-//            );
-//        }
-
-        return new JsonResponse(
-            [
-                'status' => 'ok',
-            ],
-            JsonResponse::HTTP_CREATED
-        );
-
-//        if ($request->getMethod() === 'POST') {
-//            print_r($_POST);
-//            $json_string = $_POST['message'];
-//            $json = json_decode($json_string);
-//            print_r($json);
-//            $manager = $this->doctrine->getManager();
-//            $decodedRequest = json_decode($request);
-
-
-//            echo '<pre>';
-//            if($input)
-//            var_dump($input->WEATHERDATA);
-//            echo '</pre>';
-//
-//            $data = new WeatherData();
-
-        // Klopt nog niet helemaal, hieronder
-        // https://stackoverflow.com/questions/29308898/how-to-extract-and-access-data-from-json-with-php
-
-        //        foreach($decodedRequest as $i) {
-        //            $data->setStn($decodedRequest->WEATHERDATA[$i]->STN);
-        //            $data->setDate($decodedRequest->WEATHERDATA[$i]->DATE);
-        //            $data->setTime($decodedRequest->WEATHERDATA[$i]->TIME);
-        //            $data->setTemp($decodedRequest->WEATHERDATA[$i]->TEMP);
-        //            $data->setDewp($decodedRequest->WEATHERDATA[$i]->DEWP);
-        //            $data->setStp($decodedRequest->WEATHERDATA[$i]->STP);
-        //            $data->setSlp($decodedRequest->WEATHERDATA[$i]->SLP);
-        //            $data->setVisib($decodedRequest->WEATHERDATA[$i]->VISB);
-        //            $data->setWdsp($decodedRequest->WEATHERDATA[$i]->WDSP);
-        //            $data->setPrcp($decodedRequest->WEATHERDATA[$i]->PRCP);
-        //            $data->setSndp($decodedRequest->WEATHERDATA[$i]->SNDP);
-        //            $data->setFrshtt($decodedRequest->WEATHERDATA[$i]->FRSHTT);
-        //            $data->setCldc($decodedRequest->WEATHERDATA[$i]->CLDC);
-        //            $data->setWnddir($decodedRequest->WEATHERDATA[$i]->WNDDIR);
-        //
-        //            $manager->persists($data);
-        //            $manager->flush();
-        //        }
-
-
-//            return new Response('weatherdata posted');
-
-
-//        echo '<pre>';
-//        var_dump($request);
-////        var_dump($request->server);
-//        return $this->render('/main/retrieve.html.twig', [
-//            'controller_name' => 'MainController',
-//        ]);
-
-
     }
 
 }

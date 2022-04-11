@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\WeatherdataRepository;
+use App\Repository\DataRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=WeatherdataRepository::class)
+ * @ORM\Entity(repositoryClass=DataRepository::class)
  */
-class Weatherdata
+class Data
 {
     /**
      * @ORM\Id
@@ -23,67 +23,67 @@ class Weatherdata
     private $stn;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $date;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time", nullable=true)
      */
     private $time;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $temp;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $dewp;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $stp;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $slp;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $visib;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $wdsp;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $prcp;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $sndp;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $frshtt;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $cldc;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $wnddir;
 
@@ -110,7 +110,7 @@ class Weatherdata
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(?\DateTimeInterface $date): self
     {
         $this->date = $date;
 
@@ -122,7 +122,7 @@ class Weatherdata
         return $this->time;
     }
 
-    public function setTime(\DateTimeInterface $time): self
+    public function setTime(?\DateTimeInterface $time): self
     {
         $this->time = $time;
 
@@ -134,7 +134,7 @@ class Weatherdata
         return $this->temp;
     }
 
-    public function setTemp(float $temp): self
+    public function setTemp(?float $temp): self
     {
         $this->temp = $temp;
 
@@ -146,7 +146,7 @@ class Weatherdata
         return $this->dewp;
     }
 
-    public function setDewp(float $dewp): self
+    public function setDewp(?float $dewp): self
     {
         $this->dewp = $dewp;
 
@@ -158,7 +158,7 @@ class Weatherdata
         return $this->stp;
     }
 
-    public function setStp(float $stp): self
+    public function setStp(?float $stp): self
     {
         $this->stp = $stp;
 
@@ -170,7 +170,7 @@ class Weatherdata
         return $this->slp;
     }
 
-    public function setSlp(float $slp): self
+    public function setSlp(?float $slp): self
     {
         $this->slp = $slp;
 
@@ -182,7 +182,7 @@ class Weatherdata
         return $this->visib;
     }
 
-    public function setVisib(float $visib): self
+    public function setVisib(?float $visib): self
     {
         $this->visib = $visib;
 
@@ -194,7 +194,7 @@ class Weatherdata
         return $this->wdsp;
     }
 
-    public function setWdsp(float $wdsp): self
+    public function setWdsp(?float $wdsp): self
     {
         $this->wdsp = $wdsp;
 
@@ -206,7 +206,7 @@ class Weatherdata
         return $this->prcp;
     }
 
-    public function setPrcp(float $prcp): self
+    public function setPrcp(?float $prcp): self
     {
         $this->prcp = $prcp;
 
@@ -218,7 +218,7 @@ class Weatherdata
         return $this->sndp;
     }
 
-    public function setSndp(float $sndp): self
+    public function setSndp(?float $sndp): self
     {
         $this->sndp = $sndp;
 
@@ -230,7 +230,7 @@ class Weatherdata
         return $this->frshtt;
     }
 
-    public function setFrshtt(string $frshtt): self
+    public function setFrshtt(?string $frshtt): self
     {
         $this->frshtt = $frshtt;
 
@@ -242,7 +242,7 @@ class Weatherdata
         return $this->cldc;
     }
 
-    public function setCldc(float $cldc): self
+    public function setCldc(?float $cldc): self
     {
         $this->cldc = $cldc;
 
@@ -254,7 +254,7 @@ class Weatherdata
         return $this->wnddir;
     }
 
-    public function setWnddir(int $wnddir): self
+    public function setWnddir(?int $wnddir): self
     {
         $this->wnddir = $wnddir;
 
