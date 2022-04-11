@@ -15,13 +15,13 @@ class MainController extends AbstractController
 {
     public function __construct(private ManagerRegistry $doctrine) {}
 
-    #[Route('/', name: 'home')]
-        public function login(): Response
-        {
-            return $this->render('security/login.html.twig', [
-                'controller_name' => 'SecurityController',
-            ]);
-        }
+    #[Route('/', name: 'app_login')]
+    public function login(): Response
+    {
+        return $this->render('security/login.html.twig', [
+            'controller_name' => 'SecurityController',
+        ]);
+    }
 
     #[Route('/main', name: 'main')]
     public function index(): Response
