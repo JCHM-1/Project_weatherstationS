@@ -19,7 +19,7 @@ class RegistrationController extends AbstractController
     {
         $user = new Profile();
 
-
+        $user->set
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 

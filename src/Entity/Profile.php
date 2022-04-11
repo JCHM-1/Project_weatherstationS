@@ -36,6 +36,50 @@ class Profile
     private $roles;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     */
+    private $password;
+
+    /**
+     * @var \Subscriptions
+     *
+     * @ORM\ManyToOne(targetEntity="Subscriptions")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="subscription", referencedColumnName="id")
+     * })
+     */
+    private $subscription;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * The public representation of the user (e.g. a username, an email address, etc.)
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
@@ -55,21 +99,31 @@ class Profile
     }
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @see PasswordAuthenticatedUserInterface
      */
-    private $password;
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
 
-    /**
-     * @var \Subscriptions
-     *
-     * @ORM\ManyToOne(targetEntity="Subscriptions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subscription", referencedColumnName="id")
-     * })
-     */
-    private $subscription;
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getSubscription(): ?int
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(int $subscription): self
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
 
 
 }
