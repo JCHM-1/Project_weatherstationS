@@ -33,7 +33,9 @@
                     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                         <ul class="navbar-nav mr-auto">
                             <li><a class="nav-link active" aria-current="page" href="/main">Home</a></li>
-                            <li><a class="nav-link active" aria-current="page" href="/main/weather">Weather</a></li>
+                            {% if is_granted('ROLE_USER') %}
+                            <li><a class="nav-link active" aria-current="page" href="/main/weather">Zoeken</a></li>
+                            {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
                             <li><a class="nav-link active" aria-current="page" href="/data/search">Search</a></li>
                             {% endif %}
