@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Geolocation
  *
- * @ORM\Table(name="geolocation", indexes={@ORM\Index(name="fk_geolocation_country_code", columns={"country_code"}), @ORM\Index(name="fk_geolocation_station_name", columns={"station_name"})})
+ * @ORM\Table(name="geolocation", indexes={@ORM\Index(name="country_code", columns={"country_code"}), @ORM\Index(name="fk_station_name_idx", columns={"station_name"})})
  * @ORM\Entity
  */
 class Geolocation
@@ -20,13 +20,6 @@ class Geolocation
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="station_name", type="string", length=10, nullable=false)
-     */
-    private $stationName;
 
     /**
      * @var string
@@ -147,226 +140,15 @@ class Geolocation
      */
     private $country;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getStationName(): ?string
-    {
-        return $this->stationName;
-    }
-
-    public function setStationName(string $stationName): self
-    {
-        $this->stationName = $stationName;
-
-        return $this;
-    }
-
-    public function getCountryCode(): ?string
-    {
-        return $this->countryCode;
-    }
-
-    public function setCountryCode(string $countryCode): self
-    {
-        $this->countryCode = $countryCode;
-
-        return $this;
-    }
-
-    public function getIsland(): ?string
-    {
-        return $this->island;
-    }
-
-    public function setIsland(?string $island): self
-    {
-        $this->island = $island;
-
-        return $this;
-    }
-
-    public function getCounty(): ?string
-    {
-        return $this->county;
-    }
-
-    public function setCounty(?string $county): self
-    {
-        $this->county = $county;
-
-        return $this;
-    }
-
-    public function getPlace(): ?string
-    {
-        return $this->place;
-    }
-
-    public function setPlace(?string $place): self
-    {
-        $this->place = $place;
-
-        return $this;
-    }
-
-    public function getHamlet(): ?string
-    {
-        return $this->hamlet;
-    }
-
-    public function setHamlet(?string $hamlet): self
-    {
-        $this->hamlet = $hamlet;
-
-        return $this;
-    }
-
-    public function getTown(): ?string
-    {
-        return $this->town;
-    }
-
-    public function setTown(?string $town): self
-    {
-        $this->town = $town;
-
-        return $this;
-    }
-
-    public function getMunicipality(): ?string
-    {
-        return $this->municipality;
-    }
-
-    public function setMunicipality(?string $municipality): self
-    {
-        $this->municipality = $municipality;
-
-        return $this;
-    }
-
-    public function getStateDistrict(): ?string
-    {
-        return $this->stateDistrict;
-    }
-
-    public function setStateDistrict(?string $stateDistrict): self
-    {
-        $this->stateDistrict = $stateDistrict;
-
-        return $this;
-    }
-
-    public function getAdministrative(): ?string
-    {
-        return $this->administrative;
-    }
-
-    public function setAdministrative(?string $administrative): self
-    {
-        $this->administrative = $administrative;
-
-        return $this;
-    }
-
-    public function getState(): ?string
-    {
-        return $this->state;
-    }
-
-    public function setState(?string $state): self
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    public function getVillage(): ?string
-    {
-        return $this->village;
-    }
-
-    public function setVillage(?string $village): self
-    {
-        $this->village = $village;
-
-        return $this;
-    }
-
-    public function getRegion(): ?string
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?string $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    public function getProvince(): ?string
-    {
-        return $this->province;
-    }
-
-    public function setProvince(?string $province): self
-    {
-        $this->province = $province;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getLocality(): ?string
-    {
-        return $this->locality;
-    }
-
-    public function setLocality(?string $locality): self
-    {
-        $this->locality = $locality;
-
-        return $this;
-    }
-
-    public function getPostcode(): ?string
-    {
-        return $this->postcode;
-    }
-
-    public function setPostcode(?string $postcode): self
-    {
-        $this->postcode = $postcode;
-
-        return $this;
-    }
-
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(?string $country): self
-    {
-        $this->country = $country;
-
-        return $this;
-    }
+    /**
+     * @var \Station
+     *
+     * @ORM\ManyToOne(targetEntity="Station")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="station_name", referencedColumnName="name")
+     * })
+     */
+    private $stationName;
 
 
 }

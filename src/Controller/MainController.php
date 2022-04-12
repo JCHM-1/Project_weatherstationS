@@ -63,4 +63,10 @@ class MainController extends AbstractController
         ('geolocations' => $geolocations));
     }
 
+    #[Route('/main/profile/station/{id}', name: 'show')]
+    public function show($stn,){
+
+        //return $this->render(/main/profile/station/)
+    }
+
 }

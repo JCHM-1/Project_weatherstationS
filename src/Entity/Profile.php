@@ -33,7 +33,6 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -107,18 +106,6 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
      * })
      */
     private $subscription;
-
-    public function getSubscription(): ?Subscriptions
-    {
-        return $this->subscription;
-    }
-
-    public function setSubscription(?Subscriptions $subscription): self
-    {
-        $this->subscription = $subscription;
-
-        return $this;
-    }
 
 
 }
