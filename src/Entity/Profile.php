@@ -107,5 +107,17 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $subscription;
 
+    public function getSubscription(): ?Subscriptions
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscriptions $subscription): self
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
+
 
 }

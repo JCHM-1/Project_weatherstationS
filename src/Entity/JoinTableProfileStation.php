@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\JoinTableProfileStationRepo;
+
 
 /**
  * JoinTableProfileStation
  *
  * @ORM\Table(name="join_table_profile_station", indexes={@ORM\Index(name="profile_id", columns={"profile_id"}), @ORM\Index(name="station_id", columns={"station_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\JoinTableProfileStationRepo")
  */
 class JoinTableProfileStation
 {
@@ -41,5 +43,32 @@ class JoinTableProfileStation
      */
     private $station;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(?Profile $profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    public function getStation(): ?Station
+    {
+        return $this->station;
+    }
+
+    public function setStation(?Station $station): self
+    {
+        $this->station = $station;
+
+        return $this;
+    }
 }

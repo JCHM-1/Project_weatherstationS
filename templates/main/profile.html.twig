@@ -25,7 +25,7 @@
                 <tbody>
                 {% for key, value in stations %}
                     <tr>
-                        <td>{{ value }}</td>
+                        <td> <a href="{{  path('show', {stn: value}) }}" > {{ value }} </a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

@@ -5,11 +5,19 @@ namespace App\Controller;
 use App\Entity\Geolocation;
 use App\Entity\Profile;
 use App\Entity\Data;
+use App\Entity\Nearestlocation;
+use App\Entity\Station;
 use App\Entity\JoinTableProfileStation;
 use App\Repository\JoinTableProfileStationRepo;
+use App\Repository\StationRepo;
+use App\Repository\NLrepo;
+use App\Repository\GLrepo;
+use App\Repository\DataRepository;
+
 
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -63,10 +71,23 @@ class MainController extends AbstractController
         ('geolocations' => $geolocations));
     }
 
-    #[Route('/main/profile/station/{id}', name: 'show')]
-    public function show($stn,){
+    #[Route('/main/profile/station/{stn}', name: 'show')]
+    public function show($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository){
 
-        //return $this->render(/main/profile/station/)
+        $stationdata = $stationRepo->find($stn);
+        $nearestlocdata = $nlrepo->find($stn);
+        $geolocdata = $glrepo->find($stn);
+        $data = $dataRepository->findBy(['stn'=>$stn]);
+
+        var_dump($data);
+
+
+        return $this->render('main/show.html.twig', [
+            'stationdata' => $stationdata,
+            'nearestlocdata'=> $nearestlocdata,
+            'geolocdata'=> $geolocdata,
+            'weatherdata'=>$data
+        ]);
     }
 
 }
