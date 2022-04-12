@@ -17,7 +17,7 @@ class SearchController extends AbstractController
 
     public function __construct(private ManagerRegistry $doctrine) {}
 
-    #[Route('/data/search', methods:['GET', 'POST'], name: 'search')]
+    #[Route('/main/search', methods:['GET', 'POST'], name: 'search')]
     public function show(Environment $twig, Request $request)
     {
         $weatherdata = [];

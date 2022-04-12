@@ -5,11 +5,15 @@ namespace App\Controller;
 use App\Entity\Geolocation;
 use App\Entity\Profile;
 use App\Entity\Data;
+use App\Entity\JoinTableProfileStation;
+use App\Repository\JoinTableProfileStationRepo;
 
+use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class MainController extends AbstractController
 {
@@ -31,13 +35,23 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/main/weather', methods:['GET'], name: 'weather')]
-    public function weather(): Response
+    #[Route('/main/profile', methods:['GET'], name: 'profile')]
+    public function weather(UserInterface $user, JoinTableProfileStationRepo $repo): Response
     {
-        $weatherdata = $this->doctrine->getRepository
-        (Data::class)->findAll();
-        return $this->render('main/weather.html.twig', array
-        ('weatherdata' => $weatherdata));
+        // $repo = $this->doctrine->getRepository("JoinTableProfileStationRepo");
+        $data = $repo->findBy(['profile'=> ''.$user->getId().'' ]);
+        //dd($data);
+
+        $stations = [];
+
+        foreach($data as $subdata){
+            $stations[] = $subdata->getStation()->getName();
+        }
+
+        //dd($stations);
+
+        return $this->render('main/profile.html.twig', array
+        ('stations' => $stations));
     }
 
     #[Route('/main/locations', methods:['GET'], name: 'locations')]
