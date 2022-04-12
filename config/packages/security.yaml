@@ -1,3 +1,5 @@
+
+
 security:
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
@@ -13,6 +15,7 @@ security:
             entity:
                 class: App\Entity\Profile
                 property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

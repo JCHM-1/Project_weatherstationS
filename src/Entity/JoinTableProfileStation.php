@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * JoinTableProfileStation
  *
- * @ORM\Table(name="join_table_profile_station", indexes={@ORM\Index(name="station_id_idx", columns={"station_id"})})
+ * @ORM\Table(name="join_table_profile_station", indexes={@ORM\Index(name="profile_id", columns={"profile_id"}), @ORM\Index(name="station_id", columns={"station_id"})})
  * @ORM\Entity
  */
 class JoinTableProfileStation
@@ -15,21 +15,21 @@ class JoinTableProfileStation
     /**
      * @var int
      *
-     * @ORM\Column(name="profile_id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $profileId;
+    private $id;
 
     /**
      * @var \Profile
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Profile")
+     * @ORM\ManyToOne(targetEntity="Profile")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
      * })
      */
-    private $id;
+    private $profile;
 
     /**
      * @var \Station

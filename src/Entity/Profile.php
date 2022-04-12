@@ -2,56 +2,37 @@
 
 namespace App\Entity;
 
+use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Profile
- *
- * @ORM\Table(name="profile", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8157AA0FE7927C74", columns={"email"})}, indexes={@ORM\Index(name="subscription_idx", columns={"subscription"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ProfileRepository::class)
  */
-class Profile
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class Profile implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=180, nullable=false)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
-
     /**
-     * @var array
-     *
-     * @ORM\Column(name="roles", type="json", nullable=false)
+     * @ORM\Column(type="json")
      */
-    private $roles;
-
+    private $roles = [];
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
-
-    /**
-     * @var \Subscriptions
-     *
-     * @ORM\ManyToOne(targetEntity="Subscriptions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subscription", referencedColumnName="id")
-     * })
-     */
-    private $subscription;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -68,7 +49,15 @@ class Profile
 
         return $this;
     }
-
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
     /**
      * @see UserInterface
      */
@@ -80,14 +69,12 @@ class Profile
 
         return array_unique($roles);
     }
-
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
-
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -95,24 +82,30 @@ class Profile
     {
         return $this->password;
     }
-
     public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
-
-    public function getSubscription(): ?int
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        return $this->subscription;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
-    public function setSubscription(int $subscription): self
-    {
-        $this->subscription = $subscription;
+    /**
+     * @var \Subscriptions
+     *
+     * @ORM\ManyToOne(targetEntity="Subscriptions")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="subscription", referencedColumnName="id")
+     * })
+     */
+    private $subscription;
 
-        return $this;
-    }
 
 }
