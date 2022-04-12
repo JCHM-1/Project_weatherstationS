@@ -70,16 +70,6 @@ class Profile
     }
 
     /**
-     * The public representation of the user (e.g. a username, an email address, etc.)
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
      * @see UserInterface
      */
     public function getRoles(): array
@@ -124,6 +114,5 @@ class Profile
 
         return $this;
     }
-
 
 }
