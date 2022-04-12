@@ -61,7 +61,7 @@ class MainController extends AbstractController
         $subscription = $profileRepository->find($user->getId())->getSubscription();
 
         $amount = $subscription->getAmount();
-        var_dump($subscription);
+        //var_dump($subscription);
         $realtime = $subscription->getRealTime();
 
 

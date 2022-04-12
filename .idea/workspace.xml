@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="localhost/ redirect naar inloggen">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/profile.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +187,7 @@
       <workItem from="1648476965993" duration="15231000" />
       <workItem from="1649290218797" duration="597000" />
       <workItem from="1649723966119" duration="37000" />
-      <workItem from="1649759049519" duration="30641000" />
+      <workItem from="1649759049519" duration="31432000" />
     </task>
     <task id="LOCAL-00001" summary="Registratie pagina">
       <created>1648765507567</created>
@@ -268,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649802176119</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="localhost/ redirect naar inloggen">
+      <created>1649803211877</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1649803211877</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
