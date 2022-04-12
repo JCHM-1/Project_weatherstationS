@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="localhost/ redirect naar inloggen">
-      <change afterPath="$PROJECT_DIR$/src/Repository/GLrepo.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/NLrepo.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/main/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Country.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Country.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Data.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Data.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Geolocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Geolocation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/JoinTableProfileStation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/JoinTableProfileStation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/MessengerMessages.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/MessengerMessages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Nearestlocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Nearestlocation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Station.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Station.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Subscriptions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Subscriptions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/main/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/profile.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -202,7 +189,7 @@
       <workItem from="1648476965993" duration="15231000" />
       <workItem from="1649290218797" duration="597000" />
       <workItem from="1649723966119" duration="37000" />
-      <workItem from="1649759049519" duration="29678000" />
+      <workItem from="1649759049519" duration="30641000" />
     </task>
     <task id="LOCAL-00001" summary="Registratie pagina">
       <created>1648765507567</created>
@@ -274,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649791532915</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="localhost/ redirect naar inloggen">
+      <created>1649802176119</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1649802176119</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

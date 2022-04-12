@@ -13,6 +13,8 @@ use App\Repository\StationRepo;
 use App\Repository\NLrepo;
 use App\Repository\GLrepo;
 use App\Repository\DataRepository;
+use App\Repository\ProfileRepository;
+
 
 
 use Doctrine\ORM\Mapping\JoinTable;
@@ -44,22 +46,32 @@ class MainController extends AbstractController
     }
 
     #[Route('/main/profile', methods:['GET'], name: 'profile')]
-    public function weather(UserInterface $user, JoinTableProfileStationRepo $repo): Response
+    public function weather(UserInterface $user, JoinTableProfileStationRepo $repo,ProfileRepository $profileRepository): Response
     {
         // $repo = $this->doctrine->getRepository("JoinTableProfileStationRepo");
         $data = $repo->findBy(['profile'=> ''.$user->getId().'' ]);
         //dd($data);
 
         $stations = [];
-
         foreach($data as $subdata){
             $stations[] = $subdata->getStation()->getName();
         }
-
         //dd($stations);
 
+        $subscription = $profileRepository->find($user->getId())->getSubscription();
+
+        $amount = $subscription->getAmount();
+        var_dump($subscription);
+        $realtime = $subscription->getRealTime();
+
+
+
+
         return $this->render('main/profile.html.twig', array
-        ('stations' => $stations));
+        ('stations' => $stations,
+        'amount'=>$amount,
+        'realtime'=>$realtime
+        ));
     }
 
     #[Route('/main/locations', methods:['GET'], name: 'locations')]
