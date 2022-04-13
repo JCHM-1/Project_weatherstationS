@@ -3,13 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\StationRepo;
 
 /**
  * Station
  *
  * @ORM\Table(name="station")
- * @ORM\Entity(repositoryClass="App\Repository\StationRepo")
+ * @ORM\Entity
  */
 class Station
 {
@@ -43,45 +42,5 @@ class Station
      */
     private $elevation;
 
-    public function getName(): ?int
-    {
-        return $this->name;
-    }
-
-    public function getLongitude(): ?float
-    {
-        return $this->longitude;
-    }
-
-    public function setLongitude(float $longitude): self
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    public function getLatitude(): ?float
-    {
-        return $this->latitude;
-    }
-
-    public function setLatitude(float $latitude): self
-    {
-        $this->latitude = $latitude;
-
-        return $this;
-    }
-
-    public function getElevation(): ?float
-    {
-        return $this->elevation;
-    }
-
-    public function setElevation(float $elevation): self
-    {
-        $this->elevation = $elevation;
-
-        return $this;
-    }
 
 }

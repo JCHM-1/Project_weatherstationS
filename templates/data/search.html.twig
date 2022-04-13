@@ -37,7 +37,8 @@
             <thead>
             <tr class="table-primary">
 {#                <th scope="col">Id</th>#}
-                <th scope="col">Station</th>
+
+                <th scope="col">{%  if type is not null %}{{ type}} : {{place}} {% else %} {% endif %}</th>
 {#                <th scope="col">Datum</th>#}
 {#                <th scope="col">Tijd</th>#}
 {#                <th scope="col">Tempratuur</th>#}
@@ -58,9 +59,9 @@
                 {% for data in stations %}
                     <tr>
 {#                        <th scope="row">{{ data.id }}</th>#}
-                        {% if data.stationName is not empty %}
-                            <th scope="row">{{ data.stationName }}</th>
-                        {% endif %}
+
+                            <th scope="row"> <a href="{{  path('showStations', {stn: data.stationName}) }}" > {{ data.stationName }} </a></th>
+
 {#                        <td>{{ data.date|date('Y-m-d') }}</td>#}
 {#                        <td>{{ data.time|date('H:i:s') }}</td>#}
 {#                        <td>{{ data.temp }}</td>#}

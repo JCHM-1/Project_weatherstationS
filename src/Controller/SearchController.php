@@ -6,6 +6,14 @@ use App\Entity\Data;
 use App\Entity\Station;
 use App\Entity\Geolocation;
 use App\Form\WeatherdataFormType;
+use App\Repository\GLrepo;
+use App\Repository\StationRepo;
+use App\Repository\NLrepo;
+use App\Repository\DataRepository;
+use App\Repository\ProfileRepository;
+
+use Doctrine\ORM\Mapping\JoinTable;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Type;
@@ -24,17 +32,23 @@ class SearchController extends AbstractController
     }
 
     #[Route('/data/search', methods:['GET', 'POST'], name: 'search')]
-    public function show(Request $request)
+    public function show(Request $request, GLrepo $glrepo)
     {
+        $type = null;
+        $place = null;
         $output = [];
         $station = new Station;
         if ($request->isMethod('POST')) {
             $type = $request->request->get('type');
             $place = $request->request->get('place');
 
-            $output = $this->doctrine->getRepository
+//             $output = $this->doctrine->getRepository(Geolocation::class)->findBy([$type => $place]);
 //            (Geolocation::class)->findOneBy([$type => $place]);
-            (Geolocation::class)->findBy([$type => $place]);
+//             $output = $output[1];
+            $output = $glrepo->findBy([$type=>$place]);
+
+
+            //var_dump($output);
 
 //            echo var_dump($type);
 //            echo var_dump($place);
@@ -63,7 +77,9 @@ class SearchController extends AbstractController
 //            'data_form' => $form->createView(),
 //            'weatherdata' => $weatherdata,
             'keys' => $this->getLocationKeys(),
-            'stations' => $output
+            'stations' => $output,
+            'type'=> $type,
+            'place' => $place
 //            'vardump' => var_dump($locations)
         ));
     }
@@ -75,6 +91,26 @@ class SearchController extends AbstractController
             array_push($keyName, substr($key, 23));
         }
         return $keyName;
+    }
+
+    #[Route('/data/search/{stn}', name: 'showStations')]
+    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository){
+
+        $stationdata = $stationRepo->findBy(['name'=>$stn]);
+        $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
+        $geolocdata = $glrepo->find($stn);
+        $data = $dataRepository->findBy(['stn'=>$stn]);
+
+        var_dump($stationdata);
+
+
+        return $this->render('main/show.html.twig', [
+            'stationdata' => $stationdata,
+            'nearestlocdata'=> $nearestlocdata,
+            'geolocdata'=> $geolocdata,
+            'weatherdata'=>$data
+
+        ]);
     }
 
 }

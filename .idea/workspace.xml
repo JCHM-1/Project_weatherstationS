@@ -10,10 +10,23 @@
       <change beforePath="$PROJECT_DIR$/config/packages/parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/parameters.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/routing.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/routing.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SearchController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Country.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Country.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Data.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Data.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Geolocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Geolocation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/JoinTableProfileStation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/JoinTableProfileStation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/MessengerMessages.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/MessengerMessages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Nearestlocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Nearestlocation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Station.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Station.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Subscriptions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Subscriptions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/WeatherdataFormType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/data/search.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/data/search.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/main/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,21 +233,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Registratie pagina" />
     <option name="LAST_COMMIT_MESSAGE" value="Registratie pagina" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Controller/DataController.php</url>
-          <line>68</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
