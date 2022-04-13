@@ -3,19 +3,20 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StationRepo;
 
 /**
  * Station
  *
  * @ORM\Table(name="station")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\StationRepo")
  */
 class Station
 {
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="name", type="string", length=10, nullable=false)
+     * @ORM\Column(name="name", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -42,7 +43,7 @@ class Station
      */
     private $elevation;
 
-    public function getName(): ?string
+    public function getName(): ?int
     {
         return $this->name;
     }
@@ -82,6 +83,5 @@ class Station
 
         return $this;
     }
-
 
 }

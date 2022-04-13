@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <div class="card bg-light mb-3">
+        <div class="card-header"><h3>Your profile</h3></div>
+        <div class="card-body">
+            <p> Current email: </p>
+            <p> Amount of weatherstations : {{ amount }} </p>
+            <p> Realtime: {{ realtime}} </p>
+        </div>
+    </div>
+
+    <div class="card bg-light mb-3">
+        <div class="card-header"><h4>You are subscribed to:</h4></div>
+        <div class="card-body">
+            <table class="locations table table-striped table-bordered">
+                <thead>
+                <tr class="table-primary">
+                    <th scope="col">Station-nr</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, value in stations %}
+                    <tr>
+                        <td> <a href="{{  path('show', {stn: value}) }}" > {{ value }} </a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

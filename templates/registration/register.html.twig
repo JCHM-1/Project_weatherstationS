@@ -5,6 +5,11 @@
 {% block body %}
 <div class="container shadow p-3 mb-5 bg-white rounded">
     <h1>Register</h1>
+<div class="card bg-light mb-3" style="margin-left: 18%;margin-right: 18%;width: auto;">
+<div class="card-header">
+<h1 class="h3 mb-3 font-weight-normal">Register</h1>
+</div>
+<div class="card-body">
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
@@ -13,8 +18,10 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button class="btn btn-lg mt-3 btn-primary" type="submit">Register</button>
     {{ form_end(registrationForm) }}
 
 </div>
+    </div>
+    </div>
 {% endblock %}
