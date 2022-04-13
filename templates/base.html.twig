@@ -34,6 +34,7 @@
                         <ul class="navbar-nav mr-auto">
                             {% if is_granted('ROLE_USER') %}
                             <li><a class="nav-link active" aria-current="page" href="/main/profile">Profile</a></li>
+                            <li><a class="nav-link active" aria-current="page" href="/data/search">Search</a></li>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
                             <li><a class="nav-link active" aria-current="page" href="/main/search">Search</a></li>

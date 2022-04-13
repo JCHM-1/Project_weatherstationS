@@ -3,57 +3,82 @@
 {% block title %}Search{% endblock %}
 
 {% block body %}
-    {% for message in app.flashes('error') %}
-        <div class="alert alert-warning">
-            {{ message }}
-        </div>
-    {% endfor %}
-    {{ form(data_form) }}
     <div class="container shadow p-3 mb-5 bg-white rounded">
-        <table class="locations table table-striped table-bordered">
-            <thead>
-            <tr class="table-primary">
-                <th scope="col">Id</th>
-                <th scope="col">Station</th>
-                <th scope="col">Datum</th>
-                <th scope="col">Tijd</th>
-                <th scope="col">Tempratuur</th>
-                <th scope="col">Dauwpunt</th>
-                <th scope="col">Station Luchtdruk</th>
-                <th scope="col">Zeeniveau Luchtdruk</th>
-                <th scope="col">Zicht</th>
-                <th scope="col">Windsnelheid</th>
-                <th scope="col">Neerslag</th>
-                <th scope="col">Sneeuwdiepte</th>
-                <th scope="col">VRSHOT</th>
-                <th scope="col">Bewolking</th>
-                <th scope="col">Windrichting</th>
-            </tr>
-            </thead>
-            <tbody>
-{#            {% if weatherdata is not empty  %}#}
-                {% for data in weatherdata %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-warning">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <form action={{ path('search') }} method="post">
+            <div class="form-group">
+                <select class="form-select mb-3 mt-3" id="select" name="type">
+                    <option selected >Select location type</option>
+                    {% for key in keys %}
+                        <option>{{ key }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Location: </span>
+                <input type="text" class="form-control" id="place" name="place" aria-describedby="basic-addon3">
+            </div>
+
+            <button type="submit" class="btn btn-dark">Search</button>
+
+        </form>
+
+        {#    {{ form(data_form) }}#}
+        {#        {{ vardump }}#}
+
+        {% if stations is not empty %}
+            <table class="locations table table-striped table-bordered p-3 mt-5" >
+                <thead>
+                <tr class="table-primary">
+                    {#                <th scope="col">Id</th>#}
+                    <th scope="col">Station</th>
+                    {#                <th scope="col">Datum</th>#}
+                    {#                <th scope="col">Tijd</th>#}
+                    {#                <th scope="col">Tempratuur</th>#}
+                    {#                <th scope="col">Dauwpunt</th>#}
+                    {#                <th scope="col">Station Luchtdruk</th>#}
+                    {#                <th scope="col">Zeeniveau Luchtdruk</th>#}
+                    {#                <th scope="col">Zicht</th>#}
+                    {#                <th scope="col">Windsnelheid</th>#}
+                    {#                <th scope="col">Neerslag</th>#}
+                    {#                <th scope="col">Sneeuwdiepte</th>#}
+                    {#                <th scope="col">VRSHOT</th>#}
+                    {#                <th scope="col">Bewolking</th>#}
+                    {#                <th scope="col">Windrichting</th>#}
+                </tr>
+                </thead>
+                <tbody>
+                {#            {% if weatherdata is not empty  %}#}
+                {% for data in stations %}
                     <tr>
-                        <th scope="row">{{ data.id }}</th>
-                        <td>{{ data.stn }}</td>
-                        <td>{{ data.date|date('Y-m-d') }}</td>
-                        <td>{{ data.time|date('H:i:s') }}</td>
-                        <td>{{ data.temp }}</td>
-                        <td>{{ data.dewp }}</td>
-                        <td>{{ data.stp }}</td>
-                        <td>{{ data.slp }}</td>
-                        <td>{{ data.visib }}</td>
-                        <td>{{ data.wdsp }}</td>
-                        <td>{{ data.prcp }}</td>
-                        <td>{{ data.sndp }}</td>
-                        <td>{{ data.frshtt }}</td>
-                        <td>{{ data.cldc }}</td>
-                        <td>{{ data.wnddir }}</td>
+                        {#                        <th scope="row">{{ data.id }}</th>#}
+                        {% if data.stationName is not empty %}
+                            <th scope="row">{{ data.stationName }}</th>
+                        {% endif %}
+                        {#                        <td>{{ data.date|date('Y-m-d') }}</td>#}
+                        {#                        <td>{{ data.time|date('H:i:s') }}</td>#}
+                        {#                        <td>{{ data.temp }}</td>#}
+                        {#                        <td>{{ data.dewp }}</td>#}
+                        {#                        <td>{{ data.stp }}</td>#}
+                        {#                        <td>{{ data.slp }}</td>#}
+                        {#                        <td>{{ data.visib }}</td>#}
+                        {#                        <td>{{ data.wdsp }}</td>#}
+                        {#                        <td>{{ data.prcp }}</td>#}
+                        {#                        <td>{{ data.sndp }}</td>#}
+                        {#                        <td>{{ data.frshtt }}</td>#}
+                        {#                        <td>{{ data.cldc }}</td>#}
+                        {#                        <td>{{ data.wnddir }}</td>#}
                     </tr>
                 {% endfor %}
-{#            {% endif %}#}
-            </tbody>
-        </table>
+                {#            {% endif %}#}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
-
 {% endblock %}

@@ -99,6 +99,7 @@ class MainController extends AbstractController
             'nearestlocdata'=> $nearestlocdata,
             'geolocdata'=> $geolocdata,
             'weatherdata'=>$data
+
         ]);
     }
 
