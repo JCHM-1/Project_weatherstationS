@@ -1,5 +1,6 @@
 parameters:
   database_host:     localhost
-  database_name:     weatherstation
+  database_name:     WeatherStations
   database_user:     root
-  database_password: Shalom12
+  database_password: Jchm2001
+
