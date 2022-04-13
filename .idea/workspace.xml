@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="Registratie pagina">
-      <change afterPath="$PROJECT_DIR$/migrations/Version20220408103125.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/parameters.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/routing.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/routing.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Country.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Country.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Data.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Data.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Geolocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Geolocation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/JoinTableProfileStation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/JoinTableProfileStation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/MessengerMessages.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/MessengerMessages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Nearestlocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Nearestlocation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Station.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Station.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Subscriptions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Subscriptions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/WeatherdataFormType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/data/search.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/data/search.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="Registratie pagina" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -217,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648765507567</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Registratie pagina">
+      <created>1649877541040</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1649877541040</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
