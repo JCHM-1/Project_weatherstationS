@@ -3,10 +3,10 @@
 {% block title %}Station info{% endblock %}
 
 {% block body %}
-
+{% for data in stationdata %}
     <div class="card bg-light mb-3">
-        <div class="card-header"><h4>Info about station {{ stationdata.name }}</h4></div>
-
+        <div class="card-header"><h4>Info about station {{ data.name }}</h4></div>
+{% endfor %}
         <div class="card-body">
             <h5>Weatherdata from the past ...</h5>
             <table class="locations table table-striped table-bordered">
@@ -29,21 +29,25 @@
                 <tbody>
                 <tr>
                     <td> Country </td>
-                    <td>  {%  if geolocdata is not null %}{{ geolocdata.country }}{% else %} Geen info beschikbaar {% endif %}</td>
+                    {% for data in geolocdata %}
+                        <td>  {%  if data is not null %}{{ data.country }}{% else %} No info {% endif %}</td>
+                    {% endfor %}
                 </tr>
+                {% for data in stationdata %}
                     <tr>
+
                         <td> Longitude </td>
-                        <td> {{ stationdata.longitude }}</td>
+                        <td> {{ data.longitude }}</td>
                     </tr>
                     <tr>
                         <td> Latitude </td>
-                        <td> {{ stationdata.latitude }}</td>
+                        <td> {{ data.latitude }}</td>
                     </tr>
                     <tr>
                         <td> Elevation </td>
-                        <td> {{ stationdata.elevation }}</td>
+                        <td> {{ data.elevation }}</td>
                     </tr>
-
+                 {% endfor %}
                 </tbody>
             </table>
         </div>

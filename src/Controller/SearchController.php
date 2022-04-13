@@ -99,11 +99,8 @@ class SearchController extends AbstractController
 
         $stationdata = $stationRepo->findBy(['name'=>$stn]);
         $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
-        $geolocdata = $glrepo->find($stn);
+        $geolocdata = $glrepo->findBy(['stationName'=>$stn]);
         $data = $dataRepository->findBy(['stn'=>$stn]);
-
-        $stationdata = $stationdata[0];
-        var_dump($stationdata);
 
 
         return $this->render('main/show.html.twig', [
