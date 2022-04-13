@@ -96,4 +96,28 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    /**
+     * @var \Subscriptions
+     *
+     * @ORM\ManyToOne(targetEntity="Subscriptions")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="subscription", referencedColumnName="id")
+     * })
+     */
+    private $subscription;
+
+    public function getSubscription(): ?Subscriptions
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscriptions $subscription): self
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
+
+
 }

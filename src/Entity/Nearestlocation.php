@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\NLrepo;
 
 /**
  * Nearestlocation
  *
- * @ORM\Table(name="nearestlocation", indexes={@ORM\Index(name="fk_nearestlocation_country_code", columns={"country_code"}), @ORM\Index(name="fk_nearestlocation_station_name", columns={"station_name"})})
- * @ORM\Entity
+ * @ORM\Table(name="nearestlocation", indexes={@ORM\Index(name="fk_nearestlocation_country_code", columns={"country_code"}), @ORM\Index(name="station_name_idx", columns={"station_name"})})
+ * @ORM\Entity(repositoryClass="App\Repository\NLrepo")
  */
 class Nearestlocation
 {

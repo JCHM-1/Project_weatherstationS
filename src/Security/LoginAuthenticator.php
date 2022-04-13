@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,8 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
     {
         $this->urlGenerator = $urlGenerator;
     }
+
+
 
     public function authenticate(Request $request): Passport
     {

@@ -3,13 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\GLrepo;
 
 /**
  * Geolocation
  *
- * @ORM\Table(name="geolocation", indexes={@ORM\Index(name="fk_geolocation_country_code", columns={"country_code"}), @ORM\Index(name="fk_geolocation_station_name", columns={"station_name"})})
- * @ORM\Entity
+ * @ORM\Table(name="geolocation", indexes={@ORM\Index(name="country_code", columns={"country_code"}), @ORM\Index(name="fk_station_name_idx", columns={"station_name"})})
+ * @ORM\Entity(repositoryClass="App\Repository\GLrepo")
  */
+
 class Geolocation
 {
     /**
@@ -20,13 +22,6 @@ class Geolocation
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="station_name", type="string", length=10, nullable=false)
-     */
-    private $stationName;
 
     /**
      * @var string
@@ -147,21 +142,19 @@ class Geolocation
      */
     private $country;
 
+    /**
+     * @var \Station
+     *
+     * @ORM\ManyToOne(targetEntity="Station")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="station_name", referencedColumnName="name")
+     * })
+     */
+    private $stationName;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getStationName(): ?string
-    {
-        return $this->stationName;
-    }
-
-    public function setStationName(string $stationName): self
-    {
-        $this->stationName = $stationName;
-
-        return $this;
     }
 
     public function getCountryCode(): ?string
@@ -364,6 +357,18 @@ class Geolocation
     public function setCountry(?string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getStationName(): ?Station
+    {
+        return $this->stationName;
+    }
+
+    public function setStationName(?Station $stationName): self
+    {
+        $this->stationName = $stationName;
 
         return $this;
     }
