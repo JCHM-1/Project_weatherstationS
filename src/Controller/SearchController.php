@@ -46,6 +46,7 @@ class SearchController extends AbstractController
 //            (Geolocation::class)->findOneBy([$type => $place]);
 //             $output = $output[1];
             $output = $glrepo->findBy([$type=>$place]);
+            $output = $output[1];
 
 
             //var_dump($output);

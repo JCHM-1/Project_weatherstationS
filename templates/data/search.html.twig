@@ -56,11 +56,11 @@
             </thead>
             <tbody>
 {#            {% if weatherdata is not empty  %}#}
-                {% for data in stations %}
-                    <tr>
-{#                        <th scope="row">{{ data.id }}</th>#}
 
-                            <th scope="row"> <a href="{{  path('showStations', {stn: data.stationName}) }}" > {{ data.stationName }} </a></th>
+                    <tr>
+{#                        <th scope="row">{{ stations.id }}</th>#}
+
+                            <th scope="row"> <a href="{{  path('showStations', {stn: stations.stationName}) }}" > {{ stations.stationName }} </a></th>
 
 {#                        <td>{{ data.date|date('Y-m-d') }}</td>#}
 {#                        <td>{{ data.time|date('H:i:s') }}</td>#}
@@ -76,7 +76,7 @@
 {#                        <td>{{ data.cldc }}</td>#}
 {#                        <td>{{ data.wnddir }}</td>#}
                     </tr>
-                {% endfor %}
+
 {#            {% endif %}#}
             </tbody>
         </table>
