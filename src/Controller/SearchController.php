@@ -31,33 +31,13 @@ class SearchController extends AbstractController
         if ($request->isMethod('POST')) {
             $type = $request->request->get('type');
             $place = $request->request->get('place');
-
             $output = $this->doctrine->getRepository
-//            (Geolocation::class)->findOneBy([$type => $place]);
             (Geolocation::class)->findBy([$type => $place]);
-
-//            echo var_dump($type);
-//            echo var_dump($place);
-//            echo "<br>";
-//            echo var_dump($output);
         }
 
 
 //        $this->logger->log('info', '------------------------------------------------POST-------------------------------------------');
 //        $this->logger->log('info', $input);
-//        if ($request->get())
-//        $weatherdata = [];
-//        $data = new Data();
-//        $form = $this->createForm(WeatherdataFormType::class, $data);
-
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $weatherdata = $this->doctrine->getRepository
-//            (Data::class)->findBy(array('stn'=>$data->getStn()));
-//            if (!$weatherdata) {
-//                $this->addFlash('error', 'Station: '.$data->getStn().' not found.');
-//            }
-//        }
 
         return $this->render('data/search.html.twig', array(
 //            'data_form' => $form->createView(),
