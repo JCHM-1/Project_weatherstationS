@@ -9,10 +9,11 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 
         <!-- animate style -->
-        <link rel="stylesheet" href="href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css""> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -29,9 +30,23 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="/main">Home</a>
-                        <a class="nav-link active" aria-current="page" href="/main/weather">Weather</a>
+                    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                        <ul class="navbar-nav mr-auto">
+                            <li><a class="nav-link active" aria-current="page" href="/main">Home</a></li>
+                            <li><a class="nav-link active" aria-current="page" href="/main/weather">Weather</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li><a class="nav-link active" aria-current="page" href="/data/search">Search</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 justify-content-end">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/{{ app.user ? 'logout' : 'login' }}">
+                                    {{ app.user ? 'Logout' : 'Login' }}
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -43,9 +58,9 @@
 
 
 
-
+    <div class="container">
         {% block body %}{% endblock %}
-    
+    </div>
     
         {% block footer %}
         {# <div class="fixed-bottom" id="footer_container">
@@ -68,7 +83,9 @@
                 <ul class="list-group list-group-flush">
                     <a href="#" class="list-group-item list-group-item-action">FAQ</a>
                     <a href="#" class="list-group-item list-group-item-action">Contact</a>
-                    <a href="/main/admin" class="list-group-item list-group-item-action">Admin</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="/admin/profiles" class="list-group-item list-group-item-action">Admin</a>
+                    {% endif %}
                 </ul>
             </div>
         </div>

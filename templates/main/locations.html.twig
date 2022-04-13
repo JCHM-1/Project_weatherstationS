@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+
+        <table class="locations table table-striped table-bordered">
+            <thead>
+            <tr class="table-primary">
+                <th scope="col">Id</th>
+                <th scope="col">StationName</th>
+                <th scope="col">County</th>
+                <th scope="col">Postcode</th>
+                <th scope="col">Country</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for location in geolocations %}
+            <tr>
+                <th scope="row">{{ location.id }}</th>
+                <td>{{ location.stationName }}</td>
+                <td>{{ location.county }}</td>
+                <td>{{ location.postcode }}</td>
+                <td>{{ location.country }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

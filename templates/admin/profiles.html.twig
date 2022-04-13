@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profiles{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('succes') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+
+        <div class="ms-auto p-2 mb-3">
+            <a class="btn btn-dark" href="/register" role="button">Add Admin</a>
+        </div>
+
+        <table class="locations table table-striped table-bordered">
+            <thead>
+            <tr class="table-primary">
+                <th scope="col">Id</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Role</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for profile in profiles %}
+                <tr>
+                    <th scope="row">{{ profile.id }}</th>
+                    <td>{{ profile.email }}</td>
+                    <td>{{ profile.password }}</td>
+                    <td>{{ profile.roles[0] }}</td>
+                    <td><a class="text-danger" href="{{ path('remove', {id: profile.id}) }}">Remove</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

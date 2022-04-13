@@ -2,13 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Geolocation;
+use App\Entity\Profile;
+use App\Entity\Data;
+
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/main', name: 'app_main')]
+    public function __construct(private ManagerRegistry $doctrine) {}
+
+    #[Route('/main', name: 'main')]
     public function index(): Response
     {
         return $this->render('main/index.html.twig', [
@@ -16,20 +23,22 @@ class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/main/weather', methods:['GET'], name: 'app_weather')]
+    #[Route('/main/weather', methods:['GET'], name: 'weather')]
     public function weather(): Response
     {
-        return $this->render('main/weather.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        $weatherdata = $this->doctrine->getRepository
+        (Data::class)->findAll();
+        return $this->render('main/weather.html.twig', array
+        ('weatherdata' => $weatherdata));
     }
 
-    #[Route('/main/admin', methods:['GET'], name: 'app_admin')]
-    public function admin(): Response
+    #[Route('/main/locations', methods:['GET'], name: 'locations')]
+    public function locations(): Response
     {
-        return $this->render('main/admin.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        $geolocations = $this->doctrine->getRepository
+        (Geolocation::class)->findAll();
+        return $this->render('main/locations.html.twig', array
+        ('geolocations' => $geolocations));
     }
 
 }
