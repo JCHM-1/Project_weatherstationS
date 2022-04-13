@@ -43,4 +43,9 @@ class Station
     private $elevation;
 
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
 }
