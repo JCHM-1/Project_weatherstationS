@@ -101,6 +101,7 @@ class SearchController extends AbstractController
         $geolocdata = $glrepo->find($stn);
         $data = $dataRepository->findBy(['stn'=>$stn]);
 
+        $stationdata = $stationdata[0];
         var_dump($stationdata);
 
 
