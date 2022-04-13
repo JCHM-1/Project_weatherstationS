@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Data;
+use App\Entity\Station;
+use App\Entity\Geolocation;
 use App\Form\WeatherdataFormType;
 
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Type;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,29 +19,62 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SearchController extends AbstractController
 {
 
-    public function __construct(private ManagerRegistry $doctrine) {}
+    public function __construct(private ManagerRegistry $doctrine, LoggerInterface $logger) {
+        $this->logger = $logger;
+    }
 
     #[Route('/data/search', methods:['GET', 'POST'], name: 'search')]
-    public function show(Environment $twig, Request $request)
+    public function show(Request $request)
     {
-        $weatherdata = [];
-        $data = new Data();
-        $form = $this->createForm(WeatherdataFormType::class, $data);
-        $form->handleRequest($request);
+        $output = [];
+        $station = new Station;
+        if ($request->isMethod('POST')) {
+            $type = $request->request->get('type');
+            $place = $request->request->get('place');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $weatherdata = $this->doctrine->getRepository
-            (Data::class)->findBy(array('stn'=>$data->getStn()));
-//            var_dump($weatherdata);
-            if (!$weatherdata) {
-                $this->addFlash('error', 'Station: '.$data->getStn().' not found.');
-            }
+            $output = $this->doctrine->getRepository
+//            (Geolocation::class)->findOneBy([$type => $place]);
+            (Geolocation::class)->findBy([$type => $place]);
+
+//            echo var_dump($type);
+//            echo var_dump($place);
+//            echo "<br>";
+//            echo var_dump($output);
         }
 
+
+//        $this->logger->log('info', '------------------------------------------------POST-------------------------------------------');
+//        $this->logger->log('info', $input);
+//        if ($request->get())
+//        $weatherdata = [];
+//        $data = new Data();
+//        $form = $this->createForm(WeatherdataFormType::class, $data);
+
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $weatherdata = $this->doctrine->getRepository
+//            (Data::class)->findBy(array('stn'=>$data->getStn()));
+//            if (!$weatherdata) {
+//                $this->addFlash('error', 'Station: '.$data->getStn().' not found.');
+//            }
+//        }
+
         return $this->render('data/search.html.twig', array(
-            'data_form' => $form->createView(),
-            'weatherdata' => $weatherdata
+//            'data_form' => $form->createView(),
+//            'weatherdata' => $weatherdata,
+            'keys' => $this->getLocationKeys(),
+            'stations' => $output
+//            'vardump' => var_dump($locations)
         ));
+    }
+
+    public function getLocationKeys(): array {
+        $keyName = [];
+        $locations = array_keys((array) new Geolocation);
+        foreach ($locations as $key) {
+            array_push($keyName, substr($key, 23));
+        }
+        return $keyName;
     }
 
 }
