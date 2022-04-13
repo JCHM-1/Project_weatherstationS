@@ -45,7 +45,7 @@ class AdminController extends AbstractController
         $manager->remove($profile);
         $manager->flush();
         $this->addFlash('succes', 'Profile Removed');
-        return $this->redirect($this->generateUrl('profiles'));
+        return $this->redirect($this->generateUrl('admin'));
     }
 
 }
