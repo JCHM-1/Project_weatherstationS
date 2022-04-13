@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="localhost/ redirect naar inloggen">
+    <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="Registratie pagina">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/parameters.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +21,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Backend" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -187,9 +186,8 @@
       <workItem from="1648473860886" duration="1744000" />
       <workItem from="1648476965993" duration="15231000" />
       <workItem from="1649290218797" duration="597000" />
-      <workItem from="1649723966119" duration="37000" />
-      <workItem from="1649759049519" duration="31442000" />
-      <workItem from="1649846595267" duration="3281000" />
+      <workItem from="1649554486721" duration="8874000" />
+      <workItem from="1649717071978" duration="9301000" />
     </task>
     <task id="LOCAL-00001" summary="Registratie pagina">
       <created>1648765507567</created>
@@ -198,105 +196,7 @@
       <option name="project" value="LOCAL" />
       <updated>1648765507567</updated>
     </task>
-    <task id="LOCAL-00002" summary="localhost/ redirect naar inloggen">
-      <created>1649714878605</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1649714878605</updated>
-    </task>
-    <task id="LOCAL-00003" summary="localhost/ redirect naar inloggen">
-      <created>1649717976573</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1649717976573</updated>
-    </task>
-    <task id="LOCAL-00004" summary="localhost/ redirect naar inloggen">
-      <created>1649718168226</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1649718168226</updated>
-    </task>
-    <task id="LOCAL-00005" summary="localhost/ redirect naar inloggen">
-      <created>1649719142844</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1649719142844</updated>
-    </task>
-    <task id="LOCAL-00006" summary="localhost/ redirect naar inloggen">
-      <created>1649719295190</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1649719295190</updated>
-    </task>
-    <task id="LOCAL-00007" summary="localhost/ redirect naar inloggen">
-      <created>1649720551823</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1649720551823</updated>
-    </task>
-    <task id="LOCAL-00008" summary="localhost/ redirect naar inloggen">
-      <created>1649767587180</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1649767587180</updated>
-    </task>
-    <task id="LOCAL-00009" summary="localhost/ redirect naar inloggen">
-      <created>1649778395604</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1649778395604</updated>
-    </task>
-    <task id="LOCAL-00010" summary="localhost/ redirect naar inloggen">
-      <created>1649791532915</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1649791532915</updated>
-    </task>
-    <task id="LOCAL-00011" summary="localhost/ redirect naar inloggen">
-      <created>1649802176119</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1649802176119</updated>
-    </task>
-    <task id="LOCAL-00012" summary="localhost/ redirect naar inloggen">
-      <created>1649803211877</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1649803211877</updated>
-    </task>
-    <task id="LOCAL-00013" summary="localhost/ redirect naar inloggen">
-      <created>1649804987720</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1649804987720</updated>
-    </task>
-    <task id="LOCAL-00014" summary="localhost/ redirect naar inloggen">
-      <created>1649848999374</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1649848999374</updated>
-    </task>
-    <task id="LOCAL-00015" summary="localhost/ redirect naar inloggen">
-      <created>1649849269622</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1649849269622</updated>
-    </task>
-    <option name="localTasksCounter" value="16" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,7 +216,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Registratie pagina" />
-    <MESSAGE value="localhost/ redirect naar inloggen" />
-    <option name="LAST_COMMIT_MESSAGE" value="localhost/ redirect naar inloggen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Registratie pagina" />
   </component>
 </project>
