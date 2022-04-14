@@ -37,7 +37,6 @@ class SearchController extends AbstractController
         $type = null;
         $place = null;
         $output = [];
-        $station = new Station;
         if ($request->isMethod('POST')) {
             $type = $request->request->get('type');
             $place = $request->request->get('place');
