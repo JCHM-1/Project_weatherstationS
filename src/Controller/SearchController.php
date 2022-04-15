@@ -79,8 +79,8 @@ class SearchController extends AbstractController
             'keys' => $this->getLocationKeys(),
             'stations' => $output,
             'type'=> $type,
-            'place' => $place
-//            'vardump' => var_dump($locations)
+            'place' => $place,
+            'hasKey' => $this->hasKey($output)
         ));
     }
 
@@ -155,7 +155,7 @@ class SearchController extends AbstractController
                 $keys['country'] = true;
             }
         }
-        var_dump($keys);
+//        var_dump($keys);
         return $keys;
     }
 

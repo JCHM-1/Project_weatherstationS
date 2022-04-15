@@ -41,7 +41,7 @@
                     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 justify-content-end">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ app.user ? 'logout' : '/' }}">
+                                <a class="nav-link active" aria-current="page" href="{{ app.user ? '/logout' : '/' }}">
                                     {{ app.user ? 'Logout' : 'Login' }}
                                 </a>
                             </li>
@@ -82,9 +82,9 @@
                 <ul class="list-group list-group-flush">
                     <a href="#" class="list-group-item list-group-item-action">FAQ</a>
                     <a href="#" class="list-group-item list-group-item-action">Contact</a>
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <a href="/admin/profiles" class="list-group-item list-group-item-action">Admin</a>
-                    {% endif %}
+{#                    {% if is_granted('ROLE_ADMIN') %}#}
+{#                    <a href="/admin/profiles" class="list-group-item list-group-item-action">Admin</a>#}
+{#                    {% endif %}#}
                 </ul>
             </div>
         </div>
