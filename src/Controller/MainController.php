@@ -78,7 +78,12 @@ class MainController extends AbstractController
     public function locations(): Response
     {
         $geolocations = $this->doctrine->getRepository
-        (Geolocation::class)->findAll();
+        (Geolocation::class)->findBy(
+            array(),
+            array('id' => 'ASC'),
+            100,
+            0
+        );
         return $this->render('main/locations.html.twig', array
         ('geolocations' => $geolocations));
     }

@@ -15,7 +15,7 @@ class DownloadController extends AbstractController
     public function index(): Response
     {
         
-        $filename = 'Textfile.txt';
+        $filename = 'Data.txt';
 
         $fileContent = "Hello this is the content of my file";
 

@@ -20,24 +20,48 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
+
     /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
+
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @var \Subscriptions
+     *
+     * @ORM\ManyToOne(targetEntity="Subscriptions")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="subscription", referencedColumnName="id")
+     * })
+     */
+    private $subscription;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
+     */
+    private $token;
+
+
+
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    
     public function getEmail(): ?string
     {
         return $this->email;
@@ -49,6 +73,8 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
     /**
      * A visual identifier that represents this user.
      *
@@ -58,6 +84,8 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return (string) $this->email;
     }
+
+
     /**
      * @see UserInterface
      */
@@ -75,7 +103,9 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    /**
+    /*
+    
+    *
      * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
@@ -97,15 +127,6 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @var \Subscriptions
-     *
-     * @ORM\ManyToOne(targetEntity="Subscriptions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subscription", referencedColumnName="id")
-     * })
-     */
-    private $subscription;
 
     public function getSubscription(): ?Subscriptions
     {
@@ -118,6 +139,20 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
+    public function getToken(): string 
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
 
 
 }
