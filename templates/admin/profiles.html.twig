@@ -9,13 +9,15 @@
     </div>
     {% endfor %}
 
-    <div class="container shadow p-3 mb-5 bg-white rounded">
+    <div class="card bg-light mb-3">
+            <div class="card-header"><h4>All users</h4></div>
+            <div class="card-body">
 
         <div class="ms-auto p-2 mb-3">
             <a class="btn btn-dark" href="/register" role="button">Add Admin</a>
         </div>
 
-        <table class="locations table table-striped table-bordered">
+        <table class="locations table table-striped table-bordered table-hover">
             <thead>
             <tr class="table-primary">
                 <th scope="col">Id</th>
@@ -37,5 +39,20 @@
             {% endfor %}
             </tbody>
         </table>
+        </div>
     </div>
+    <div class="card bg-light mb-3">
+            <div class="card-header"><h4>Broken stations</h4></div>
+            <div class="card-body">
+
+            <table class="locations table table-striped table-bordered table-hover">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div
 {% endblock %}

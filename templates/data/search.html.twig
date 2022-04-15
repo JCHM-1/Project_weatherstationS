@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Search{% endblock %}
+{% block title %}Locating Data{% endblock %}
 
 {% block body %}
     <div class="container shadow p-3 mb-5 bg-white rounded">
@@ -10,18 +10,26 @@
         </div>
     {% endfor %}
 
-        <form action={{ path('search') }} method="post">
+        <form onclick="getOption()" action={{ path('search') }} method="post">
             <div class="form-group">
-                <select class="form-select mb-3 mt-3" id="select" name="type">
-                    <option selected >Select location type</option>
+                <select onclick="getOption()" class="form-select mb-3 mt-3" id="selectOption" name="type">
+                    <option onclick="getOption()" selected disabled >Select location type</option>
                     {% for key in keys %}
-                        <option>{{ key }}</option>
+                        <option onclick="getOption()" > {{ key }}</option>
                     {% endfor %}
                 </select>
             </div>
 
+            <script type="text/javascript">
+                function getOption() {
+                    selectElement = document.querySelector('#selectOption');
+                    output = selectElement.value;
+                    document.querySelector('.input-group-text').textContent = output;
+                }
+            </script>
+
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3">Location: </span>
+                <span class="input-group-text" > Location: </span>
                 <input type="text" class="form-control" id="place" name="place" aria-describedby="basic-addon3">
             </div>
 
