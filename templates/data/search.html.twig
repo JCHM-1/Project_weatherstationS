@@ -34,23 +34,53 @@
                 <thead id="s_thead">
                 <tr class="table-primary" id="s_tr">
                     <th scope="col">Station</th>
-                    <th scope="col">Country Code</th>
-                    <th scope="col">Island</th>
-                    <th scope="col">County</th>
-                    <th scope="col">Place</th>
-                    <th scope="col">Hamlet</th>
-                    <th scope="col">Town</th>
-                    <th scope="col">Municipality</th>
-                    <th scope="col">State District</th>
-                    <th scope="col">Administrative</th>
-                    <th scope="col">State</th>
-                    <th scope="col">Village</th>
-                    <th scope="col">Region</th>
-                    <th scope="col">Province</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Locality</th>
-                    <th scope="col">Postcode</th>
-                    <th scope="col">Country</th>
+{#                    <th scope="col">Country Code</th>#}
+                    {% if hasKey['island'] %}
+                        <th scope="col">Island</th>
+                    {% endif %}
+                    {% if hasKey['county'] %}
+                        <th scope="col">County</th>
+                    {% endif %}
+                    {% if hasKey['place'] %}
+                        <th scope="col">Place</th>
+                    {% endif %}
+                    {% if hasKey['hamlet'] %}
+                        <th scope="col">Hamlet</th>
+                    {% endif %}
+                    {% if hasKey['town'] %}
+                        <th scope="col">Town</th>
+                    {% endif %}
+                    {% if hasKey['municipality'] %}
+                        <th scope="col">Municipality</th>
+                    {% endif %}
+                    {% if hasKey['stateDistrict'] %}
+                        <th scope="col">State District</th>
+                    {% endif %}
+                    {% if hasKey['administrative'] %}
+                        <th scope="col">Administrative</th>
+                    {% endif %}
+                    {% if hasKey['state'] %}
+                        <th scope="col">State</th>
+                    {% endif %}
+                    {% if hasKey['village'] %}
+                        <th scope="col">Village</th>
+                    {% endif %}
+                    {% if hasKey['region'] %}
+                        <th scope="col">Region</th>
+                    {% endif %}
+                    {% if hasKey['province'] %}
+                        <th scope="col">Province</th>
+                    {% endif %}
+                    {% if hasKey['city'] %}
+                        <th scope="col">City</th>
+                    {% endif %}
+                    {% if hasKey['locality'] %}
+                        <th scope="col">Locality</th>
+                    {% endif %}
+                    {% if hasKey['postcode'] %}
+                        <th scope="col">Postcode</th>
+                    {% endif %}
+{#                    <th scope="col">Country</th>#}
                 </tr>
                 </thead>
                 <tbody id="s_tbody">
@@ -58,23 +88,53 @@
                     <tr>
                         {% if data.stationName is not empty %}
                             <td>{{ data.stationName }}</td>
-                            <td>{{ data.countryCode }}</td>
-                            <td>{{ data.island }}</td>
-                            <td>{{ data.county }}</td>
-                            <td>{{ data.place }}</td>
-                            <td>{{ data.hamlet }}</td>
-                            <td>{{ data.town }}</td>
-                            <td>{{ data.municipality }}</td>
-                            <td>{{ data.stateDistrict }}</td>
-                            <td>{{ data.administrative }}</td>
-                            <td>{{ data.state }}</td>
-                            <td>{{ data.village }}</td>
-                            <td>{{ data.region }}</td>
-                            <td>{{ data.province }}</td>
-                            <td>{{ data.city }}</td>
-                            <td>{{ data.locality }}</td>
-                            <td>{{ data.postcode }}</td>
-                            <td>{{ data.country }}</td>
+{#                            <td>{{ data.countryCode }}</td>#}
+                            {% if hasKey['island'] %}
+                                <td>{{ data.island }}</td>
+                            {% endif %}
+                            {% if hasKey['county'] %}
+                                <td>{{ data.county }}</td>
+                            {% endif %}
+                            {% if hasKey['place'] %}
+                                <td>{{ data.place }}</td>
+                            {% endif %}
+                            {% if hasKey['hamlet'] %}
+                                <td>{{ data.hamlet }}</td>
+                            {% endif %}
+                            {% if hasKey['town'] %}
+                                <td>{{ data.town }}</td>
+                            {% endif %}
+                            {% if hasKey['municipality'] %}
+                                <td>{{ data.municipality }}</td>
+                            {% endif %}
+                            {% if hasKey['stateDistrict'] %}
+                                <td>{{ data.stateDistrict }}</td>
+                            {% endif %}
+                            {% if hasKey['administrative'] %}
+                                <td>{{ data.administrative }}</td>
+                            {% endif %}
+                            {% if hasKey['state'] %}
+                                <td>{{ data.state }}</td>
+                            {% endif %}
+                            {% if hasKey['village'] %}
+                                <td>{{ data.village }}</td>
+                            {% endif %}
+                            {% if hasKey['region'] %}
+                                <td>{{ data.region }}</td>
+                            {% endif %}
+                            {% if hasKey['province'] %}
+                                <td>{{ data.province }}</td>
+                            {% endif %}
+                            {% if hasKey['city'] %}
+                                <td>{{ data.city }}</td>
+                            {% endif %}
+                            {% if hasKey['locality'] %}
+                                <td>{{ data.locality }}</td>
+                            {% endif %}
+                            {% if hasKey['postcode'] %}
+                                <td>{{ data.postcode }}</td>
+                            {% endif %}
+{#                            <td>{{ data.country }}</td>#}
                         {% endif %}
                     </tr>
                 {% endfor %}

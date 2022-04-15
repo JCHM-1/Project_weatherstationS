@@ -29,13 +29,23 @@ class DataController extends AbstractController
 
         for ($x=0; $x<count($data['WEATHERDATA']); $x++) {
 
+
             $date = DateTime::createFromFormat('Y-m-d', $data['WEATHERDATA'][$x]['DATE']);
             $time = DateTime::createFromFormat('H:i:s', $data['WEATHERDATA'][$x]['TIME']);
 
             $input = new Data();
+
             $input->setStn($data['WEATHERDATA'][$x]['STN']);
             $input->setDate($date);
             $input->setTime($time);
+
+//            if (empty($data['WEATHERDATA'][$x]['TEMP'])) {
+//
+//            } else {
+//                $input->setTemp($data['WEATHERDATA'][$x]['TEMP']);
+//            }
+
+
             $input->setTemp($data['WEATHERDATA'][$x]['TEMP']);
             $input->setDewp($data['WEATHERDATA'][$x]['DEWP']);
             $input->setStp($data['WEATHERDATA'][$x]['STP']);
