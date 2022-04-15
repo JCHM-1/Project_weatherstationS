@@ -79,9 +79,84 @@ class SearchController extends AbstractController
             'keys' => $this->getLocationKeys(),
             'stations' => $output,
             'type'=> $type,
-            'place' => $place
-//            'vardump' => var_dump($locations)
+            'place' => $place,
+            'hasKey' => $this->hasKey($output)
         ));
+    }
+
+    public function hasKey(array $output): array {
+        $keys = array(
+            'countryCode' => false,
+            'island' => false,
+            'county' => false,
+            'place' => false,
+            'hamlet' => false,
+            'town' => false,
+            'municipality' => false,
+            'stateDistrict' => false,
+            'administrative' => false,
+            'state' => false,
+            'village' => false,
+            'region' => false,
+            'province' => false,
+            'city' => false,
+            'locality' => false,
+            'postcode' => false,
+            'country' => false
+        );
+
+        foreach ($output as $data) {
+            if (empty($data->getCountryCode())===false) {
+                $keys['countryCode'] = true;
+            }
+            if (empty($data->getCounty())===false) {
+                $keys['county'] = true;
+            }
+            if (empty($data->getPlace())===false) {
+                $keys['place'] = true;
+            }
+            if (empty($data->getHamlet())===false) {
+                $keys['hamlet'] = true;
+            }
+            if (empty($data->getTown())===false) {
+                $keys['town'] = true;
+            }
+            if (empty($data->getMunicipality())===false) {
+                $keys['municipality'] = true;
+            }
+            if (empty($data->getStateDistrict())===false) {
+                $keys['stateDistrict'] = true;
+            }
+            if (empty($data->getAdministrative())===false) {
+                $keys['administrative'] = true;
+            }
+            if (empty($data->getState())===false) {
+                $keys['state'] = true;
+            }
+            if (empty($data->getVillage())===false) {
+                $keys['village'] = true;
+            }
+            if (empty($data->getRegion())===false) {
+                $keys['region'] = true;
+            }
+            if (empty($data->getProvince())===false) {
+                $keys['province'] = true;
+            }
+            if (empty($data->getCity())===false) {
+                $keys['city'] = true;
+            }
+            if (empty($data->getLocality())===false) {
+                $keys['locality'] = true;
+            }
+            if (empty($data->getPostcode())===false) {
+                $keys['postcode'] = true;
+            }
+            if (empty($data->getCountry())===false) {
+                $keys['country'] = true;
+            }
+        }
+//        var_dump($keys);
+        return $keys;
     }
 
     public function getLocationKeys(): array {

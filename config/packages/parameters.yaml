@@ -1,5 +1,5 @@
 parameters:
   database_host:     localhost
-  database_name:     weatherstation
+  database_name:     weatherstations
   database_user:     root
-  database_password: Shalom12
+  database_password: Steenwijk1Cambodja3!
