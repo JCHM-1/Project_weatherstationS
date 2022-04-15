@@ -1,58 +1,95 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profiles{% endblock %}
+{% block title %}Profiles
+{% endblock %}
 
 {% block body %}
-    {% for message in app.flashes('succes') %}
-    <div class="alert alert-success">
-        {{ message }}
-    </div>
-    {% endfor %}
+	{% for message in app.flashes('succes') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	<div class="card bg-light mb-3">
+		<div class="card-header">
+			<h4>All users</h4>
+		</div>
+		<div class="card-body">
+
+			<div class="ms-auto p-2 mb-3">
+				<a class="btn btn-dark" href="/register" role="button">Add Admin</a>
+			</div>
+
+			<table class="locations table table-striped table-bordered table-hover">
+				<thead>
+					<tr class="table-primary">
+						<th scope="col">Id</th>
+						<th scope="col">Email</th>
+						<th scope="col">Password</th>
+						<th scope="col">Role</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for profile in profiles %}
+						<tr>
+							<th scope="row">{{ profile.id }}</th>
+							<td>{{ profile.email }}</td>
+							<td>{{ profile.password }}</td>
+							<td>{{ profile.roles[0] }}</td>
+							<td>
+								<a class="text-danger" href="{{ path('remove', {id: profile.id}) }}">Remove</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
 
     <div class="card bg-light mb-3">
-            <div class="card-header"><h4>All users</h4></div>
-            <div class="card-body">
+		<div class="card-header">
+			<h4>Klant toevoegen</h4>
+		</div>
+		<div class="card-body">
+			<form method="" action="{{path("add")}}">
+				<div class="mb-3">
+					<label for="email" class="form-label">Email address</label>
+					<input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="mail">
+				</div>
+				{# <div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">Password</label>
+					<input type="password" class="form-control" id="exampleInputPassword1">
+				</div> #}
+                <div class="mb-3">
+					<label for="subscription" class="form-label">Kies subscription</label>
+                    <select class="form-select" aria-label="Default select example" id="subscription" name="sub">
+                        {% for sub in subscriptions %}
+                        <option onclick="getOption()" > {{ sub }}</option>
+                    	{% endfor %}
+				    </select>
+                </div>
+				<button type="submit" class="btn btn-dark">Klant toevoegen</button>
+			</form>
+		</div>
+	</div>
 
-        <div class="ms-auto p-2 mb-3">
-            <a class="btn btn-dark" href="/register" role="button">Add Admin</a>
-        </div>
 
-        <table class="locations table table-striped table-bordered table-hover">
-            <thead>
-            <tr class="table-primary">
-                <th scope="col">Id</th>
-                <th scope="col">Email</th>
-                <th scope="col">Password</th>
-                <th scope="col">Role</th>
-                <th scope="col">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for profile in profiles %}
-                <tr>
-                    <th scope="row">{{ profile.id }}</th>
-                    <td>{{ profile.email }}</td>
-                    <td>{{ profile.password }}</td>
-                    <td>{{ profile.roles[0] }}</td>
-                    <td><a class="text-danger" href="{{ path('remove', {id: profile.id}) }}">Remove</a></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        </div>
-    </div>
-    <div class="card bg-light mb-3">
-            <div class="card-header"><h4>Broken stations</h4></div>
-            <div class="card-body">
+	<div class="card bg-light mb-3">
+		<div class="card-header">
+			<h4>Broken stations</h4>
+		</div>
+		<div class="card-body">
 
-            <table class="locations table table-striped table-bordered table-hover">
-                <thead>
-                </thead>
-                <tbody>
-                    <tr>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        </div
+			<table class="locations table table-striped table-bordered table-hover">
+				<thead></thead>
+				<tbody>
+					<tr></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
 {% endblock %}

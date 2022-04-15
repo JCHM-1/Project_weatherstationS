@@ -22,7 +22,7 @@ use App\Repository\NLrepo;
 use App\Repository\GLrepo;
 use App\Repository\DataRepository;
 use App\Repository\ProfileRepository;
-
+use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController
 {
@@ -33,7 +33,23 @@ class AdminController extends AbstractController
         {
                 $profiles = $profileRepository->findAll();
                 return $this->render('admin/profiles.html.twig', array
-                ('profiles' => $profiles));
+                ('profiles' => $profiles,
+                'subscriptions' => $this->subscriptions(),
+            ));
+            }
+    }
+
+
+    #[Route('/main/admin/add', methods:['POST','GET'], name: 'add')]
+    public function add(Request $request): Response
+    {
+        {
+                $email = $request->request->get('mail');
+                $subscription = $request->request->get('sub');
+                var_dump($email);
+                var_dump($subscription);
+                return new Response;
+            
             }
     }
 
@@ -46,6 +62,15 @@ class AdminController extends AbstractController
         $manager->flush();
         $this->addFlash('succes', 'Profile Removed');
         return $this->redirect($this->generateUrl('admin'));
+    }
+
+    public function subscriptions(): array {
+        $subscriptions = array (
+            '1' => 1,
+            '2' => 2,
+            '3' => 3
+        );
+        return $subscriptions;
     }
 
 }
