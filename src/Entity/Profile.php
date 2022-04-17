@@ -33,7 +33,7 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $password;
 
@@ -42,7 +42,7 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @ORM\ManyToOne(targetEntity="Subscriptions")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subscription", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="subscription", referencedColumnName="id", nullable=true)
      * })
      */
     private $subscription;

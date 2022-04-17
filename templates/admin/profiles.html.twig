@@ -9,6 +9,11 @@
 			{{ message }}
 		</div>
 	{% endfor %}
+	{% for message in app.flashes('error') %}
+		<div class="alert alert-warning">
+			{{ message }}
+		</div>
+	{% endfor %}
 
 	<div class="card bg-light mb-3">
 		<div class="card-header">
@@ -25,7 +30,6 @@
 					<tr class="table-primary">
 						<th scope="col">Id</th>
 						<th scope="col">Email</th>
-						<th scope="col">Password</th>
 						<th scope="col">Role</th>
 						<th scope="col">Action</th>
 					</tr>
@@ -35,9 +39,9 @@
 						<tr>
 							<th scope="row">{{ profile.id }}</th>
 							<td>{{ profile.email }}</td>
-							<td>{{ profile.password }}</td>
 							<td>{{ profile.roles[0] }}</td>
 							<td>
+								<a href="{{ path('edit', {id: profile.id}) }}">Edit</a>
 								<a class="text-danger" href="{{ path('remove', {id: profile.id}) }}">Remove</a>
 							</td>
 						</tr>
@@ -53,7 +57,7 @@
 			<h4>Klant toevoegen</h4>
 		</div>
 		<div class="card-body">
-			<form method="" action="{{path("add")}}">
+			<form method="POST" action="{{path("admin")}}">
 				<div class="mb-3">
 					<label for="email" class="form-label">Email address</label>
 					<input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="mail">

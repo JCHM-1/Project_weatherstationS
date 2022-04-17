@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\JoinTable;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use App\Entity\Subscriptions;
 use App\Entity\Geolocation;
 use App\Entity\Profile;
 use App\Entity\Data;
@@ -27,33 +28,53 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminController extends AbstractController
 {
 
-    #[Route('/main/admin', methods:['GET'], name: 'admin')]
-    public function admin(UserInterface $user, JoinTableProfileStationRepo $repo,ProfileRepository $profileRepository): Response
+    public function __construct(private ManagerRegistry $doctrine) {}
+
+    #[Route('/main/admin', methods:['GET', 'POST'], name: 'admin')]
+    public function admin(ProfileRepository $profileRepository, Request $request): Response
     {
         {
-                $profiles = $profileRepository->findAll();
+
+            $profiles = $profileRepository->findAll();
+//            var_dump($request->getMethod()==='POST');
+            if ($request->getMethod()==='POST') {
+                $email = $request->request->get('mail');
+                $subscription = $request->request->get('sub');
+                if ($profileRepository->findOneBy(array('email' => $email))) {
+                    $this->addFlash('error', 'Email already exist');
+                } else {
+                    $this->createProfile($email, $subscription);
+                }
+            }
+
                 return $this->render('admin/profiles.html.twig', array
                 ('profiles' => $profiles,
-                'subscriptions' => $this->subscriptions(),
+                'subscriptions' => $this->subscriptions()
             ));
             }
     }
 
+    public function createProfile($mail, $sub) {
+        $manager = $this->doctrine->getManager();
 
-    #[Route('/main/admin/add', methods:['POST','GET'], name: 'add')]
-    public function add(Request $request): Response
-    {
-        {
-                $email = $request->request->get('mail');
-                $subscription = $request->request->get('sub');
-                var_dump($email);
-                var_dump($subscription);
-                return new Response;
-            
-            }
+        $subscription = new Subscriptions();
+        if ($sub === '2') {
+            $subscription->setAmount(10);
+        } else {
+            $subscription->setAmount(1);
+        }
+        $realtime = $sub === '1' or '2';
+        $subscription->setRealtime($realtime);
+        $manager->persist($subscription);
+        $manager->flush();
+
+        $user = new Profile();
+        $user->setEmail($mail);
+        $user->setSubscription($subscription);
+        $manager->persist($user);
+        $manager->flush();
+        $this->addFlash('succes', 'Profile Added');
     }
-
-    public function __construct(private ManagerRegistry $doctrine) {}
 
     #[Route('/admin/remove/{id}', name: 'remove')]
     public function removeProfile(Profile $profile) {
@@ -62,6 +83,17 @@ class AdminController extends AbstractController
         $manager->flush();
         $this->addFlash('succes', 'Profile Removed');
         return $this->redirect($this->generateUrl('admin'));
+    }
+
+    #[Route('/admin/edit', name: 'edit')]
+    public function editProfile(ProfileRepository $profileRepository) {
+//        $profile = $profileRepository->findOneBy(array('id' => 2));
+//        var_dump($profile->getEmail());
+
+
+        return $this->render('admin/edit.html.twig', array(
+            'profile' => $profile
+        ));
     }
 
     public function subscriptions(): array {
