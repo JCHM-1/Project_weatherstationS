@@ -32,7 +32,7 @@ class AdminController extends AbstractController
     public function __construct(private ManagerRegistry $doctrine) {}
 
     #[Route('/main/admin', methods:['GET', 'POST'], name: 'admin')]
-    public function admin(ProfileRepo $profileRepository, Request $request): Response
+    public function admin(ProfileRepo $profileRepository, Request $request,StationRepo $stationRepo,JoinTableProfileStationRepo $jtpsRepo, DataRepo $dataRepo): Response
     {
         {
 
@@ -41,22 +41,42 @@ class AdminController extends AbstractController
             if ($request->getMethod()==='POST') {
                 $email = $request->request->get('mail');
                 $subscription = $request->request->get('sub');
+
+                if ($subscription == 1 or $subscription == 3) {
+                    $station[] = $request->request->get('station1');
+                    }
+                else {
+                    $station[] = $request->request->get('station1');
+                    $station[] = $request->request->get('station2');
+                    $station[] = $request->request->get('station3');
+                    $station[] = $request->request->get('station4');
+                    $station[] = $request->request->get('station5');
+                    $station[] = $request->request->get('station6');
+                    $station[] = $request->request->get('station7');
+                    $station[] = $request->request->get('station8');
+                    $station[] = $request->request->get('station9');
+                    $station[] = $request->request->get('station10');
+                }
                 if ($profileRepository->findOneBy(array('email' => $email))) {
                     $this->addFlash('error', 'Email already exist');
                 } else {
-                    $this->createProfile($email, $subscription);
+                    $this->createProfile($email, $subscription,$station,$jtpsRepo,$dataRepo);
                 }
             }
 
+            $stations = $stationRepo->findAll();
+
                 return $this->render('admin/profiles.html.twig', array(
                     'profiles' => $profiles,
-                    'subscriptions' => $this->subscriptions()
+                    'subscriptions' => $this->subscriptions(),
+                    'stations'=> $stations,
+                    'sub'=>$subscription
             ));
 
             }
     }
 
-    public function createProfile($mail, $sub) {
+    public function createProfile($mail, $sub,$station,JoinTableProfileStationRepo $jtpsRepo, DataRepo $dataRepo) {
         $manager = $this->doctrine->getManager();
         $subscription = $manager->getRepository(Subscriptions::class)->findOneBy(array('id' => $sub));
 
@@ -65,20 +85,65 @@ class AdminController extends AbstractController
         $user->setSubscription($subscription);
         $manager->persist($user);
         $manager->flush();
+
+        if($sub == 1 or $sub == 3){
+            $jointable = new JoinTableProfileStation();
+            $jointable->setProfile($user->getId());
+            $jointable->setStation($station[0]);
+        }else{
+            for($x=0; $x<10;$x++){
+                $jointable = new JoinTableProfileStation();
+                $jointable->setProfile($user->getId());
+                $jointable->setStation($station[$x]);
+            }
+        }
+
+        $manager->persist($jointable);
+        $manager->flush();
+
         $this->addFlash('succes', 'Profile Added');
 
         $secretKey  = 'wap';
+
         try {
             $tokenId = $user->getId();
-        } catch (\Exception $e) {
-        }
-        // Retrieved from filtered POST data
+        } catch (\Exception $e) {}
 
-        // Create the token as an array
-        $data = [
-            // Json Token Id: an unique identifier for the token
-            'jti'  => $tokenId
-        ];
+
+        // Retrieved from filtered POST data
+        // Demo: Voor subscr 1 laat 10x data van 1 station
+        if ($user->getSubscription() == 1)
+        {
+            $station = $jtpsRepo->findOneBy(['profile'=>$tokenId]);
+            $stn = $station->getStation()->getName();
+
+            for($x = 10; $x>0; $x--){
+                $data[] = $dataRepo->findBy(['stn'=> $stn]);
+            }
+        }
+
+        // Demo: voor subscr 2 laat 1x data van 10 stations
+        elseif($user->getSubscription() == 2)
+        {
+            $stations = $jtpsRepo->findBy(['profile'=>$tokenId]);
+
+            foreach($stations as $station) {
+                $stn = $station->getStation()->getName();
+                // Create the token as an array
+                $data[] = $dataRepo->findBy(['stn'=> $stn]);
+            }
+        }
+
+        // Demo: laat 100 keer data zien van 1 station
+        else
+        {
+            $station = $jtpsRepo->findOneBy(['profile'=>$tokenId]);
+            $stn = $station->getStation()->getName();
+
+            for($x = 100; $x>0; $x--){
+                $data[] = $dataRepo->findBy(['stn'=> $stn]);
+            }
+        }
 
         // Encode the array to a JWT string.
         $token =  JWT::encode(

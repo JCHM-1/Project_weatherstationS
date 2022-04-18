@@ -69,12 +69,80 @@
 				</div> #}
                 <div class="mb-3">
 					<label for="subscription" class="form-label">Kies subscription</label>
-                    <select class="form-select" aria-label="Default select example" id="subscription" name="sub">
+                    <select class="form-select" aria-label="Default select example" id="sub" name="sub">
                         {% for sub in subscriptions %}
-                        <option onclick="getOption()" > {{ sub }}</option>
+                        <option onclick="getOption()" value="{{ sub }}" > {{ sub }}</option>
                     	{% endfor %}
 				    </select>
                 </div>
+				<div class="mb-3">
+					{% if(sub == 1 or sub == 3) %}
+						<label for="station" class="form-label">Kies Station(s)</label>
+
+							<select class="form-select" aria-label="Default select example" id="station" name="station1">
+								{% for station in stations %}
+									<option onclick="getOption()" > {{ station.name }}</option>
+								{% endfor %}
+							</select>
+
+					{% endif %}
+					{% if(sub == 2) %}
+						<label for="station" class="form-label">Kies Station(s)</label>
+
+							<select class="form-select" aria-label="Default select example" id="station" name="station1">
+								{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+						{% endfor %}
+							</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station2">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station3">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station4">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station5">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station6">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station7">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station8">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station9">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station10">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+
+
+					{% endif %}
+				</div>
 				<button type="submit" class="btn btn-dark" id="resource">Klant toevoegen</button>
 			</form>
 	<script type="text/javascript">
