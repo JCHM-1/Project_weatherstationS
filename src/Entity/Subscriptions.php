@@ -64,15 +64,6 @@ class Subscriptions
         return $this;
     }
 
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
     /**
      * @param int $id
      */
@@ -82,35 +73,11 @@ class Subscriptions
     }
 
     /**
-     * @return int
-     */
-    public function getAmount(): int
-    {
-        return $this->amount;
-    }
-
-    /**
-     * @param int $amount
-     */
-    public function setAmount(int $amount): void
-    {
-        $this->amount = $amount;
-    }
-
-    /**
      * @return bool
      */
     public function isRealtime(): bool
     {
         return $this->realtime;
-    }
-
-    /**
-     * @param bool $realtime
-     */
-    public function setRealtime(bool $realtime): void
-    {
-        $this->realtime = $realtime;
     }
 
 
