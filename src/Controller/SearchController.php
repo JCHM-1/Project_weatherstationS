@@ -20,7 +20,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Type;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
-//use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -142,14 +142,13 @@ class SearchController extends AbstractController
     }
 
     #[Route('/data/search/{stn}', name: 'showStations')]
-    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository): Response
+    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepo $dataRepository): Response
     {
 
         $stationdata = $stationRepo->findBy(['name'=>$stn]);
         $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
         $geolocdata = $glrepo->findBy(['stationName'=>$stn]);
         $data = $dataRepository->findBy(['stn'=>$stn]);
-
 
         return $this->render('main/show.html.twig', [
             'stationdata' => $stationdata,
