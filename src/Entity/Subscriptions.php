@@ -15,9 +15,9 @@ class Subscriptions
     /**
      * @var int
      *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer", type="integer", nullable=false)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -62,22 +62,6 @@ class Subscriptions
         $this->realtime = $realtime;
 
         return $this;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isRealtime(): bool
-    {
-        return $this->realtime;
     }
 
 

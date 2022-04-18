@@ -35,7 +35,7 @@ class DownloadController extends AbstractController
         try {
 
             $decoded = JWT::decode($token, new Key($key, 'HS512'));
-            $content = json_decode(json_encode($decoded), true);
+            $content = (array) json_decode(json_encode($decoded, true));
 
             echo '<pre>';
             var_dump($decoded);
@@ -67,6 +67,8 @@ class DownloadController extends AbstractController
             // ]);
 
         return $response;
+
+        // return new respone status ok
 
 //        JWT::encode($filecontent
 
