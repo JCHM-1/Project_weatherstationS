@@ -39,6 +39,8 @@ class DataController extends AbstractController
             $input->setDate($date);
             $input->setTime($time);
 
+            //$average = array_sum($data)/count($data);
+
 //            if (empty($data['WEATHERDATA'][$x]['TEMP'])) {
 //
 //            } else {
@@ -60,9 +62,9 @@ class DataController extends AbstractController
 
             $entityManager->persist($input);
             $entityManager->flush();
-
-
-
+//
+//
+//
 //            $this->logger->log('info', '---------------------------DATA----------------------------');
 //            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['STN']));
 //            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['DATE']));

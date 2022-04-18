@@ -13,6 +13,7 @@ use App\Repository\DataRepo;
 use App\Repository\ProfileRepo;
 
 use Doctrine\ORM\Mapping\JoinTable;
+use JetBrains\PhpStorm\Pure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use Doctrine\Persistence\ManagerRegistry;
@@ -27,12 +28,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SearchController extends AbstractController
 {
 
+    private LoggerInterface $logger;
+
     public function __construct(private ManagerRegistry $doctrine, LoggerInterface $logger) {
         $this->logger = $logger;
     }
 
     #[Route('/data/search', methods:['GET', 'POST'], name: 'search')]
-    public function show(Request $request, GLRepo $glrepo)
+    public function show(Request $request, GLrepo $glrepo): Response
     {
         $type = null;
         $place = null;
@@ -52,10 +55,6 @@ class SearchController extends AbstractController
             'place' => $place,
             'hasKey' => $this->hasKey($output)
         ));
-    }
-
-    #[Route('/data/search/{stn}', methods:['GET', 'POST'], name: 'search_stn')]
-    public function showStn(Request $request) {
     }
 
     public function hasKey(array $output): array {
@@ -137,13 +136,14 @@ class SearchController extends AbstractController
         $keyName = [];
         $locations = array_keys((array) new Geolocation);
         foreach ($locations as $key) {
-            array_push($keyName, substr($key, 23));
+            $keyName[] = substr($key, 23);
         }
         return $keyName;
     }
 
     #[Route('/data/search/{stn}', name: 'showStations')]
-    public function showStations($stn, StationRepo $stationRepo, NLRepo $nlrepo, GLRepo $glrepo, DataRepo $dataRepository){
+    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository): Response
+    {
 
         $stationdata = $stationRepo->findBy(['name'=>$stn]);
         $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
@@ -159,5 +159,4 @@ class SearchController extends AbstractController
 
         ]);
     }
-
 }
