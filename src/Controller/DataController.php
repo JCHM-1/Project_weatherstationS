@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\DataRepo;
 use DateTime;
 use App\Entity\Data;
 use Doctrine\Persistence\ManagerRegistry;
@@ -21,7 +22,7 @@ class DataController extends AbstractController
     }
 
     #[Route('/main/postdata', name: 'data')]
-    public function postdata(Request $request, ManagerRegistry $doctrine): void
+    public function postdata(Request $request, ManagerRegistry $doctrine, DataRepo $dataRepo): void
     {
         $entityManager = $doctrine->getManager();
         $data = $request->toArray();
@@ -38,21 +39,7 @@ class DataController extends AbstractController
             $input->setDate($date);
             $input->setTime($time);
 
-            if ($data['WEATHERDATA'][$x]['TEMP'] == "" || $data['WEATHERDATA'][$x]['TEMP'] == 0) {
-                $input->setTemp($data['WEATHERDATA'][
-                array_sum($data["WEATHERDATA"][$x]['TEMP']) / count($data["WEATHERDATA"][$x]['TEMP'])]['TEMP']);
-            } else {
-                $input->setTemp($data['WEATHERDATA'][$x]['TEMP']);
-            }
-
-            if ($data['WEATHERDATA'][$x]['FRSHHT'] == "" ||
-                $data['WEATHERDATA'][$x]['FRSHHT'] == "0" ||
-                $data['WEATHERDATA'][$x]['FRSHHT'] == "None") {
-                $input->setTemp($data['WEATHERDATA']
-                [array_sum($data["WEATHERDATA"][$x]['FRSHHT']) / count($data["WEATHERDATA"][$x]['FRSHHT'])]['FRSHHT']);
-            } else {
-                $input->setTemp($data['WEATHERDATA'][$x]['FRSHHT']);
-            }
+            $input->setTemp($data['WEATHERDATA'][$x]['TEMP']);
             $input->setDewp($data['WEATHERDATA'][$x]['DEWP']);
             $input->setStp($data['WEATHERDATA'][$x]['STP']);
             $input->setSlp($data['WEATHERDATA'][$x]['SLP']);
@@ -60,29 +47,34 @@ class DataController extends AbstractController
             $input->setWdsp($data['WEATHERDATA'][$x]['WDSP']);
             $input->setPrcp($data['WEATHERDATA'][$x]['PRCP']);
             $input->setSndp($data['WEATHERDATA'][$x]['SNDP']);
+
+            if ($data['WEATHERDATA'][$x]['FRSHTT'] == "None" || $data['WEATHERDATA'][$x]['FRSHTT'] == "") {
+                $x = $dataRepo->findOneBy();
+            }
+
             $input->setFrshtt($data['WEATHERDATA'][$x]['FRSHTT']);
             $input->setCldc($data['WEATHERDATA'][$x]['CLDC']);
             $input->setWnddir($data['WEATHERDATA'][$x]['WNDDIR']);
+
 
             $entityManager->persist($input);
             $entityManager->flush();
 
 //            $this->logger->log('info', '---------------------------DATA----------------------------');
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['STN']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['STN']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['DATE']);
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['STN']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['DATE']));
 //            $this->logger->log('info', $data['WEATHERDATA'][$x]['TIME']);
 //            $this->logger->log('info', $data['WEATHERDATA'][$x]['TEMP']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['DEWP']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['STP']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['SLP']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['VISIB']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['WDSP']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['PRCP']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['SNDP']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['FRSHTT']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['CLDC']);
-//            $this->logger->log('info', $data['WEATHERDATA'][$x]['WNDDIR']);
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['DEWP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['STP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['SLP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['VISIB']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['WDSP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['PRCP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['SNDP']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['FRSHTT']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['CLDC']));
+//            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['WNDDIR']));
 //            $this->logger->log('info', '---------------------------TYPE----------------------------');
 //            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['STN']));
 //            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['DATE']));

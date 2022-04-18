@@ -9,7 +9,7 @@ use App\Repository\DataRepo;
  * Data
  *
  * @ORM\Table(name="data", indexes={@ORM\Index(name="stn_idx", columns={"stn"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=DataRepo::class)
  */
 class Data
 {
@@ -330,6 +330,4 @@ class Data
     {
         $this->wnddir = $wnddir;
     }
-
-
 }
