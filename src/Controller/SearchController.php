@@ -133,7 +133,7 @@ class SearchController extends AbstractController
         return $keys;
     }
 
-    public function getLocationKeys(): array {
+    #[Pure] public function getLocationKeys(): array {
         $keyName = [];
         $locations = array_keys((array) new Geolocation);
         foreach ($locations as $key) {
