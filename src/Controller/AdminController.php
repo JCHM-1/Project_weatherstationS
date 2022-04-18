@@ -35,41 +35,41 @@ class AdminController extends AbstractController
     public function admin(ProfileRepo $profileRepository, Request $request,StationRepo $stationRepo,JoinTableProfileStationRepo $jtpsRepo, DataRepo $dataRepo): Response
     {
         {
-
+            $subscription = [];
             $profiles = $profileRepository->findAll();
-//            var_dump($request->getMethod()==='POST');
-            if ($request->getMethod()==='POST') {
-                $email = $request->request->get('mail');
-                $subscription = $request->request->get('sub');
-
-                if ($subscription == 1 or $subscription == 3) {
-                    $station[] = $request->request->get('station1');
-                    }
-                else {
-                    $station[] = $request->request->get('station1');
-                    $station[] = $request->request->get('station2');
-                    $station[] = $request->request->get('station3');
-                    $station[] = $request->request->get('station4');
-                    $station[] = $request->request->get('station5');
-                    $station[] = $request->request->get('station6');
-                    $station[] = $request->request->get('station7');
-                    $station[] = $request->request->get('station8');
-                    $station[] = $request->request->get('station9');
-                    $station[] = $request->request->get('station10');
-                }
-                if ($profileRepository->findOneBy(array('email' => $email))) {
-                    $this->addFlash('error', 'Email already exist');
-                } else {
-                    $this->createProfile($email, $subscription,$station[],$jtpsRepo,$dataRepo);
-                }
-            }
-
-            $stations = $stationRepo->findAll();
+////            var_dump($request->getMethod()==='POST');
+//            if ($request->getMethod()==='POST') {
+//                $email = $request->request->get('mail');
+//                $subscription = $request->request->get('sub');
+//
+//                if ($subscription == 1 or $subscription == 3) {
+//                    $station[] = $request->request->get('station1');
+//                    }
+//                else {
+//                    $station[] = $request->request->get('station1');
+//                    $station[] = $request->request->get('station2');
+//                    $station[] = $request->request->get('station3');
+//                    $station[] = $request->request->get('station4');
+//                    $station[] = $request->request->get('station5');
+//                    $station[] = $request->request->get('station6');
+//                    $station[] = $request->request->get('station7');
+//                    $station[] = $request->request->get('station8');
+//                    $station[] = $request->request->get('station9');
+//                    $station[] = $request->request->get('station10');
+//                }
+//                if ($profileRepository->findOneBy(array('email' => $email))) {
+//                    $this->addFlash('error', 'Email already exist');
+//                } else {
+//                    $this->createProfile($email, $subscription,$station[],$jtpsRepo,$dataRepo);
+//                }
+//            }
+//
+//            $stations = $stationRepo->findAll();
 
                 return $this->render('admin/profiles.html.twig', array(
                     'profiles' => $profiles,
                     'subscriptions' => $this->subscriptions(),
-                    'stations'=> $stations,
+//                    'stations'=> $stations,
                     'sub'=>$subscription
             ));
 
@@ -196,12 +196,14 @@ class AdminController extends AbstractController
     }
 
     public function subscriptions(): array {
-        $subscriptions = array (
-            '1' => 1,
-            '2' => 2,
-            '3' => 3
-        );
-        return $subscriptions;
+        $subscriptions = $this->doctrine->getRepository(Subscriptions::class)->findAll();
+        $subType = [];
+        foreach ($subscriptions as $sub) {
+            if ($sub->getId()!=999) {
+                array_push($subType, $sub->getId());
+            }
+        }
+        return $subType;
     }
 
 }
