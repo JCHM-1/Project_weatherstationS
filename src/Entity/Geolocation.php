@@ -3,15 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\GLrepo;
 
 /**
  * Geolocation
  *
  * @ORM\Table(name="geolocation", indexes={@ORM\Index(name="country_code", columns={"country_code"}), @ORM\Index(name="fk_station_name_idx", columns={"station_name"})})
- * @ORM\Entity(repositoryClass="App\Repository\GLrepo")
+ * @ORM\Entity
  */
-
 class Geolocation
 {
     /**

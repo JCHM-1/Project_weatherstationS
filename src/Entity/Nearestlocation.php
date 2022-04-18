@@ -76,5 +76,94 @@ class Nearestlocation
      */
     private $stationName;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getAdministrativeRegion1(): ?string
+    {
+        return $this->administrativeRegion1;
+    }
+
+    public function setAdministrativeRegion1(?string $administrativeRegion1): self
+    {
+        $this->administrativeRegion1 = $administrativeRegion1;
+
+        return $this;
+    }
+
+    public function getAdministrativeRegion2(): ?string
+    {
+        return $this->administrativeRegion2;
+    }
+
+    public function setAdministrativeRegion2(?string $administrativeRegion2): self
+    {
+        $this->administrativeRegion2 = $administrativeRegion2;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getCountryCode(): ?Country
+    {
+        return $this->countryCode;
+    }
+
+    public function setCountryCode(?Country $countryCode): self
+    {
+        $this->countryCode = $countryCode;
+
+        return $this;
+    }
+
+    public function getStationName(): ?Station
+    {
+        return $this->stationName;
+    }
+
+    public function setStationName(?Station $stationName): self
+    {
+        $this->stationName = $stationName;
+
+        return $this;
+    }
+
 
 }

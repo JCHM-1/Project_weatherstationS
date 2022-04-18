@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Geolocation[]    findAll()
  * @method Geolocation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GLrepo extends ServiceEntityRepository
+class GLRepo extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

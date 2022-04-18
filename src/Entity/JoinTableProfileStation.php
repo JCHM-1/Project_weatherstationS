@@ -8,18 +8,18 @@ use Doctrine\ORM\Mapping as ORM;
  * JoinTableProfileStation
  *
  * @ORM\Table(name="join_table_profile_station", indexes={@ORM\Index(name="profile_id", columns={"profile_id"}), @ORM\Index(name="station_id", columns={"station_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=JoinTableProfileStationRepo::class)
  */
 class JoinTableProfileStation
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="prim_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $prim_id;
 
     /**
      * @var \Profile
@@ -41,52 +41,33 @@ class JoinTableProfileStation
      */
     private $station;
 
-    /**
-     * @return int
-     */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return \Profile
-     */
-    public function getProfile(): \Profile
+    public function getProfile(): ?Profile
     {
         return $this->profile;
     }
 
-    /**
-     * @param \Profile $profile
-     */
-    public function setProfile(\Profile $profile): void
+    public function setProfile(?Profile $profile): self
     {
         $this->profile = $profile;
+
+        return $this;
     }
 
-    /**
-     * @return \Station
-     */
-    public function getStation(): \Station
+    public function getStation(): ?Station
     {
         return $this->station;
     }
 
-    /**
-     * @param \Station $station
-     */
-    public function setStation(\Station $station): void
+    public function setStation(?Station $station): self
     {
         $this->station = $station;
+
+        return $this;
     }
 
 
