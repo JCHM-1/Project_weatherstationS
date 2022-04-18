@@ -142,8 +142,9 @@ class SearchController extends AbstractController
     }
 
     #[Route('/data/search/{stn}', name: 'showStations')]
-    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo, DataRepo $dataRepository): Response
+    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepo $dataRepository): Response
     {
+
         $stationdata = $stationRepo->findBy(['name'=>$stn]);
         $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
         $geolocdata = $glrepo->findBy(['stationName'=>$stn]);
