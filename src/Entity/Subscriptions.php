@@ -15,9 +15,9 @@ class Subscriptions
     /**
      * @var int
      *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer", type="integer", nullable=false)
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -35,53 +35,33 @@ class Subscriptions
      */
     private $realtime;
 
-
-    /**
-     * @return int
-     */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
-    /**
-     * @param int $amount
-     */
-    public function setAmount(int $amount): void
+    public function setAmount(int $amount): self
     {
         $this->amount = $amount;
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isRealtime(): bool
+    public function getRealtime(): ?bool
     {
         return $this->realtime;
     }
 
-    /**
-     * @param bool $realtime
-     */
-    public function setRealtime(bool $realtime): void
+    public function setRealtime(bool $realtime): self
     {
         $this->realtime = $realtime;
+
+        return $this;
     }
 
 

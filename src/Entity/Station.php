@@ -3,13 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\StationRepo;
 
 /**
  * Station
  *
  * @ORM\Table(name="station")
- * @ORM\Entity(repositoryClass="App\Repository\StationRepo")
+ * @ORM\Entity(repositoryClass=StationRepo::class)
  */
 class Station
 {
@@ -84,9 +83,5 @@ class Station
         return $this;
     }
 
-    public function __toString(): string
-        {
-            return $this->name;
-        }
 
 }

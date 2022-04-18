@@ -28,5 +28,22 @@ class Country
      */
     private $country;
 
+    public function getCountryCode(): ?string
+    {
+        return $this->countryCode;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
 
 }

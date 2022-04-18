@@ -10,10 +10,10 @@ use App\Entity\Station;
 use App\Entity\JoinTableProfileStation;
 use App\Repository\JoinTableProfileStationRepo;
 use App\Repository\StationRepo;
-use App\Repository\NLrepo;
-use App\Repository\GLrepo;
-use App\Repository\DataRepository;
-use App\Repository\ProfileRepository;
+use App\Repository\NLRepo;
+use App\Repository\GLRepo;
+use App\Repository\DataRepo;
+use App\Repository\ProfileRepo;
 
 
 
@@ -46,7 +46,7 @@ class MainController extends AbstractController
     }
 
     #[Route('/main/profile', methods:['GET'], name: 'profile')]
-    public function weather(UserInterface $user, JoinTableProfileStationRepo $repo,ProfileRepository $profileRepository): Response
+    public function weather(UserInterface $user, JoinTableProfileStationRepo $repo, ProfileRepo $profileRepository): Response
     {
         // $repo = $this->doctrine->getRepository("JoinTableProfileStationRepo");
         $data = $repo->findBy(['profile'=> ''.$user->getId().'' ]);
@@ -89,7 +89,7 @@ class MainController extends AbstractController
     }
 
     #[Route('/main/profile/station/{stn}', name: 'show')]
-    public function show($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository){
+    public function show($stn, StationRepo $stationRepo, NLRepo $nlrepo, GLRepo $glrepo, DataRepo $dataRepository){
 
         $stationdata = $stationRepo->find($stn);
         $nearestlocdata = $nlrepo->find($stn);

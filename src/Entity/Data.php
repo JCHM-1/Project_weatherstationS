@@ -22,6 +22,11 @@ class Data
     private $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $stn;
+
+    /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="date", type="date", nullable=true)
@@ -120,10 +125,81 @@ class Data
      *   @ORM\JoinColumn(name="stn", referencedColumnName="name")
      * })
      */
-    private $stn;
-
-    public function setStn(mixed $STN)
+    public function getId(): ?int
     {
+        return $this->id;
+    }
+
+    public function getStn(): ?int
+    {
+        return $this->stn;
+    }
+
+    public function setStn(int $stn): self
+    {
+        $this->stn = $stn;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getTime(): ?\DateTimeInterface
+    {
+        return $this->time;
+    }
+
+    public function setTime(?\DateTimeInterface $time): self
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    public function getTemp(): ?float
+    {
+        return $this->temp;
+    }
+
+    public function setTemp(?float $temp): self
+    {
+        $this->temp = $temp;
+
+        return $this;
+    }
+
+    public function getDewp(): ?float
+    {
+        return $this->dewp;
+    }
+
+    public function setDewp(?float $dewp): self
+    {
+        $this->dewp = $dewp;
+
+        return $this;
+    }
+
+    public function getStp(): ?float
+    {
+        return $this->stp;
+    }
+
+    public function setStp(?float $stp): self
+    {
+        $this->stp = $stp;
+
+        return $this;
     }
 
 

@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use Firebase\JWT\JWT;
 use App\Entity\Profile;
 use App\Form\RegistrationFormType;
+use App\Repository\ProfileRepo;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +21,6 @@ class RegistrationController extends AbstractController
     {
         $user = new Profile();
 
-//        $user->set
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -37,11 +38,26 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
+
             return $this->redirectToRoute('main');
+
+
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
+
+//    public function hasher(Profile $user)
+//    {
+////        ProfileRepo $profilerepo;
+//
+//        $id = $profilerepo->find($user->getEmail())->getId();
+//
+//        JWT::encode($user->getEmail(), $key);
+//
+//    }
+
+
 }
