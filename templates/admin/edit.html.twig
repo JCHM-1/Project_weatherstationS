@@ -9,22 +9,23 @@
         <thead>
         <tr class="table-primary">
             <th scope="col">Email</th>
-            <th scope="col"></th>
+            <th scope="col">Subscription Type</th>
 {#            <th scope="col">Amount</th>#}
 {#            <th scope="col">Realtime</th>#}
 {#            <th scope="col">Station</th>#}
         </tr>
         </thead>
         <tbody>
-        {% for info in profile %}
+{#        {% for user in profile %}#}
             <tr>
-                <th scope="row">{{ info.email }}</th>
-                <td></td>
+                <th scope="row">{{ profile.email }}</th>
+                <td>{{ profile.subscription.id }}</td>
+
 {#                <td>{{ info.Subscriptions.amount }}</td>#}
 {#                <td>{{ info.Subscriptions.realtime }}</td>#}
 {#                <td>{{ info.Subscriptions.station }}</td>#}
             </tr>
-        {% endfor %}
+{#        {% endfor %}#}
         </tbody>
     </table>
 

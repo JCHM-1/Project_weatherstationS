@@ -2,26 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\JoinTableProfileStation;
+use App\Repository\JoinTableProfileStationRepo;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\Mapping\JoinTable;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 use App\Entity\Subscriptions;
-use App\Entity\Geolocation;
 use App\Entity\Profile;
-use App\Entity\Data;
-use App\Entity\Nearestlocation;
-use App\Entity\Station;
-use App\Entity\JoinTableProfileStation;
-use App\Repository\JoinTableProfileStationRepo;
-use App\Repository\StationRepo;
-use App\Repository\NLrepo;
-use App\Repository\GLrepo;
-use App\Repository\DataRepository;
 use App\Repository\ProfileRepository;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -47,26 +36,16 @@ class AdminController extends AbstractController
                 }
             }
 
-                return $this->render('admin/profiles.html.twig', array
-                ('profiles' => $profiles,
-                'subscriptions' => $this->subscriptions()
+                return $this->render('admin/profiles.html.twig', array(
+                    'profiles' => $profiles,
+                    'subscriptions' => $this->subscriptions()
             ));
             }
     }
 
     public function createProfile($mail, $sub) {
         $manager = $this->doctrine->getManager();
-
-        $subscription = new Subscriptions();
-        if ($sub === '2') {
-            $subscription->setAmount(10);
-        } else {
-            $subscription->setAmount(1);
-        }
-        $realtime = $sub === '1' or '2';
-        $subscription->setRealtime($realtime);
-        $manager->persist($subscription);
-        $manager->flush();
+        $subscription = $manager->getRepository(Subscriptions::class)->findOneBy(array('id' => $sub));
 
         $user = new Profile();
         $user->setEmail($mail);
@@ -74,6 +53,7 @@ class AdminController extends AbstractController
         $manager->persist($user);
         $manager->flush();
         $this->addFlash('succes', 'Profile Added');
+        return $this->redirect($this->generateUrl('admin'));
     }
 
     #[Route('/admin/remove/{id}', name: 'remove')]
@@ -85,11 +65,17 @@ class AdminController extends AbstractController
         return $this->redirect($this->generateUrl('admin'));
     }
 
-    #[Route('/admin/edit', name: 'edit')]
-    public function editProfile(ProfileRepository $profileRepository) {
-//        $profile = $profileRepository->findOneBy(array('id' => 2));
-//        var_dump($profile->getEmail());
+    #[Route('/admin/edit/{id}', name: 'edit')]
+    public function editProfile(ProfileRepository $profileRepository, $id, JoinTableProfileStationRepo $jtpsRepo) {
 
+        $profile = $profileRepository->findOneBy(array('id' => $id));
+        $stations = $jtpsRepo->find(1);
+        foreach( $stations as $station ) {
+
+        }
+//        var_dump($profile->getEmail());
+//        echo $_SERVER['']
+//        var_dump($profile);
 
         return $this->render('admin/edit.html.twig', array(
             'profile' => $profile

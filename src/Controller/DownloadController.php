@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class DownloadController extends AbstractController
 {
-    #[Route('/download{token}', name: 'app_download')]
+    #[Route('/download', name: 'app_download')]
     public function index(): Response
     {
         

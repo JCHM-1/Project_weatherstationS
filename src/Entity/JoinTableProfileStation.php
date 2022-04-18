@@ -41,5 +41,53 @@ class JoinTableProfileStation
      */
     private $station;
 
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return \Profile
+     */
+    public function getProfile(): \Profile
+    {
+        return $this->profile;
+    }
+
+    /**
+     * @param \Profile $profile
+     */
+    public function setProfile(\Profile $profile): void
+    {
+        $this->profile = $profile;
+    }
+
+    /**
+     * @return \Station
+     */
+    public function getStation(): \Station
+    {
+        return $this->station;
+    }
+
+    /**
+     * @param \Station $station
+     */
+    public function setStation(\Station $station): void
+    {
+        $this->station = $station;
+    }
+
 
 }
