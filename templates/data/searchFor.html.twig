@@ -4,7 +4,8 @@
 
 {% block body %}
     <div class="container-xl shadow p-3 mb-5 bg-white rounded">
-        <form onclick="getOption()" action={{ path('search') }} method="post">
+        <form onclick="getOption()" action={{ path('searchFor', {id: profile.id}) }} method="post">
+            <p>{{ profile.email }}</p>
             <div class="form-group">
                 <select class="form-select mb-3 mt-3" id="selectOption" name="type">
                     <option selected disabled >Select location type</option>
@@ -18,10 +19,9 @@
                 <span class="input-group-text" > Location: </span>
                 <input type="text" class="form-control" id="place" name="place" aria-describedby="basic-addon3">
             </div>
-
             <button type="submit" class="btn btn-dark">Search</button>
-
         </form>
+
         <div class = "container ">
             {% if stations is not empty %}
                 <table class="locations table table-striped table-bordered p-3 mt-5 " id="s_table">
@@ -29,7 +29,6 @@
                     <tr class="table-primary" id="s_tr">
                         <th scope="col">Station</th>
                         <th scope="col">Country Code</th>
-                        <th scope="col">Country</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -39,8 +38,7 @@
                             {% if data.stationName is not empty %}
                                 <td style ="word-break:break-all;"><a class="text-info" href="{{ path('showStations', {stn: data.stationName}) }}">{{ data.stationName }}</a></td>
                                 <td>{{ data.countryCode }}</td>
-                                <td>{{ data.country }}</td>
-                                <td><a>Add</a></td>
+                                <td><a href="{{ path('addStation', {id: profile.id, stn: data.stationName}) }}">Add</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}

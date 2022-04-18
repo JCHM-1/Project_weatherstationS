@@ -6,7 +6,6 @@ use App\Entity\JoinTableProfileStation;
 use App\Repository\JoinTableProfileStationRepo;
 use Doctrine\Persistence\ManagerRegistry;
 use Firebase\JWT\JWT;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -115,7 +114,6 @@ class AdminController extends AbstractController
         // Demo: Voor subscr 1 laat 10x data van 1 station
         if ($user->getSubscription()->getId() == 1)
         {
-
             for($x = 10; $x>0; $x--){
                 $station = $jtpsRepo->findOneBy(['profile'=>$tokenId])->getStation()->getName();
                 var_dump($station);
@@ -160,8 +158,8 @@ class AdminController extends AbstractController
             'HS512'  // Algorithm used to sign the token, see https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40#section-3
         );
 
-        var_dump($token);
-        //var_dump(new JwtSecurityTokenHandler().ReadJwtToken(JWT::decode($token,$secretKey)));
+    //        var_dump($token);
+            //var_dump(new JwtSecurityTokenHandler().ReadJwtToken(JWT::decode($token,$secretKey)));
         $this->addFlash('succes', 'Volgende token verstuurd naar '.$user->getEmail().' : '.$token);
         $this->generateURL('app_download', ['token' => $token]);
 
@@ -180,22 +178,62 @@ class AdminController extends AbstractController
     #[Route('/admin/edit/{id}', name: 'edit')]
     public function editProfile($id,ProfileRepo $profileRepository, JoinTableProfileStationRepo $jtpsRepo) {
         $profile = $profileRepository->findOneBy(array('id' => $id));
-//        var_dump($profile->getEmail());
-//        echo $_SERVER['']
-//        var_dump($profile);
+        $stations = $jtpsRepo->findBy(['profile' => $id]);
+        return $this->render('admin/edit.html.twig', array(
+            'id' => $id,
+            'profile' => $profile,
+            'stations' => $stations
+        ));
+    }
 
+    #[Route('/admin/edit/{id}/{stn}', name: 'addStation')]
+    public function addStation(ProfileRepo $profileRepository, JoinTableProfileStationRepo $jtpsRepo, StationRepo $stationRepo, $id, $stn) {
+        $profile = $profileRepository->findOneBy(array('id' => $id));
         $stations = $jtpsRepo->findBy(['profile' => $id]);
 
-        foreach($stations as $station) {
-            var_dump($station->getStation()->getName());
+        $station = $stationRepo->findOneBy(array('name' => $stn));
+
+//        var_dump($station);
+
+        $exist = false;
+        foreach ($stations as $station) {
+            if ($station->getStation()->getName()===$stn) {
+                echo "Exist";
+                $exist = true;
+            }
         }
 
-        $key[] = 'wap';
-        $jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI1eWRkdXJvSHB1eVE5VlkxUTlWSUJ3PT0ifQ.JssGBy3-Toa34LqG5aBALEd5jsV-ehLmzjkTAIQX-LwZ9Gmv40CCM5Xc65S-fwquMJq4XArifzFF9V-e9jx3eQ';
-        $decoded = JWT::decode($jwt, $key);
+        if ($exist) {
+            $this->addFlash('error', 'Station is already in subscription.');
+        } else {
+            $manager = $this->doctrine->getManager();
+            $jtps = new JoinTableProfileStation();
+//            $jtps->setProfile($profile);
+//            $jtps->setStation($station);
+//            $manager->persist($jtps);
+//            $manager->flush();
 
-        echo $decoded;
+            $this->addFlash('succes', 'Station: '.$stn.' succesfully added.');
+        }
 
+        return $this->render('admin/edit.html.twig', array(
+            'id' => $id,
+            'profile' => $profile,
+            'stations' => $stations
+        ));
+    }
+
+    #[Route('/admin/edit/remove/{id}/{profile}', name: 'removeStation')]
+    public function removeStation($id, $profile, JoinTableProfileStationRepo $joinTableProfileStation, ProfileRepo $profileRepository, StationRepo $stationRepo) {
+        $profile = $profileRepository->findOneBy(array('id' => $profile));
+        $stations = $stationRepo->findBy(array('id'=>$profile));
+        $manager = $this->doctrine->getManager();
+
+        $jtps = $joinTableProfileStation->findOneBy(array('id' => $id));
+        $manager->remove($jtps);
+        $manager->flush();
+        $this->addFlash('succes', 'Station Removed');
+        //TODO: return Url
         return $this->render('admin/edit.html.twig', array(
             'id' => $id,
             'profile' => $profile,

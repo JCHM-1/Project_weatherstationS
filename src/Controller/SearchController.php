@@ -35,7 +35,7 @@ class SearchController extends AbstractController
         $this->logger = $logger;
     }
 
-    #[Route('/data/search/{id}', methods:['GET', 'POST'], name: 'searchFor')]
+    #[Route('/data/searchFor/{id}', name: 'searchFor')]
     public function showFor(Request $request, GLrepo $glrepo, ProfileRepo $profileRepository, JoinTableProfileStationRepo $jtpsRepo, $id): Response
     {
         $profile = $profileRepository->findOneBy(array('id' => $id));
@@ -50,7 +50,7 @@ class SearchController extends AbstractController
             }
         }
 
-        return $this->render('data/search.html.twig', array(
+        return $this->render('data/searchFor.html.twig', array(
             'keys' => $this->getLocationKeys(),
             'hasKey' => $this->hasKey($output),
             'stations' => $output,
@@ -170,7 +170,6 @@ class SearchController extends AbstractController
     #[Route('/data/search/{stn}', name: 'showStations')]
     public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepo $dataRepository): Response
     {
-
         $stationdata = $stationRepo->findBy(['name'=>$stn]);
         $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
         $geolocdata = $glrepo->findBy(['stationName'=>$stn]);

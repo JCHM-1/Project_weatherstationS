@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-
+{#    {% if profile is not empty %}#}
     <table class="locations table table-striped table-bordered table-hover">
         <thead>
         <tr class="table-primary">
@@ -16,11 +16,11 @@
         </thead>
         <tbody>
             <tr>
-            <th scope="row">{{ profile.email }}</th>
-            <td>{{ profile.subscription.id }}</td>
-            <td>{{ profile.subscription.amount }}</td>
-            <td>{{ profile.subscription.realtime ? 'True' : 'False' }}</td>
-        </tr>
+                <th scope="row">{{ profile.email }}</th>
+                <td>{{ profile.subscription.id }}</td>
+                <td>{{ profile.subscription.amount }}</td>
+                <td>{{ profile.subscription.realtime ? 'True' : 'False' }}</td>
+            </tr>
         </tbody>
     </table>
 
@@ -37,7 +37,7 @@
             <tr>
                 <td> {{ station.station.name }} {% set num = num + 1 %}</td>
                 <td>
-                    <a class="text-danger" href="{{ path('removeStation', {id: station.id}) }}">Remove</a>
+                    <a class="text-danger" href="{{ path('removeStation', {id: station.id, profile: profile.id}) }}">Remove</a>
                 </td>
             </tr>
         {% endfor %}
@@ -51,5 +51,5 @@
         {% endfor %}
         </tbody>
     </table>
-
+{#    {% endif %}#}
 {% endblock %}
