@@ -122,5 +122,9 @@ class Data
      */
     private $stn;
 
+    public function setStn(mixed $STN)
+    {
+    }
+
 
 }

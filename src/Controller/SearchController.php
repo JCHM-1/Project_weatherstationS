@@ -13,6 +13,7 @@ use App\Repository\DataRepository;
 use App\Repository\ProfileRepository;
 
 use Doctrine\ORM\Mapping\JoinTable;
+use JetBrains\PhpStorm\Pure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use Doctrine\Persistence\ManagerRegistry;
@@ -54,8 +55,22 @@ class SearchController extends AbstractController
         ));
     }
 
-    #[Route('/data/search/{stn}', methods:['GET', 'POST'], name: 'search_stn')]
-    public function showStn(Request $request) {
+    #[Route('/data/search/{stn}', name: 'showStations')]
+    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository){
+
+        $stationdata = $stationRepo->findBy(['name'=>$stn]);
+        $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
+        $geolocdata = $glrepo->findBy(['stationName'=>$stn]);
+        $data = $dataRepository->findBy(['stn'=>$stn]);
+
+
+        return $this->render('main/show.html.twig', [
+            'stationdata' => $stationdata,
+            'nearestlocdata'=> $nearestlocdata,
+            'geolocdata'=> $geolocdata,
+            'weatherdata'=>$data
+
+        ]);
     }
 
     public function hasKey(array $output): array {
@@ -133,31 +148,12 @@ class SearchController extends AbstractController
         return $keys;
     }
 
-    public function getLocationKeys(): array {
+    #[Pure] public function getLocationKeys(): array {
         $keyName = [];
         $locations = array_keys((array) new Geolocation);
         foreach ($locations as $key) {
-            array_push($keyName, substr($key, 23));
+            $keyName[] = substr($key, 23);
         }
         return $keyName;
     }
-
-    #[Route('/data/search/{stn}', name: 'showStations')]
-    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository){
-
-        $stationdata = $stationRepo->findBy(['name'=>$stn]);
-        $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
-        $geolocdata = $glrepo->findBy(['stationName'=>$stn]);
-        $data = $dataRepository->findBy(['stn'=>$stn]);
-
-
-        return $this->render('main/show.html.twig', [
-            'stationdata' => $stationdata,
-            'nearestlocdata'=> $nearestlocdata,
-            'geolocdata'=> $geolocdata,
-            'weatherdata'=>$data
-
-        ]);
-    }
-
 }
