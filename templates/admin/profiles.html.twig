@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profiles
-{% endblock %}
+{% block title %}Profiles{% endblock %}
 
 {% block body %}
 	{% for message in app.flashes('succes') %}
@@ -21,15 +20,16 @@
 		</div>
 		<div class="card-body">
 
-			<div class="ms-auto p-2 mb-3">
-				<a class="btn btn-dark" href="/register" role="button">Add Admin</a>
-			</div>
+        <div class="ms-auto p-2 mb-3">
+            <a class="btn btn-dark" href="/register" role="button">Add Admin</a>
+        </div>
 
 			<table class="locations table table-striped table-bordered table-hover">
 				<thead>
 					<tr class="table-primary">
 						<th scope="col">Id</th>
 						<th scope="col">Email</th>
+						<th scope="col">Subscription type</th>
 						<th scope="col">Role</th>
 						<th scope="col">Action</th>
 					</tr>
@@ -39,6 +39,7 @@
 						<tr>
 							<th scope="row">{{ profile.id }}</th>
 							<td>{{ profile.email }}</td>
+							<td>{{ profile.subscription.id }}</td>
 							<td>{{ profile.roles[0] }}</td>
 							<td>
 								<a href="{{ path('edit', {id: profile.id}) }}">Edit</a>
@@ -59,7 +60,7 @@
 		<div class="card-body">
 			<form method="POST" action="{{path("admin")}}">
 				<div class="mb-3">
-					<label for="email" class="form-label">Email address</label>
+					<label for="email" class="form-label" id="emaildata">Email address</label>
 					<input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="mail">
 				</div>
 				{# <div class="mb-3">
@@ -74,8 +75,55 @@
                     	{% endfor %}
 				    </select>
                 </div>
-				<button type="submit" class="btn btn-dark">Klant toevoegen</button>
+				<button type="submit" class="btn btn-dark" id="resource">Klant toevoegen</button>
 			</form>
+	<script type="text/javascript">
+		const store = {};
+		const emaildata = document.querySelector('#frmLogin');
+		const btnGetResource = document.querySelector('#resource');
+		const form = document.forms[0];
+
+		// Inserts the jwt to the store object
+		store.setJWT = function (data) {
+			this.JWT = data;
+		};
+
+		loginButton.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			const res = await fetch('/authenticate.php', {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				},
+				body: JSON.stringify({
+					username: form.inputEmail.value,
+					password: form.inputPassword.value
+				})
+			});
+
+			if (res.status >= 200 && res.status <= 299) {
+				const jwt = await res.text();
+				store.setJWT(jwt);
+				frmLogin.style.display = 'none';
+				btnGetResource.style.display = 'block';
+			} else {
+				// Handle errors
+				console.log(res.status, res.statusText);
+			}
+		});
+
+		btnGetResource.addEventListener('click', async (e) => {
+			const res = await fetch('/resource.php', {
+				headers: {
+					'Authorization': `Bearer ${store.JWT}`
+				}
+			});
+			const timeStamp = await res.text();
+			console.log(timeStamp);
+		});
+	</script>
+
 		</div>
 	</div>
 
@@ -86,14 +134,14 @@
 		</div>
 		<div class="card-body">
 
-			<table class="locations table table-striped table-bordered table-hover">
-				<thead></thead>
-				<tbody>
-					<tr></tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-
-
+            <table class="locations table table-striped table-bordered table-hover">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div
 {% endblock %}

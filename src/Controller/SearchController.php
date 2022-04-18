@@ -6,11 +6,11 @@ use App\Entity\Data;
 use App\Entity\Station;
 use App\Entity\Geolocation;
 use App\Form\WeatherdataFormType;
-use App\Repository\GLrepo;
+use App\Repository\GLRepo;
 use App\Repository\StationRepo;
-use App\Repository\NLrepo;
-use App\Repository\DataRepository;
-use App\Repository\ProfileRepository;
+use App\Repository\NLRepo;
+use App\Repository\DataRepo;
+use App\Repository\ProfileRepo;
 
 use Doctrine\ORM\Mapping\JoinTable;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -32,7 +32,7 @@ class SearchController extends AbstractController
     }
 
     #[Route('/data/search', methods:['GET', 'POST'], name: 'search')]
-    public function show(Request $request, GLrepo $glrepo)
+    public function show(Request $request, GLRepo $glrepo)
     {
         $type = null;
         $place = null;
@@ -143,7 +143,7 @@ class SearchController extends AbstractController
     }
 
     #[Route('/data/search/{stn}', name: 'showStations')]
-    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository){
+    public function showStations($stn, StationRepo $stationRepo, NLRepo $nlrepo, GLRepo $glrepo, DataRepo $dataRepository){
 
         $stationdata = $stationRepo->findBy(['name'=>$stn]);
         $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);

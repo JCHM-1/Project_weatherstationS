@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220412124516 extends AbstractMigration
+final class Version20220417220755 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,14 +20,16 @@ final class Version20220412124516 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE join_table_profile_station RENAME INDEX station_id_idx TO station_id');
-        $this->addSql('ALTER TABLE profile RENAME INDEX subscription_idx TO IDX_8157AA0FA3C664D3');
+        $this->addSql('ALTER TABLE data CHANGE stn stn INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE geolocation CHANGE station_name station_name INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE station CHANGE name name INT AUTO_INCREMENT NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE join_table_profile_station RENAME INDEX station_id TO station_id_idx');
-        $this->addSql('ALTER TABLE profile RENAME INDEX idx_8157aa0fa3c664d3 TO subscription_idx');
+        $this->addSql('ALTER TABLE data CHANGE stn stn INT NOT NULL');
+        $this->addSql('ALTER TABLE geolocation CHANGE station_name station_name INT NOT NULL');
+        $this->addSql('ALTER TABLE station CHANGE name name INT NOT NULL');
     }
 }

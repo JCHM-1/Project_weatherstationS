@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ProfileRepository;
+use App\Repository\ProfileRepo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=ProfileRepository::class)
+ * @ORM\Entity(repositoryClass=ProfileRepo::class)
  */
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class Profile implements UserInterface, PasswordAuthenticatedUserInterface
@@ -47,21 +47,12 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $subscription;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
-     */
-    private $token;
-
-
-
-
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -104,7 +95,7 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
     /*
-    
+
     *
      * @see PasswordAuthenticatedUserInterface
      */
@@ -139,20 +130,5 @@ class Profile implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
-    public function getToken(): string 
-    {
-        return $this->token;
-    }
-
-    public function setToken(string $token): self
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
-
 
 }

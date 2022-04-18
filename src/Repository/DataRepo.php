@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Nearestlocation;
+use App\Entity\Data;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Nearestlocation|null find($id, $lockMode = null, $lockVersion = null)
- * @method Nearestlocation|null findOneBy(array $criteria, array $orderBy = null)
- * @method Nearestlocation[]    findAll()
- * @method Nearestlocation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Data|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Data|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Data[]    findAll()
+ * @method Data[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class NLrepo extends ServiceEntityRepository
+class DataRepo extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Nearestlocation::class);
+        parent::__construct($registry, Data::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Nearestlocation $entity, bool $flush = true): void
+    public function add(Data $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class NLrepo extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Nearestlocation $entity, bool $flush = true): void
+    public function remove(Data $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,15 +46,15 @@ class NLrepo extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Nearestlocation[] Returns an array of Nearestlocation objects
+    //  * @return Data[] Returns an array of Data objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('n.id', 'ASC')
+            ->orderBy('d.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -63,10 +63,10 @@ class NLrepo extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Nearestlocation
+    public function findOneBySomeField($value): ?Data
     {
-        return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

@@ -8,8 +8,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DataController extends AbstractController
 {
@@ -22,7 +22,7 @@ class DataController extends AbstractController
     }
 
     #[Route('/main/postdata', name: 'data')]
-    public function postdata(Request $request, ManagerRegistry $doctrine): void
+    public function postdata(Request $request, ManagerRegistry $doctrine): JsonResponse
     {
         $entityManager = $doctrine->getManager();
         $data = $request->toArray();
@@ -93,7 +93,15 @@ class DataController extends AbstractController
 //            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['FRSHTT']));
 //            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['CLDC']));
 //            $this->logger->log('info', var_dump($data['WEATHERDATA'][$x]['WNDDIR']));
+            return new JsonResponse(
+            [
+                'status' => 'ok',
+            ],
+            JsonResponse::HTTP_CREATED
+        );
+
         }
+
     }
 
 }

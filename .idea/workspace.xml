@@ -5,9 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96bf0b85-9b96-432c-b1fe-8b13efd5f7e4" name="Changes" comment="Registratie pagina">
+      <change beforePath="$PROJECT_DIR$/.idea/Project_weatherstationS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project_weatherstationS.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/parameters.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220408103125.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20220412124516.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20220417220755.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DataController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DownloadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DownloadController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Country.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Country.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Data.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Data.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/DoctrineMigrationVersions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Geolocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Geolocation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/JoinTableProfileStation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/JoinTableProfileStation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/MessengerMessages.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/MessengerMessages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Nearestlocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Nearestlocation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Station.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Station.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Subscriptions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Subscriptions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/DataRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/DataRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/GLrepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GLRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/NLrepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/NLRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ProfileRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProfileRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/profiles.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/profiles.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/profile.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +178,15 @@
       <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
       <path value="$PROJECT_DIR$/vendor/symfony-bundles/json-request-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/templating" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/fgrosse/phpasn1" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
+      <path value="$PROJECT_DIR$/vendor/spomky-labs/aes-key-wrap" />
+      <path value="$PROJECT_DIR$/vendor/web-token/jwt-framework" />
     </include_path>
   </component>
   <component name="ProjectId" id="2710XJV0CY3oKp5XpnBZ0fXlJMN" />
@@ -167,14 +210,8 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\jaron\Documents\Hanze\Year 2\Period 3 &amp; 4\Project_weatherstationS\templates\data" />
-      <recent name="C:\Users\jaron\Documents\Hanze\Year 2\Period 3 &amp; 4\Project_weatherstationS\templates\main" />
-      <recent name="C:\Users\jaron\Documents\Hanze\Year 2\Period 3 &amp; 4\Project_weatherstationS\templates\search" />
-    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -192,6 +229,7 @@
       <workItem from="1649554486721" duration="8874000" />
       <workItem from="1649717071978" duration="9301000" />
       <workItem from="1650028519662" duration="855000" />
+      <workItem from="1649972982732" duration="788000" />
     </task>
     <task id="LOCAL-00001" summary="Registratie pagina">
       <created>1648765507567</created>
@@ -242,7 +280,21 @@
       <option name="project" value="LOCAL" />
       <updated>1649880799575</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Registratie pagina">
+      <created>1649881644950</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1649881644950</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Registratie pagina">
+      <created>1649881669347</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1649881669347</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

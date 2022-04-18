@@ -35,5 +35,34 @@ class Subscriptions
      */
     private $realtime;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getAmount(): ?int
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(int $amount): self
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getRealtime(): ?bool
+    {
+        return $this->realtime;
+    }
+
+    public function setRealtime(bool $realtime): self
+    {
+        $this->realtime = $realtime;
+
+        return $this;
+    }
+
 
 }

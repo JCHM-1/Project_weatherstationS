@@ -7,21 +7,52 @@
     <div class="card bg-light mb-3">
         <div class="card-header"><h4>Info about station {{ data.name }}</h4></div>
 {% endfor %}
+
         <div class="card-body">
             <h5>Weatherdata from the past ...</h5>
-            <table class="locations table table-striped table-bordered">
-                <thead>
-                <tr class="table-primary">
-                    <th scope="col">  </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>  </td>
-                </tr>
+            {%  if weatherdata is not null %}
+                {% for data in weatherdata %}
+                    <table class="locations table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr class="table-primary">
+                            <th scope="col">Datum</th>
+                            <th scope="col">Tijd</th>
+                            <th scope="col">Tempratuur</th>
+                            <th scope="col">Dauwpunt</th>
+                            <th scope="col">Station Luchtdruk</th>
+                            <th scope="col">Zeeniveau Luchtdruk</th>
+                            <th scope="col">Zicht</th>
+                            <th scope="col">Windsnelheid</th>
+                            <th scope="col">Neerslag</th>
+                            <th scope="col">Sneeuwdiepte</th>
+                            <th scope="col">VRSHOT</th>
+                            <th scope="col">Bewolking</th>
+                            <th scope="col">Windrichting</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ data.date|date('Y-m-d') }}</td>
+                            <td>{{ data.time|date('H:i:s') }}</td>
+                            <td>{{ data.temp }}</td>
+                            <td>{{ data.dewp }}</td>
+                            <td>{{ data.stp }}</td>
+                            <td>{{ data.slp }}</td>
+                            <td>{{ data.visib }}</td>
+                            <td>{{ data.wdsp }}</td>
+                            <td>{{ data.prcp }}</td>
+                            <td>{{ data.sndp }}</td>
+                            <td>{{ data.frshtt }}</td>
+                            <td>{{ data.cldc }}</td>
+                            <td>{{ data.wnddir }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endfor %}
+        {% else %}
+        <p> No info </p>
+        {% endif %}
 
-                </tbody>
-            </table>
         </div>
         <div class="card-body">
             <h5>Information</h5>
