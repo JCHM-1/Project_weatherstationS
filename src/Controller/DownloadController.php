@@ -2,12 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\DataRepo;
-use App\Repository\JoinTableProfileStationRepo;
-use App\Repository\ProfileRepo;
-use App\Repository\StationRepo;
-use Firebase\JWT\JWT;
-use http\Client\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -91,4 +85,26 @@ class DownloadController extends AbstractController
 //$data = json_decode(file_get_contents("php://input"));
 //
 //}
+
+
+//$filename = 'Data.txt';
+//
+//$fileContent = "Hello this is the content of my file";
+//
+//$response = new Response($fileContent);
+//
+//$disposition = HeaderUtils::makeDisposition(
+//ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+//$filename
+//);
+//
+//$response->headers->set('Content-Disposition', $disposition);
+//
+//
+//    // return $this->render('download/index.html.twig', [
+//    //     'controller_name' => 'DownloadController',
+//    //     $response
+//    // ]);
+//
+//return $response;
 }

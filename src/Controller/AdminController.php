@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\JoinTableProfileStation;
+use App\Repository\JoinTableProfileStationRepo;
 use Doctrine\Persistence\ManagerRegistry;
 use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,13 +15,11 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use App\Entity\Subscriptions;
-use App\Entity\Geolocation;
 use App\Entity\Profile;
+use App\Repository\ProfileRepository;
 use App\Entity\Data;
 use App\Entity\Nearestlocation;
 use App\Entity\Station;
-use App\Entity\JoinTableProfileStation;
-use App\Repository\JoinTableProfileStationRepo;
 use App\Repository\StationRepo;
 use App\Repository\NLRepo;
 use App\Repository\GLRepo;
@@ -51,15 +51,15 @@ class AdminController extends AbstractController
 
                 return $this->render('admin/profiles.html.twig', array(
                     'profiles' => $profiles,
-                'subscriptions' => $this->subscriptions()
-                ));
+                    'subscriptions' => $this->subscriptions()
+            ));
+
             }
     }
 
     public function createProfile($mail, $sub) {
         $manager = $this->doctrine->getManager();
-
-        $subscription = $manager->getRepository(Subscriptions::class)->findOneBy(['id'=>$sub]);
+        $subscription = $manager->getRepository(Subscriptions::class)->findOneBy(array('id' => $sub));
 
         $user = new Profile();
         $user->setEmail($mail);
@@ -67,6 +67,7 @@ class AdminController extends AbstractController
         $manager->persist($user);
         $manager->flush();
         $this->addFlash('succes', 'Profile Added');
+        return $this->redirect($this->generateUrl('admin'));
 
         $secretKey  = 'wap';
         try {
@@ -110,6 +111,8 @@ class AdminController extends AbstractController
     public function editProfile($id,ProfileRepo $profileRepository, JoinTableProfileStationRepo $jtpsRepo) {
         $profile = $profileRepository->findOneBy(array('id' => $id));
 //        var_dump($profile->getEmail());
+//        echo $_SERVER['']
+//        var_dump($profile);
         $stations = $jtpsRepo->findBy(['profile' => $id]);
 
         foreach($stations as $station) {
@@ -139,4 +142,3 @@ class AdminController extends AbstractController
     }
 
 }
-
