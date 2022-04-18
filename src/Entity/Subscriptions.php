@@ -45,11 +45,10 @@ class Subscriptions
         return $this->amount;
     }
 
-    public function setAmount(int $amount): self
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
 
-        return $this;
     }
 
     public function getRealtime(): ?bool
