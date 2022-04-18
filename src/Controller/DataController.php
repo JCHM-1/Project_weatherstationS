@@ -38,29 +38,31 @@ class DataController extends AbstractController
             $input->setDate($date);
             $input->setTime($time);
 
-            if (empty($data['WEATHERDATA'][$x]['TEMP']) || $data['WEATHERDATA'][$x]['TEMP'] == 0) {
+            if ($data['WEATHERDATA'][$x]['TEMP'] == "" || $data['WEATHERDATA'][$x]['TEMP'] == 0) {
                 $input->setTemp($data['WEATHERDATA'][
                 array_sum($data["WEATHERDATA"][$x]['TEMP']) / count($data["WEATHERDATA"][$x]['TEMP'])]['TEMP']);
             } else {
                 $input->setTemp($data['WEATHERDATA'][$x]['TEMP']);
             }
 
-            if (empty($data['WEATHERDATA'][$x]['FRSHHT']) || $data['WEATHERDATA'][$x]['FRSHHT'] == "0" || $data['WEATHERDATA'][$x]['FRSHHT'] == "None") {
-                $input->setTemp($data['WEATHERDATA'][
-                array_sum($data["WEATHERDATA"][$x]['FRSHHT']) / count($data["WEATHERDATA"][$x]['FRSHHT'])]['FRSHHT']);
+            if ($data['WEATHERDATA'][$x]['FRSHHT'] == "" ||
+                $data['WEATHERDATA'][$x]['FRSHHT'] == "0" ||
+                $data['WEATHERDATA'][$x]['FRSHHT'] == "None") {
+                $input->setTemp($data['WEATHERDATA']
+                [array_sum($data["WEATHERDATA"][$x]['FRSHHT']) / count($data["WEATHERDATA"][$x]['FRSHHT'])]['FRSHHT']);
             } else {
                 $input->setTemp($data['WEATHERDATA'][$x]['FRSHHT']);
             }
-//            $input->setDewp($data['WEATHERDATA'][$x]['DEWP']);
-//            $input->setStp($data['WEATHERDATA'][$x]['STP']);
-//            $input->setSlp($data['WEATHERDATA'][$x]['SLP']);
-//            $input->setVisib($data['WEATHERDATA'][$x]['VISIB']);
-//            $input->setWdsp($data['WEATHERDATA'][$x]['WDSP']);
-//            $input->setPrcp($data['WEATHERDATA'][$x]['PRCP']);
-//            $input->setSndp($data['WEATHERDATA'][$x]['SNDP']);
-//            $input->setFrshtt($data['WEATHERDATA'][$x]['FRSHTT']);
-//            $input->setCldc($data['WEATHERDATA'][$x]['CLDC']);
-//            $input->setWnddir($data['WEATHERDATA'][$x]['WNDDIR']);
+            $input->setDewp($data['WEATHERDATA'][$x]['DEWP']);
+            $input->setStp($data['WEATHERDATA'][$x]['STP']);
+            $input->setSlp($data['WEATHERDATA'][$x]['SLP']);
+            $input->setVisib($data['WEATHERDATA'][$x]['VISIB']);
+            $input->setWdsp($data['WEATHERDATA'][$x]['WDSP']);
+            $input->setPrcp($data['WEATHERDATA'][$x]['PRCP']);
+            $input->setSndp($data['WEATHERDATA'][$x]['SNDP']);
+            $input->setFrshtt($data['WEATHERDATA'][$x]['FRSHTT']);
+            $input->setCldc($data['WEATHERDATA'][$x]['CLDC']);
+            $input->setWnddir($data['WEATHERDATA'][$x]['WNDDIR']);
 
             $entityManager->persist($input);
             $entityManager->flush();
