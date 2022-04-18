@@ -16,13 +16,6 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row">{{ profile.email }}</th>
-               <td>{{ profile.subscription.amount }}</td>
-                    {% for station in stations %}
-                <td> {{ station.station.name }} </td>
-                        {% endfor %}
-{#                <td>{{ info.Subscriptions.station }}</td>#}
-        <tr>
             <th scope="row">{{ profile.email }}</th>
             <td>{{ profile.subscription.id }}</td>
             <td>{{ profile.subscription.amount }}</td>

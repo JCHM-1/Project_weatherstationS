@@ -34,7 +34,6 @@
                 <thead id="s_thead">
                 <tr class="table-primary" id="s_tr">
                     <th scope="col">Station</th>
-{#                    <th scope="col">Country Code</th>#}
                     {% if hasKey['island'] %}
                         <th scope="col">Island</th>
                     {% endif %}
@@ -80,7 +79,6 @@
                     {% if hasKey['postcode'] %}
                         <th scope="col">Postcode</th>
                     {% endif %}
-{#                    <th scope="col">Country</th>#}
                 </tr>
                 </thead>
                 <tbody id="s_tbody">
@@ -88,7 +86,6 @@
                     <tr>
                         {% if data.stationName is not empty %}
                             <td><a class="text-info" href="{{ path('showStations', {stn: data.stationName}) }}">{{ data.stationName }}</a></td>
-{#                            <td>{{ data.countryCode }}</td>#}
                             {% if hasKey['island'] %}
                                 <td>{{ data.island }}</td>
                             {% endif %}
