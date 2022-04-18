@@ -37,10 +37,11 @@
             <tr>
                 <td> {{ station.station.name }} {% set num = num + 1 %}</td>
                 <td>
-                    <a class="text-danger" href="{{ path('removeStation', {id: station.id, profile: profile.id}) }}">Remove</a>
+                    <a class="text-danger" href="{{ path('removeStation', {id: profile.id, stn: station.station.name}) }}">Remove</a>
                 </td>
             </tr>
         {% endfor %}
+        {% if profile.subscription.amount - num != 0 %}
         {% for i in 1..profile.subscription.amount - num %}
         <tr>
             <td> ENTER STATION</td>
@@ -49,7 +50,10 @@
             </td>
         </tr>
         {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 {#    {% endif %}#}
+{% endblock %}
+{% block footer %}
 {% endblock %}

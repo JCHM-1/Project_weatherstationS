@@ -191,14 +191,9 @@ class AdminController extends AbstractController
         $profile = $profileRepository->findOneBy(array('id' => $id));
         $stations = $jtpsRepo->findBy(['profile' => $id]);
 
-        $station = $stationRepo->findOneBy(array('name' => $stn));
-
-//        var_dump($station);
-
         $exist = false;
         foreach ($stations as $station) {
-            if ($station->getStation()->getName()===$stn) {
-                echo "Exist";
+            if ($station->getStation()->getName()===intval($stn)) {
                 $exist = true;
             }
         }
@@ -208,10 +203,11 @@ class AdminController extends AbstractController
         } else {
             $manager = $this->doctrine->getManager();
             $jtps = new JoinTableProfileStation();
-//            $jtps->setProfile($profile);
-//            $jtps->setStation($station);
-//            $manager->persist($jtps);
-//            $manager->flush();
+            $station = $stationRepo->findOneBy(array('name' => intval($stn)));
+            $jtps->setProfile($profile);
+            $jtps->setStation($station);
+            $manager->persist($jtps);
+            $manager->flush();
 
             $this->addFlash('succes', 'Station: '.$stn.' succesfully added.');
         }
@@ -223,13 +219,13 @@ class AdminController extends AbstractController
         ));
     }
 
-    #[Route('/admin/edit/remove/{id}/{profile}', name: 'removeStation')]
-    public function removeStation($id, $profile, JoinTableProfileStationRepo $joinTableProfileStation, ProfileRepo $profileRepository, StationRepo $stationRepo) {
-        $profile = $profileRepository->findOneBy(array('id' => $profile));
-        $stations = $stationRepo->findBy(array('id'=>$profile));
-        $manager = $this->doctrine->getManager();
+    #[Route('/admin/edit/remove/{id}/{stn}', name: 'removeStation')]
+    public function removeStation($id, $stn, JoinTableProfileStationRepo $jtpsRepo, ProfileRepo $profileRepository, StationRepo $stationRepo) {
+        $profile = $profileRepository->findOneBy(array('id' => $id));
+        $stations = $jtpsRepo->findBy(['profile' => $id]);
 
-        $jtps = $joinTableProfileStation->findOneBy(array('id' => $id));
+        $manager = $this->doctrine->getManager();
+        $jtps = $jtpsRepo->findOneBy(array('profile' => $id, 'station' => $stn));
         $manager->remove($jtps);
         $manager->flush();
         $this->addFlash('succes', 'Station Removed');
