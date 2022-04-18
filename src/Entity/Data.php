@@ -202,9 +202,5 @@ class Data
         return $this;
     }
 
-    public function setStn(mixed $STN)
-    {
-    }
-
 
 }
