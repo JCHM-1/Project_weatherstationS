@@ -113,6 +113,7 @@ class AdminController extends AbstractController
 //        var_dump($profile->getEmail());
 //        echo $_SERVER['']
 //        var_dump($profile);
+
         $stations = $jtpsRepo->findBy(['profile' => $id]);
 
         foreach($stations as $station) {

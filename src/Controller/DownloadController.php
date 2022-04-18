@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\Common\Proxy\Exception\UnexpectedValueException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DownloadController extends AbstractController
 {
     #[Route('/download/{token}', name: 'app_download')]
-    public function index($token, ProfileRepo $profileRepo, DataRepo $dataRepo, StationRepo $stationRepo, JoinTableProfileStationRepo $jtpsRepo,Request $request): void
+    public function index($token, ProfileRepo $profileRepo, DataRepo $dataRepo, StationRepo $stationRepo, JoinTableProfileStationRepo $jtpsRepo,Request $request): Response
     {
 
 //        $realtime = $profileRepo->find($token)->getSubscription()->isRealtime();
@@ -34,21 +35,38 @@ class DownloadController extends AbstractController
         try {
 
             $decoded = JWT::decode($token, new Key($key, 'HS512'));
+            $content = json_decode(json_encode($decoded), true);
 
+            echo '<pre>';
             var_dump($decoded);
-            if (!validate($decoded)) {
-
-                http_response_code(401);
-
-                die;
-
-            }
+            echo '</pre>';
 
         } catch (UnexpectedValueException $exception) {
 
             echo $exception->getMessage();
 
         }
+
+        $filename = 'Data.txt';
+
+        $fileContent = implode(" ", $content);
+
+        $response = new Response($fileContent);
+
+        $disposition = HeaderUtils::makeDisposition(
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        $filename
+        );
+
+        $response->headers->set('Content-Disposition', $disposition);
+
+
+            // return $this->render('download/index.html.twig', [
+            //     'controller_name' => 'DownloadController',
+            //     $response
+            // ]);
+
+        return $response;
 
 //        JWT::encode($filecontent
 
