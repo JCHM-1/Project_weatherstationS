@@ -87,7 +87,7 @@
                 {% for data in stations %}
                     <tr>
                         {% if data.stationName is not empty %}
-                            <td><a class="text-info" href="{{ path('search_stn', {stn: data.stationName}) }}">{{ data.stationName }}</a></td>
+                            <td><a class="text-info" href="{{ path('showStations', {stn: data.stationName}) }}">{{ data.stationName }}</a></td>
 {#                            <td>{{ data.countryCode }}</td>#}
                             {% if hasKey['island'] %}
                                 <td>{{ data.island }}</td>
