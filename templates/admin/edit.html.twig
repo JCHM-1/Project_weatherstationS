@@ -24,18 +24,30 @@
         </tbody>
     </table>
 
-    <table class="table table-dark">
-        <thead class="thead-dark">
+    <table class="locations table table-striped table-bordered table-hover">
+        <thead class="table-primary">
         <tr>
-            <th colspan="{{ stations|length }}">Stations</th>
+            <th scope="row">Stations</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
+        {% set num = 0 %}
         {% for station in stations %}
             <tr>
-                <td> {{ station.station.name }} </td>
-                <td>  </td>
+                <td> {{ station.station.name }} {% set num = num + 1 %}</td>
+                <td>
+                    <a class="text-danger" href="{{ path('removeStation', {id: station.id}) }}">Remove</a>
+                </td>
             </tr>
+        {% endfor %}
+        {% for i in 1..profile.subscription.amount - num %}
+        <tr>
+            <td> ENTER STATION</td>
+            <td>
+                <a href="{{ path('searchFor', {id: profile.id}) }}">Add</a>
+            </td>
+        </tr>
         {% endfor %}
         </tbody>
     </table>

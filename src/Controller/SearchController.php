@@ -7,6 +7,7 @@ use App\Entity\Station;
 use App\Entity\Geolocation;
 use App\Form\WeatherdataFormType;
 use App\Repository\GLRepo;
+use App\Repository\JoinTableProfileStationRepo;
 use App\Repository\StationRepo;
 use App\Repository\NLRepo;
 use App\Repository\DataRepo;
@@ -32,6 +33,31 @@ class SearchController extends AbstractController
 
     public function __construct(private ManagerRegistry $doctrine, LoggerInterface $logger) {
         $this->logger = $logger;
+    }
+
+    #[Route('/data/search/{id}', methods:['GET', 'POST'], name: 'searchFor')]
+    public function showFor(Request $request, GLrepo $glrepo, ProfileRepo $profileRepository, JoinTableProfileStationRepo $jtpsRepo, $id): Response
+    {
+        $profile = $profileRepository->findOneBy(array('id' => $id));
+        $type = null;
+        $place = null;
+        $output = [];
+        if ($request->isMethod('POST')) {
+            $type = $request->request->get('type');
+            $place = $request->request->get('place');
+            if ($place !== null) {
+                $output = $glrepo->findBy([$type=>$place]);
+            }
+        }
+
+        return $this->render('data/search.html.twig', array(
+            'keys' => $this->getLocationKeys(),
+            'hasKey' => $this->hasKey($output),
+            'stations' => $output,
+            'type'=> $type,
+            'place' => $place,
+            'profile' => $profile
+        ));
     }
 
     #[Route('/data/search', methods:['GET', 'POST'], name: 'search')]

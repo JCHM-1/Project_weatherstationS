@@ -64,8 +64,8 @@ class AdminController extends AbstractController
                 }
             }
 
-            $stations = $stationRepo->findAll();
-
+//            $stations = $stationRepo->findAll();
+            $stations = [];
                 return $this->render('admin/profiles.html.twig', array(
                     'profiles' => $profiles,
                     'subscriptions' => $this->subscriptions(),
@@ -172,21 +172,7 @@ class AdminController extends AbstractController
     #[Route('/admin/edit/{id}', name: 'edit')]
     public function editProfile($id,ProfileRepo $profileRepository, JoinTableProfileStationRepo $jtpsRepo) {
         $profile = $profileRepository->findOneBy(array('id' => $id));
-//        var_dump($profile->getEmail());
-//        echo $_SERVER['']
-//        var_dump($profile);
-
         $stations = $jtpsRepo->findBy(['profile' => $id]);
-
-        foreach($stations as $station) {
-            var_dump($station->getStation()->getName());
-        }
-
-        $key[] = 'wap';
-        $jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI1eWRkdXJvSHB1eVE5VlkxUTlWSUJ3PT0ifQ.JssGBy3-Toa34LqG5aBALEd5jsV-ehLmzjkTAIQX-LwZ9Gmv40CCM5Xc65S-fwquMJq4XArifzFF9V-e9jx3eQ';
-        $decoded = JWT::decode($jwt, $key);
-
-        echo $decoded;
 
         return $this->render('admin/edit.html.twig', array(
             'id' => $id,
@@ -194,6 +180,23 @@ class AdminController extends AbstractController
             'stations' => $stations
         ));
     }
+
+    #[Route('/admin/edit/add/{id}', name: 'addStation')]
+    public function addStation() {
+    }
+
+    #[Route('/admin/edit/remove/{id}', name: 'removeStation')]
+    public function removeStation($id, JoinTableProfileStationRepo $joinTableProfileStation) {
+        $manager = $this->doctrine->getManager();
+        $jtps = $joinTableProfileStation->findOneBy(array('id' => $id));
+        $profileId = $jtps->getProfile()->getId();
+        $manager->remove($jtps);
+        $manager->flush();
+        $this->addFlash('succes', 'Station Removed');
+        //TODO: return Url
+        return $this->redirect($this->generateUrl(path('edit'), $profileId));
+    }
+
 
     public function subscriptions(): array {
         $subscriptions = $this->doctrine->getRepository(Subscriptions::class)->findAll();
