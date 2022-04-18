@@ -6,6 +6,7 @@ use App\Entity\JoinTableProfileStation;
 use App\Repository\JoinTableProfileStationRepo;
 use Doctrine\Persistence\ManagerRegistry;
 use Firebase\JWT\JWT;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,52 +32,50 @@ class AdminController extends AbstractController
 
     public function __construct(private ManagerRegistry $doctrine) {}
 
-    #[Route('/main/admin', methods:['GET', 'POST'], name: 'admin')]
-    public function admin(ProfileRepo $profileRepository, Request $request,StationRepo $stationRepo,JoinTableProfileStationRepo $jtpsRepo, DataRepo $dataRepo): Response
+    #[Route('/main/admin', name: 'admin', methods: ['GET', 'POST'])]
+    public function admin(ProfileRepo $profileRepository, Request $request,JoinTableProfileStationRepo $jtpsRepo, DataRepo $dataRepo,StationRepo $stationRepo): Response
     {
         {
-            $subscriptions = [1, 2 ,3];
+            $subscription = [];
+            $stations = [];
+            $email = 0;
             $profiles = $profileRepository->findAll();
 //            var_dump($request->getMethod()==='POST');
             if ($request->getMethod()==='POST') {
                 $email = $request->request->get('mail');
                 $subscription = $request->request->get('sub');
 
-                if ($subscription == 1 or $subscription == 3) {
-                    $station[] = $request->request->get('station1');
-                    }
-                else {
-                    $station[] = $request->request->get('station1');
-                    $station[] = $request->request->get('station2');
-                    $station[] = $request->request->get('station3');
-                    $station[] = $request->request->get('station4');
-                    $station[] = $request->request->get('station5');
-                    $station[] = $request->request->get('station6');
-                    $station[] = $request->request->get('station7');
-                    $station[] = $request->request->get('station8');
-                    $station[] = $request->request->get('station9');
-                    $station[] = $request->request->get('station10');
-                }
+                $stations[] = $request->request->get('station1');
+                $stations[] = $request->request->get('station2');
+                $stations[] = $request->request->get('station3');
+                $stations[] = $request->request->get('station4');
+                $stations[] = $request->request->get('station5');
+                $stations[] = $request->request->get('station6');
+                $stations[] = $request->request->get('station7');
+                $stations[] = $request->request->get('station8');
+                $stations[] = $request->request->get('station9');
+                $stations[] = $request->request->get('station10');
+
+
+                var_dump($stations);
+
                 if ($profileRepository->findOneBy(array('email' => $email))) {
                     $this->addFlash('error', 'Email already exist');
                 } else {
-                    $this->createProfile($email, $subscription,$station[],$jtpsRepo,$dataRepo);
+                    $this->createProfile($email, $subscription, $stations, $jtpsRepo, $dataRepo,$stationRepo);
                 }
             }
 
-            $stations = $stationRepo->findAll();
-
-                return $this->render('admin/profiles.html.twig', array(
-                    'profiles' => $profiles,
-                    'subscriptions' => $this->subscriptions(),
-                    'stations' => $stations,
-                    'sub'=>$subscriptions
+            return $this->render('admin/profiles.html.twig', array(
+                'profiles' => $profiles,
+                'subscriptions' => $this->subscriptions(),
+                'sub'=> $subscription
             ));
 
             }
     }
 
-    public function createProfile($mail, $sub,$station,JoinTableProfileStationRepo $jtpsRepo, DataRepo $dataRepo) {
+    public function createProfile($mail, $sub,$station,JoinTableProfileStationRepo $jtpsRepo, DataRepo $dataRepo, StationRepo $stationRepo) {
         $manager = $this->doctrine->getManager();
         $subscription = $manager->getRepository(Subscriptions::class)->findOneBy(array('id' => $sub));
 
@@ -88,13 +87,15 @@ class AdminController extends AbstractController
 
         if($sub == 1 or $sub == 3){
             $jointable = new JoinTableProfileStation();
-            $jointable->setProfile($user->getId());
-            $jointable->setStation($station[0]);
+            $station = $stationRepo->findOneBy(['name'=>$station[0]]);
+            $jointable->setProfile($user);
+            $jointable->setStation($station);
         }else{
             for($x=0; $x<10;$x++){
                 $jointable = new JoinTableProfileStation();
-                $jointable->setProfile($user->getId());
-                $jointable->setStation($station[$x]);
+                $station = $stationRepo->findOneBy(['name'=>$station[$x]]);
+                $jointable->setProfile($user);
+                $jointable->setStation($station);
             }
         }
 
@@ -112,18 +113,20 @@ class AdminController extends AbstractController
 
         // Retrieved from filtered POST data
         // Demo: Voor subscr 1 laat 10x data van 1 station
-        if ($user->getSubscription() == 1)
+        if ($user->getSubscription()->getId() == 1)
         {
-            $station = $jtpsRepo->findOneBy(['profile'=>$tokenId]);
-            $stn = $station->getStation()->getName();
 
             for($x = 10; $x>0; $x--){
-                $data[] = $dataRepo->findBy(['stn'=> $stn]);
+                $station = $jtpsRepo->findOneBy(['profile'=>$tokenId])->getStation()->getName();
+                var_dump($station);
+
+                $data[] = $dataRepo->findOneBy(['stn'=> $station]);
+                var_dump($data);
             }
         }
 
         // Demo: voor subscr 2 laat 1x data van 10 stations
-        elseif($user->getSubscription() == 2)
+        elseif($user->getSubscription()->getId() == 2)
         {
             $stations = $jtpsRepo->findBy(['profile'=>$tokenId]);
 
@@ -141,13 +144,18 @@ class AdminController extends AbstractController
             $stn = $station->getStation()->getName();
 
             for($x = 100; $x>0; $x--){
-                $data[] = $dataRepo->findBy(['stn'=> $stn]);
+                $data[] = $dataRepo->findOneBy(['stn'=> $stn]);
             }
+        }
+
+        $weatherdata = [];
+        foreach($data as $dataitem){
+            $weatherdata[] = $dataitem;
         }
 
         // Encode the array to a JWT string.
         $token =  JWT::encode(
-            $data,       // Data to be encoded in the JWT
+            $weatherdata,       // Data to be encoded in the JWT
             $secretKey,  // The signing key
             'HS512'  // Algorithm used to sign the token, see https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40#section-3
         );
