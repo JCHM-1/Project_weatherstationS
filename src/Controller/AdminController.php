@@ -60,7 +60,7 @@ class AdminController extends AbstractController
                 if ($profileRepository->findOneBy(array('email' => $email))) {
                     $this->addFlash('error', 'Email already exist');
                 } else {
-                    $this->createProfile($email, $subscription,$station,$jtpsRepo,$dataRepo);
+                    $this->createProfile($email, $subscription,$station[],$jtpsRepo,$dataRepo);
                 }
             }
 
@@ -158,10 +158,7 @@ class AdminController extends AbstractController
         $this->generateURL('app_download', ['token' => $token]);
 
         return $this->redirect($this->generateUrl('admin'));
-
     }
-
-
 
     #[Route('/admin/remove/{id}', name: 'remove')]
     public function removeProfile(Profile $profile) {

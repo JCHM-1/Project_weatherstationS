@@ -58,7 +58,7 @@
 			<h4>Klant toevoegen</h4>
 		</div>
 		<div class="card-body">
-			<form method="POST" action="{{path("admin")}}">
+			<form method="POST" action="{{ path("admin") }}">
 				<div class="mb-3">
 					<label for="email" class="form-label" id="emaildata">Email address</label>
 					<input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="mail">
@@ -71,22 +71,24 @@
 					<label for="subscription" class="form-label">Kies subscription</label>
                     <select class="form-select" aria-label="Default select example" id="sub" name="sub">
                         {% for sub in subscriptions %}
-                        <option onclick="getOption()" value="{{ sub }}" > {{ sub }}</option>
+                        <option onclick="getOption()" id="{{ sub }}" > {{ sub }}</option>
+							{%  set selected = sub %}
                     	{% endfor %}
 				    </select>
                 </div>
 				<div class="mb-3">
-					{% if(sub == 1 or sub == 3) %}
+					{% if(selected == 1 or selected == 3) %}
 						<label for="station" class="form-label">Kies Station(s)</label>
 
 							<select class="form-select" aria-label="Default select example" id="station" name="station1">
 								{% for station in stations %}
-									<option onclick="getOption()" > {{ station.name }}</option>
+									<option onclick="getOption()" >  {{ station.name }}</option>
+
 								{% endfor %}
 							</select>
 
 					{% endif %}
-					{% if(sub == 2) %}
+					{% if(selected == 2) %}
 						<label for="station" class="form-label">Kies Station(s)</label>
 
 							<select class="form-select" aria-label="Default select example" id="station" name="station1">
@@ -145,52 +147,6 @@
 				</div>
 				<button type="submit" class="btn btn-dark" id="resource">Klant toevoegen</button>
 			</form>
-	<script type="text/javascript">
-		const store = {};
-		const emaildata = document.querySelector('#frmLogin');
-		const btnGetResource = document.querySelector('#resource');
-		const form = document.forms[0];
-
-		// Inserts the jwt to the store object
-		store.setJWT = function (data) {
-			this.JWT = data;
-		};
-
-		loginButton.addEventListener('submit', async (e) => {
-			e.preventDefault();
-
-			const res = await fetch('/authenticate.php', {
-				method: 'POST',
-				headers: {
-					'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
-				},
-				body: JSON.stringify({
-					username: form.inputEmail.value,
-					password: form.inputPassword.value
-				})
-			});
-
-			if (res.status >= 200 && res.status <= 299) {
-				const jwt = await res.text();
-				store.setJWT(jwt);
-				frmLogin.style.display = 'none';
-				btnGetResource.style.display = 'block';
-			} else {
-				// Handle errors
-				console.log(res.status, res.statusText);
-			}
-		});
-
-		btnGetResource.addEventListener('click', async (e) => {
-			const res = await fetch('/resource.php', {
-				headers: {
-					'Authorization': `Bearer ${store.JWT}`
-				}
-			});
-			const timeStamp = await res.text();
-			console.log(timeStamp);
-		});
-	</script>
 
 		</div>
 	</div>
@@ -211,5 +167,13 @@
                 </tbody>
             </table>
         </div>
-        </div
+        </div>
+
+	<script type="text/javascript">
+		function getOption() {
+			selectElement = document.querySelector('#sub');
+			output = selectElement.value;
+			document.querySelector('.input-group-text').textContent = output;
+		}
+	</script>
 {% endblock %}
