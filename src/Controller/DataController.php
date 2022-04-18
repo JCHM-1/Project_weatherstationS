@@ -8,7 +8,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DataController extends AbstractController
@@ -39,6 +38,8 @@ class DataController extends AbstractController
             $input->setDate($date);
             $input->setTime($time);
 
+            //$average = array_sum($data)/count($data);
+
 //            if (empty($data['WEATHERDATA'][$x]['TEMP'])) {
 //
 //            } else {
@@ -60,9 +61,9 @@ class DataController extends AbstractController
 
             $entityManager->persist($input);
             $entityManager->flush();
-
-
-
+//
+//
+//
 //            $this->logger->log('info', '---------------------------DATA----------------------------');
 //            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['STN']));
 //            $this->logger->log('info', gettype($data['WEATHERDATA'][$x]['DATE']));

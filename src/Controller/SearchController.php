@@ -21,6 +21,7 @@ use phpDocumentor\Reflection\Type;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 //use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,12 +29,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SearchController extends AbstractController
 {
 
+    private LoggerInterface $logger;
+
     public function __construct(private ManagerRegistry $doctrine, LoggerInterface $logger) {
         $this->logger = $logger;
     }
 
     #[Route('/data/search', methods:['GET', 'POST'], name: 'search')]
-    public function show(Request $request, GLrepo $glrepo)
+    public function show(Request $request, GLrepo $glrepo): Response
     {
         $type = null;
         $place = null;
@@ -53,24 +56,6 @@ class SearchController extends AbstractController
             'place' => $place,
             'hasKey' => $this->hasKey($output)
         ));
-    }
-
-    #[Route('/data/search/{stn}', name: 'showStations')]
-    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository){
-
-        $stationdata = $stationRepo->findBy(['name'=>$stn]);
-        $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
-        $geolocdata = $glrepo->findBy(['stationName'=>$stn]);
-        $data = $dataRepository->findBy(['stn'=>$stn]);
-
-
-        return $this->render('main/show.html.twig', [
-            'stationdata' => $stationdata,
-            'nearestlocdata'=> $nearestlocdata,
-            'geolocdata'=> $geolocdata,
-            'weatherdata'=>$data
-
-        ]);
     }
 
     public function hasKey(array $output): array {
@@ -155,5 +140,24 @@ class SearchController extends AbstractController
             $keyName[] = substr($key, 23);
         }
         return $keyName;
+    }
+
+    #[Route('/data/search/{stn}', name: 'showStations')]
+    public function showStations($stn,StationRepo $stationRepo, NLrepo $nlrepo, GLrepo $glrepo,DataRepository $dataRepository): Response
+    {
+
+        $stationdata = $stationRepo->findBy(['name'=>$stn]);
+        $nearestlocdata = $nlrepo->findBy(['name'=>$stn]);
+        $geolocdata = $glrepo->findBy(['stationName'=>$stn]);
+        $data = $dataRepository->findBy(['stn'=>$stn]);
+
+
+        return $this->render('main/show.html.twig', [
+            'stationdata' => $stationdata,
+            'nearestlocdata'=> $nearestlocdata,
+            'geolocdata'=> $geolocdata,
+            'weatherdata'=>$data
+
+        ]);
     }
 }
