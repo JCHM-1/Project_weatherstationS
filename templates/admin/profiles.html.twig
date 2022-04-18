@@ -35,18 +35,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for profile in profiles %}
-						<tr>
-							<th scope="row">{{ profile.id }}</th>
-							<td>{{ profile.email }}</td>
-							<td>{{ profile.subscription.id }}</td>
-							<td>{{ profile.roles[0] }}</td>
-							<td>
-								<a href="{{ path('edit', {id: profile.id}) }}">Edit</a>
-								<a class="text-danger" href="{{ path('remove', {id: profile.id}) }}">Remove</a>
-							</td>
-						</tr>
-					{% endfor %}
+{#					{% for profile in profiles %}#}
+{#						<tr>#}
+{#							<th scope="row">{{ profile.id }}</th>#}
+{#							<td>{{ profile.email }}</td>#}
+{#							<td>{{ profile.subscription.id }}</td>#}
+{#							<td>{{ profile.roles[0] }}</td>#}
+{#							<td>#}
+{#								<a href="{{ path('edit', {id: profile.id}) }}">Edit</a>#}
+{#								<a class="text-danger" href="{{ path('remove', {id: profile.id}) }}">Remove</a>#}
+{#							</td>#}
+{#						</tr>#}
+{#					{% endfor %}#}
 				</tbody>
 			</table>
 		</div>
@@ -58,93 +58,154 @@
 			<h4>Klant toevoegen</h4>
 		</div>
 		<div class="card-body">
-			<form method="POST" action="{{ path("admin") }}">
+			<form onclick="getOption()" method="POST" action="{{path("admin")}}">
 				<div class="mb-3">
 					<label for="email" class="form-label" id="emaildata">Email address</label>
 					<input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="mail">
 				</div>
-{#				 <div class="mb-3">#}
-{#					<label for="exampleInputPassword1" class="form-label">Password</label>#}
-{#					<input type="password" class="form-control" id="exampleInputPassword1">#}
-{#				</div>#}
+				{# <div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">Password</label>
+					<input type="password" class="form-control" id="exampleInputPassword1">
+				</div> #}
                 <div class="mb-3">
 					<label for="subscription" class="form-label">Kies subscription</label>
-                    <select class="form-select" aria-label="Default select example" id="sub" name="sub">
+                    <select class="form-select" aria-label="Default select example" id="subOption" name="sub">
+						<option selected disabled>Choose a subscription</option>
                         {% for sub in subscriptions %}
-                        <option onclick="getOption()" id="{{ sub }}" > {{ sub }}</option>
-                    	{% endfor %}
+                        <option> {{ sub }}</option>
+						{% endfor %}
 				    </select>
+					<p> Chosen subscription:
+						<span class="ouput" ></span>
+					</p>
+
                 </div>
-{#				<div class="mb-3">#}
-{#					{% if(selected == 1 or selected == 3) %}#}
-{#						<label for="station" class="form-label">Kies Station(s)</label>#}
-{#							<select class="form-select" aria-label="Default select example" id="station" name="station1">#}
-{#								{% for station in stations %}#}
-{#									<option onclick="getOption()" >  {{ station.name }}</option>#}
+				<div class="mb-3">
+					{% if(sub == 1 or sub == 3) %}
+						<label for="station" class="form-label">Kies Station(s)</label>
 
-{#								{% endfor %}#}
-{#							</select>#}
+							<select class="form-select" aria-label="Default select example" id="station" name="station1">
+								{% for station in stations %}
+									<option onclick="getOption()" > {{ station.name }}</option>
+								{% endfor %}
+							</select>
 
-{#					{% endif %}#}
-{#					{% if(selected == 2) %}#}
-{#						<label for="station" class="form-label">Kies Station(s)</label>#}
+					{% endif %}
+					{% if(sub == 2) %}
+						<label for="station" class="form-label">Kies Station(s)</label>
 
-{#							<select class="form-select" aria-label="Default select example" id="station" name="station1">#}
-{#								{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#						{% endfor %}#}
-{#							</select>#}
-{#						<select class="form-select" aria-label="Default select example" id="station" name="station2">#}
-{#							{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#							{% endfor %}#}
-{#						</select>#}
-{#						<select class="form-select" aria-label="Default select example" id="station" name="station3">#}
-{#							{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#							{% endfor %}#}
-{#						</select>#}
-{#						<select class="form-select" aria-label="Default select example" id="station" name="station4">#}
-{#							{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#							{% endfor %}#}
-{#						</select>#}
-{#						<select class="form-select" aria-label="Default select example" id="station" name="station5">#}
-{#							{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#							{% endfor %}#}
-{#						</select>#}
-{#						<select class="form-select" aria-label="Default select example" id="station" name="station6">#}
-{#							{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#							{% endfor %}#}
-{#						</select>#}
-{#						<select class="form-select" aria-label="Default select example" id="station" name="station7">#}
-{#							{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#							{% endfor %}#}
-{#						</select>#}
-{#						<select class="form-select" aria-label="Default select example" id="station" name="station8">#}
-{#							{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#							{% endfor %}#}
-{#						</select>#}
-{#						<select class="form-select" aria-label="Default select example" id="station" name="station9">#}
-{#							{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#							{% endfor %}#}
-{#						</select>#}
-{#						<select class="form-select" aria-label="Default select example" id="station" name="station10">#}
-{#							{% for station in stations %}#}
-{#								<option onclick="getOption()" > {{ station.name }}</option>#}
-{#							{% endfor %}#}
-{#						</select>#}
+							<select class="form-select" aria-label="Default select example" id="station" name="station1">
+								{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+						{% endfor %}
+							</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station2">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station3">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station4">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station5">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station6">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station7">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station8">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station9">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
+						<select class="form-select" aria-label="Default select example" id="station" name="station10">
+							{% for station in stations %}
+								<option onclick="getOption()" > {{ station.name }}</option>
+							{% endfor %}
+						</select>
 
 
-{#					{% endif %}#}
-{#				</div>#}
+					{% endif %}
+				</div>
+
 				<button type="submit" class="btn btn-dark" id="resource">Klant toevoegen</button>
 			</form>
+
+			<script type="text/javascript">
+				function getOption() {
+					const selectElement = document.querySelector('#subOption');
+					const output = selectElement.value;
+					document.querySelector('.ouput').textContent = output;
+				}
+			</script>
+
+	<script type="text/javascript">
+		const store = {};
+		const emaildata = document.querySelector('#frmLogin');
+		const btnGetResource = document.querySelector('#resource');
+		const form = document.forms[0];
+
+		// Inserts the jwt to the store object
+		store.setJWT = function (data) {
+			this.JWT = data;
+		};
+
+		loginButton.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			const res = await fetch('/authenticate.php', {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				},
+				body: JSON.stringify({
+					username: form.inputEmail.value,
+					password: form.inputPassword.value
+				})
+			});
+
+			if (res.status >= 200 && res.status <= 299) {
+				const jwt = await res.text();
+				store.setJWT(jwt);
+				frmLogin.style.display = 'none';
+				btnGetResource.style.display = 'block';
+			} else {
+				// Handle errors
+				console.log(res.status, res.statusText);
+			}
+		});
+
+		btnGetResource.addEventListener('click', async (e) => {
+			const res = await fetch('/resource.php', {
+				headers: {
+					'Authorization': `Bearer ${store.JWT}`
+				}
+			});
+			const timeStamp = await res.text();
+			console.log(timeStamp);
+		});
+	</script>
 
 		</div>
 	</div>
@@ -165,13 +226,5 @@
                 </tbody>
             </table>
         </div>
-        </div>
-
-	<script type="text/javascript">
-		function getOption() {
-			selectElement = document.querySelector('#sub');
-			output = selectElement.value;
-			document.querySelector('.input-group-text').textContent = output;
-		}
-	</script>
+        </div
 {% endblock %}

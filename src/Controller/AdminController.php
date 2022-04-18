@@ -35,42 +35,42 @@ class AdminController extends AbstractController
     public function admin(ProfileRepo $profileRepository, Request $request,StationRepo $stationRepo,JoinTableProfileStationRepo $jtpsRepo, DataRepo $dataRepo): Response
     {
         {
-            $subscription = [];
+            $subscriptions = [1, 2 ,3];
             $profiles = $profileRepository->findAll();
-////            var_dump($request->getMethod()==='POST');
-//            if ($request->getMethod()==='POST') {
-//                $email = $request->request->get('mail');
-//                $subscription = $request->request->get('sub');
-//
-//                if ($subscription == 1 or $subscription == 3) {
-//                    $station[] = $request->request->get('station1');
-//                    }
-//                else {
-//                    $station[] = $request->request->get('station1');
-//                    $station[] = $request->request->get('station2');
-//                    $station[] = $request->request->get('station3');
-//                    $station[] = $request->request->get('station4');
-//                    $station[] = $request->request->get('station5');
-//                    $station[] = $request->request->get('station6');
-//                    $station[] = $request->request->get('station7');
-//                    $station[] = $request->request->get('station8');
-//                    $station[] = $request->request->get('station9');
-//                    $station[] = $request->request->get('station10');
-//                }
-//                if ($profileRepository->findOneBy(array('email' => $email))) {
-//                    $this->addFlash('error', 'Email already exist');
-//                } else {
-//                    $this->createProfile($email, $subscription,$station[],$jtpsRepo,$dataRepo);
-//                }
-//            }
-//
-//            $stations = $stationRepo->findAll();
+//            var_dump($request->getMethod()==='POST');
+            if ($request->getMethod()==='POST') {
+                $email = $request->request->get('mail');
+                $subscription = $request->request->get('sub');
+
+                if ($subscription == 1 or $subscription == 3) {
+                    $station[] = $request->request->get('station1');
+                    }
+                else {
+                    $station[] = $request->request->get('station1');
+                    $station[] = $request->request->get('station2');
+                    $station[] = $request->request->get('station3');
+                    $station[] = $request->request->get('station4');
+                    $station[] = $request->request->get('station5');
+                    $station[] = $request->request->get('station6');
+                    $station[] = $request->request->get('station7');
+                    $station[] = $request->request->get('station8');
+                    $station[] = $request->request->get('station9');
+                    $station[] = $request->request->get('station10');
+                }
+                if ($profileRepository->findOneBy(array('email' => $email))) {
+                    $this->addFlash('error', 'Email already exist');
+                } else {
+                    $this->createProfile($email, $subscription,$station[],$jtpsRepo,$dataRepo);
+                }
+            }
+
+            $stations = $stationRepo->findAll();
 
                 return $this->render('admin/profiles.html.twig', array(
                     'profiles' => $profiles,
                     'subscriptions' => $this->subscriptions(),
-//                    'stations'=> $stations,
-                    'sub'=>$subscription
+                    'stations' => $stations,
+                    'sub'=>$subscriptions
             ));
 
             }
