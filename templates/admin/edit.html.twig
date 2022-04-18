@@ -27,18 +27,16 @@
     <table class="table table-dark">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">Stations</th>
+            <th colspan="{{ stations|length }}">Stations</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            {% for station in stations %}
+        {% for station in stations %}
+            <tr>
                 <td> {{ station.station.name }} </td>
-            {% endfor %}
-            {% for i in 0..stations|length %}
-                <td>{{ i }}</td>
-            {% endfor %}
-        </tr>
+                <td>  </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
