@@ -11,7 +11,7 @@
         <div class="card-body">
             <h5>Weatherdata from the past ...</h5>
             {%  if weatherdata is not null %}
-                {% for data in weatherdata %}
+
                     <table class="locations table table-striped table-bordered table-hover">
                         <thead>
                         <tr class="table-primary">
@@ -31,6 +31,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {% for data in weatherdata %}
                         <tr>
                             <td>{{ data.date|date('Y-m-d') }}</td>
                             <td>{{ data.time|date('H:i:s') }}</td>
@@ -46,9 +47,10 @@
                             <td>{{ data.cldc }}</td>
                             <td>{{ data.wnddir }}</td>
                         </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
-            {% endfor %}
+
         {% else %}
         <p> No info </p>
         {% endif %}

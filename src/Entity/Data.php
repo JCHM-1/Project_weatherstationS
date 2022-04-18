@@ -203,99 +203,133 @@ class Data
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getSlp(): ?float
     {
         return $this->slp;
     }
 
-    public function setSlp(?float $slp): self
+    /**
+     * @param float|null $slp
+     */
+    public function setSlp(?float $slp): void
     {
         $this->slp = $slp;
-
-        return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getVisib(): ?float
     {
         return $this->visib;
     }
 
-    public function setVisib(?float $visib): self
+    /**
+     * @param float|null $visib
+     */
+    public function setVisib(?float $visib): void
     {
         $this->visib = $visib;
-
-        return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getWdsp(): ?float
     {
         return $this->wdsp;
     }
 
-    public function setWdsp(?float $wdsp): self
+    /**
+     * @param float|null $wdsp
+     */
+    public function setWdsp(?float $wdsp): void
     {
         $this->wdsp = $wdsp;
-
-        return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getPrcp(): ?float
     {
         return $this->prcp;
     }
 
-    public function setPrcp(?float $prcp): self
+    /**
+     * @param float|null $prcp
+     */
+    public function setPrcp(?float $prcp): void
     {
         $this->prcp = $prcp;
-
-        return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getSndp(): ?float
     {
         return $this->sndp;
     }
 
-    public function setSndp(?float $sndp): self
+    /**
+     * @param float|null $sndp
+     */
+    public function setSndp(?float $sndp): void
     {
         $this->sndp = $sndp;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFrshtt(): ?string
     {
         return $this->frshtt;
     }
 
-    public function setFrshtt(?string $frshtt): self
+    /**
+     * @param string|null $frshtt
+     */
+    public function setFrshtt(?string $frshtt): void
     {
         $this->frshtt = $frshtt;
-
-        return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getCldc(): ?float
     {
         return $this->cldc;
     }
 
-    public function setCldc(?float $cldc): self
+    /**
+     * @param float|null $cldc
+     */
+    public function setCldc(?float $cldc): void
     {
         $this->cldc = $cldc;
-
-        return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getWnddir(): ?int
     {
         return $this->wnddir;
     }
 
-    public function setWnddir(?int $wnddir): self
+    /**
+     * @param int|null $wnddir
+     */
+    public function setWnddir(?int $wnddir): void
     {
         $this->wnddir = $wnddir;
-
-        return $this;
     }
+
+
 }
