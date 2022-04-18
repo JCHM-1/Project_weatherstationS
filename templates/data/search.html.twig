@@ -3,12 +3,13 @@
 {% block title %}Locating Data{% endblock %}
 
 {% block body %}
-    <div class="container shadow p-3 mb-5 bg-white rounded">
+    <div class="container-xl shadow p-3 mb-5 bg-white rounded">
     {% for message in app.flashes('error') %}
         <div class="alert alert-warning">
             {{ message }}
         </div>
     {% endfor %}
+
 
         <form onclick="getOption()" action={{ path('search') }} method="post">
             <div class="form-group">
@@ -28,12 +29,13 @@
             <button type="submit" class="btn btn-dark">Search</button>
 
         </form>
-
+        <div class = "container ">
         {% if stations is not empty %}
-            <table class="locations table table-striped table-bordered p-3 mt-5" id="s_table">
+            <table class="locations table table-striped table-bordered p-3 mt-5 " id="s_table">
                 <thead id="s_thead">
                 <tr class="table-primary" id="s_tr">
                     <th scope="col">Station</th>
+{#                    <th scope="col">Country Code</th>#}
                     {% if hasKey['island'] %}
                         <th scope="col">Island</th>
                     {% endif %}
@@ -79,57 +81,59 @@
                     {% if hasKey['postcode'] %}
                         <th scope="col">Postcode</th>
                     {% endif %}
+{#                    <th scope="col">Country</th>#}
                 </tr>
                 </thead>
                 <tbody id="s_tbody">
                 {% for data in stations %}
                     <tr>
                         {% if data.stationName is not empty %}
-                            <td><a class="text-info" href="{{ path('showStations', {stn: data.stationName}) }}">{{ data.stationName }}</a></td>
+                            <td style ="word-break:break-all;"><a class="text-info" href="{{ path('showStations', {stn: data.stationName}) }}">{{ data.stationName }}</a></td>
+{#                            <td>{{ data.countryCode }}</td>#}
                             {% if hasKey['island'] %}
-                                <td>{{ data.island }}</td>
+                                <td style ="word-break:break-all;">{{ data.island }}</td>
                             {% endif %}
                             {% if hasKey['county'] %}
-                                <td>{{ data.county }}</td>
+                                <td style ="word-break:break-all;">{{ data.county }}</td>
                             {% endif %}
                             {% if hasKey['place'] %}
-                                <td>{{ data.place }}</td>
+                                <td style ="word-break:break-all;">{{ data.place }}</td>
                             {% endif %}
                             {% if hasKey['hamlet'] %}
-                                <td>{{ data.hamlet }}</td>
+                                <td style ="word-break:break-all;">{{ data.hamlet }}</td>
                             {% endif %}
                             {% if hasKey['town'] %}
-                                <td>{{ data.town }}</td>
+                                <td style ="word-break:break-all;">{{ data.town }}</td>
                             {% endif %}
                             {% if hasKey['municipality'] %}
-                                <td>{{ data.municipality }}</td>
+                                <td style ="word-break:break-all;">{{ data.municipality }}</td>
                             {% endif %}
                             {% if hasKey['stateDistrict'] %}
-                                <td>{{ data.stateDistrict }}</td>
+                                <td style ="word-break:break-all;">{{ data.stateDistrict }}</td>
                             {% endif %}
                             {% if hasKey['administrative'] %}
-                                <td>{{ data.administrative }}</td>
+                                <td style ="word-break:break-all;">{{ data.administrative }}</td>
                             {% endif %}
                             {% if hasKey['state'] %}
-                                <td>{{ data.state }}</td>
+                                <td style ="word-break:break-all;">{{ data.state }}</td>
                             {% endif %}
                             {% if hasKey['village'] %}
-                                <td>{{ data.village }}</td>
+                                <td style ="word-break:break-all;">{{ data.village }}</td>
                             {% endif %}
                             {% if hasKey['region'] %}
-                                <td>{{ data.region }}</td>
+                                <td style ="word-break:break-all;">{{ data.region }}</td>
                             {% endif %}
                             {% if hasKey['province'] %}
-                                <td>{{ data.province }}</td>
+                                <td style ="word-break:break-all;">{{ data.province }}</td>
                             {% endif %}
                             {% if hasKey['city'] %}
-                                <td>{{ data.city }}</td>
+                                <td style ="word-break:break-all;">{{ data.city }}</td>
                             {% endif %}
                             {% if hasKey['locality'] %}
-                                <td>{{ data.locality }}</td>
+                                <td style ="word-break:break-all;">{{ data.locality }}</td>
                             {% endif %}
                             {% if hasKey['postcode'] %}
-                                <td>{{ data.postcode }}</td>
+                                <td style ="word-break:break-all;">{{ data.postcode }}</td>
                             {% endif %}
 {#                            <td>{{ data.country }}</td>#}
                         {% endif %}
@@ -138,6 +142,7 @@
                 </tbody>
             </table>
         {% endif %}
+        </div>
 
     </div>
 

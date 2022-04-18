@@ -150,7 +150,6 @@ class SearchController extends AbstractController
         $geolocdata = $glrepo->findBy(['stationName'=>$stn]);
         $data = $dataRepository->findBy(['stn'=>$stn]);
 
-
         return $this->render('main/show.html.twig', [
             'stationdata' => $stationdata,
             'nearestlocdata'=> $nearestlocdata,
