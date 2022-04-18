@@ -69,16 +69,15 @@ class AdminController extends AbstractController
     public function editProfile(ProfileRepository $profileRepository, $id, JoinTableProfileStationRepo $jtpsRepo) {
 
         $profile = $profileRepository->findOneBy(array('id' => $id));
-        $stations = $jtpsRepo->find(1);
-        foreach( $stations as $station ) {
+        $stations = $jtpsRepo->findBy(['profile' => $id]);
 
+        foreach($stations as $station) {
+            var_dump($station->getStation()->getName());
         }
-//        var_dump($profile->getEmail());
-//        echo $_SERVER['']
-//        var_dump($profile);
 
         return $this->render('admin/edit.html.twig', array(
-            'profile' => $profile
+            'profile' => $profile,
+            'stations' => $stations
         ));
     }
 
