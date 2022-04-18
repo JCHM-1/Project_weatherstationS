@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 use App\Entity\Subscriptions;
 use App\Entity\Profile;
-use App\Repository\ProfileRepository;
+use App\Repository\ProfileRepo;
 use App\Entity\Data;
 use App\Entity\Nearestlocation;
 use App\Entity\Station;
@@ -24,7 +24,6 @@ use App\Repository\StationRepo;
 use App\Repository\NLRepo;
 use App\Repository\GLRepo;
 use App\Repository\DataRepo;
-use App\Repository\ProfileRepo;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController
@@ -67,7 +66,6 @@ class AdminController extends AbstractController
         $manager->persist($user);
         $manager->flush();
         $this->addFlash('succes', 'Profile Added');
-        return $this->redirect($this->generateUrl('admin'));
 
         $secretKey  = 'wap';
         try {
@@ -93,6 +91,8 @@ class AdminController extends AbstractController
         //var_dump(new JwtSecurityTokenHandler().ReadJwtToken(JWT::decode($token,$secretKey)));
         $this->addFlash('succes', 'Volgende token verstuurd naar '.$user->getEmail().' : '.$token);
         $this->generateURL('app_download', ['token' => $token]);
+
+        return $this->redirect($this->generateUrl('admin'));
 
     }
 

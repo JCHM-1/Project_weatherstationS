@@ -2,12 +2,19 @@
 
 namespace App\Controller;
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use App\Repository\ProfileRepo;
+use App\Repository\DataRepo;
+use App\Repository\StationRepo;
+use App\Repository\JoinTableProfileStationRepo;
+use Symfony\Component\HttpFoundation\Request;
 
 class DownloadController extends AbstractController
 {
@@ -26,9 +33,7 @@ class DownloadController extends AbstractController
 
         try {
 
-            $jwt = preg_split('/ /', $_SERVER['HTTP_AUTHORIZATION'])[1];
-
-            $decoded = JWT::decode($jwt, $key);
+            $decoded = JWT::decode($token, new Key($key, 'HS512'));
 
             var_dump($decoded);
             if (!validate($decoded)) {
