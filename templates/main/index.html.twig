@@ -12,7 +12,8 @@
             </div>
             <hr>
             <div class="col-12">
-                <p class="lead">Wat kunnen we vandaag voor u betekenen?</p>
+                <p class="lead"> {{ app.user ? 'Wat kunnen we voor u betekenen?' : 'please login' }} 
+                </p>
             </div>
         </div>
     </div>
@@ -21,7 +22,16 @@
         <div class="row text-center padding">
             <div class="">
                 <i class="far fa-chart-bar"></i>
-                <a class="btn btn-primary btn-lg btn-dark" href="/main/locations" role="button">Station Locations</a>
+
+                {% if is_granted('ROLE_USER') %}
+                    <a class="btn btn-primary btn-lg btn-dark" aria-current="page" href="/main/admin">Admin Dashboard</a>
+                    <a class="btn btn-primary btn-lg btn-dark" aria-current="page" href="/data/search">Search</a>
+                {% else %}
+                <a class="btn btn-primary btn-lg btn-dark" aria-current="page" href="{{ app.user ? '/logout' : '/' }}">
+                    {{ app.user ? 'Logout' : 'Login' }}
+                </a>
+                {% endif %}
+                {# <a class="btn btn-primary btn-lg btn-dark" href="/main/locations" role="button">Station Locations</a> #}
 {#                <a class="btn btn-primary btn-lg btn-dark" href="/data/search" role="button">Search Weatherstations</a>#}
 
             </div>
