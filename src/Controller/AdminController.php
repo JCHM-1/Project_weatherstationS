@@ -87,20 +87,28 @@ class AdminController extends AbstractController
         //nieuwe stations toevoegen aan join table
         if($sub == 1 or $sub == 3){
             $jointable = new JoinTableProfileStation();
-            $station = $stationRepo->findOneBy(['name'=>$station[0]]);
-            $jointable->setProfile($user);
-            $jointable->setStation($station);
+
+                $station = $stationRepo->findOneBy(['name' => $station[0]]);
+                $jointable->setProfile($user);
+                $jointable->setStation($station);
+                $manager->persist($jointable);
+                $manager->flush();
+
         }else{
             for($x=0; $x<10;$x++){
                 $jointable = new JoinTableProfileStation();
-                $station = $stationRepo->findOneBy(['name'=>$station[$x]]);
-                $jointable->setProfile($user);
-                $jointable->setStation($station);
+                $stations[] = $stationRepo->findOneBy(['name'=>$station[$x]]);
+
+                foreach($stations as $y) {
+                    $jointable->setProfile($user);
+                    $jointable->setStation($y);
+                    $manager->persist($jointable);
+                    $manager->flush();
+                }
             }
         }
 
-        $manager->persist($jointable);
-        $manager->flush();
+
 
         $this->addFlash('succes', 'Profile Added');
 
