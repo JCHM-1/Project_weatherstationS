@@ -55,9 +55,6 @@ class DownloadController extends AbstractController
             $subdata['sndp'] = $data->getSndp();
             $subdata['cldc'] = $data->getCldc();
             $subdata['wnddir'] = $data->getWnddir();
-
-
-
         }
 
         // Demo: voor subscr 2 laat 1x data van 10 stations
