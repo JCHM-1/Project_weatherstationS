@@ -44,27 +44,13 @@ class AdminController extends AbstractController
                 $email = $request->request->get('mail');
                 $subscription = $request->request->get('sub');
 
-                $stations[] = $request->request->get('station1');
-                $stations[] = $request->request->get('station2');
-                $stations[] = $request->request->get('station3');
-                $stations[] = $request->request->get('station4');
-                $stations[] = $request->request->get('station5');
-                $stations[] = $request->request->get('station6');
-                $stations[] = $request->request->get('station7');
-                $stations[] = $request->request->get('station8');
-                $stations[] = $request->request->get('station9');
-                $stations[] = $request->request->get('station10');
-
-
-                //var_dump($stations);
-
                 if ($profileRepository->findOneBy(array('email' => $email))) {
                     $this->addFlash('error', 'Email already exist');
                 } else {
                     $this->createProfile($email, $subscription, $stations, $jtpsRepo, $dataRepo,$stationRepo);
                 }
             }
-
+            $profiles = $profileRepository->findAll();
             return $this->render('admin/profiles.html.twig', array(
                 'profiles' => $profiles,
                 'subscriptions' => $this->subscriptions(),
@@ -84,53 +70,31 @@ class AdminController extends AbstractController
         $manager->persist($user);
         $manager->flush();
 
-        //nieuwe stations toevoegen aan join table
-        if($sub == 1 or $sub == 3){
-            $jointable = new JoinTableProfileStation();
-            $station = $stationRepo->findOneBy(['name'=>$station[0]]);
-            $jointable->setProfile($user);
-            $jointable->setStation($station);
-        }else{
-            for($x=0; $x<10;$x++){
-                $jointable = new JoinTableProfileStation();
-                $station = $stationRepo->findOneBy(['name'=>$station[$x]]);
-                $jointable->setProfile($user);
-                $jointable->setStation($station);
-            }
-        }
-
-        $manager->persist($jointable);
-        $manager->flush();
-
         $this->addFlash('succes', 'Profile Added');
 
-
-        $secretKey  = 'wap';
-
-        try {
-            $tokenId = $user->getId();
-        } catch (\Exception $e) {}
-
-
-        // Create the token as an array
-        $data = [
-            // Json Token Id: an unique identifier for the token
-            'id'  => $tokenId
-        ];
-
-        // Encode the array to a JWT string.
-        $token =  JWT::encode(
-            $data,       // Data to be encoded in the JWT
-            $secretKey,  // The signing key
-            'HS512'  // Algorithm used to sign the token, see https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40#section-3
-        );
-
+        $token = $this->createToken($user);
     //        var_dump($token);
             //var_dump(new JwtSecurityTokenHandler().ReadJwtToken(JWT::decode($token,$secretKey)));
         $this->addFlash('succes', 'Volgende token verstuurd naar '.$user->getEmail().' : '.$token);
         $this->generateURL('app_download', ['token' => $token]);
 
         return $this->redirect($this->generateUrl('admin'));
+    }
+
+    public function createToken(Profile $user) {
+        $secretKey  = 'wap';
+        try {
+            $tokenId = [];
+            array_push($tokenId, $user->getId());
+        } catch (\Exception $e) {}
+
+        // Encode the array to a JWT string.
+        $token =  JWT::encode(
+            $tokenId,       // Data to be encoded in the JWT
+            $secretKey,  // The signing key
+            'HS512'  // Algorithm used to sign the token, see https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40#section-3
+        );
+        return $token;
     }
 
     #[Route('/admin/remove/{id}', name: 'remove')]
@@ -152,10 +116,12 @@ class AdminController extends AbstractController
     public function editProfile($id,ProfileRepo $profileRepository, JoinTableProfileStationRepo $jtpsRepo) {
         $profile = $profileRepository->findOneBy(array('id' => $id));
         $stations = $jtpsRepo->findBy(['profile' => $id]);
+        $token = $stations != null ? $this->createToken($profile) : [];
         return $this->render('admin/edit.html.twig', array(
             'id' => $id,
             'profile' => $profile,
-            'stations' => $stations
+            'stations' => $stations,
+            'token' => $token
         ));
     }
 
@@ -185,10 +151,12 @@ class AdminController extends AbstractController
         }
         $profile = $profileRepository->findOneBy(array('id' => $id));
         $stations = $jtpsRepo->findBy(['profile' => $id]);
+        $token = $stations != null ? $this->createToken($profile) : [];
         return $this->render('admin/edit.html.twig', array(
             'id' => $id,
             'profile' => $profile,
-            'stations' => $stations
+            'stations' => $stations,
+            'token' => $token
         ));
     }
 
@@ -202,10 +170,12 @@ class AdminController extends AbstractController
         //TODO: return Url
         $profile = $profileRepository->findOneBy(array('id' => $id));
         $stations = $jtpsRepo->findBy(['profile' => $id]);
+        $token = $stations != null ? $this->createToken($profile) : [];
         return $this->render('admin/edit.html.twig', array(
             'id' => $id,
             'profile' => $profile,
-            'stations' => $stations
+            'stations' => $stations,
+            'token' => $token
         ));
     }
 

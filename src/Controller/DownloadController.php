@@ -22,26 +22,12 @@ class DownloadController extends AbstractController
     #[Route('/download/{token}', name: 'app_download')]
     public function index($token, ProfileRepo $profileRepo, DataRepo $dataRepo, StationRepo $stationRepo, JoinTableProfileStationRepo $jtpsRepo,Request $request): Response
     {
-
-//        $realtime = $profileRepo->find($token)->getSubscription()->isRealtime();
-//        $stations = $jtpsRepo->findBy(['profile_id'=>$token]);
-//
-//        foreach($stations as $station){
-//            $data = $station->findAll;
-//        }
-        //$jwt = $request->getBody();
         $key = 'wap';
-
         try {
-
             $decoded = JWT::decode($token, new Key($key, 'HS512'));
-//            var_dump($decoded);
             $id = (array) json_decode(json_encode($decoded, true));
-
         } catch (UnexpectedValueException $exception) {
-
             echo $exception->getMessage();
-
         }
 
         $user = $profileRepo->findOneBy(['id' => $id]);
@@ -49,28 +35,32 @@ class DownloadController extends AbstractController
         // Demo: Voor subscr 1 laat 10x data van 1 station
         if ($user->getSubscription()->getId() == 1)
         {
-            $station = $jtpsRepo->findOneBy(['profile'=>$id])->getStation()->getName();
-            // FindOneBy because I dont want all
-            $data = $dataRepo->findOneBy(['stn'=> $station]);
-
-            $subdata = [];
+            $profileStations = $jtpsRepo->findBy(['profile'=>$id])->getStation()->getName();
             $weatherdata = [];
+            foreach ($profileStations as $station) {
+                $stationData = $dataRepo->findBy(['stn'=> $station]);
+                foreach ($stationData as $data) {
+                    $subdata = [];
+                    $subdata['stn'] = $data->getStn();
+//                  $weatherdata['date'] = (string) $dataitem->getDate();
+//                  $weatherdata['time'] = (string) $dataitem->getTime();
+                    $subdata['temp'] = (string) $data->getTemp();
+                    $subdata['dewp'] = $data->getDewp();
+                    $subdata['stp'] = $data->getStp();
+                    $subdata['slp'] = $data->getSlp();
+                    $subdata['visib'] = $data->getVisib();
+                    $subdata['wdsp'] = $data->getWdsp();
+                    $subdata['prcp'] = $data->getFrshtt();
+                    $subdata['sndp'] = $data->getSndp();
+                    $subdata['cldc'] = $data->getCldc();
+                    $subdata['wnddir'] = $data->getWnddir();
+                    array_push($weatherdata, $subdata);
+                }
+            }
 
-            $subdata['stn'] = $data->getStn();
-//          $weatherdata['date'] = (string) $dataitem->getDate();
-//          $weatherdata['time'] = (string) $dataitem->getTime();
-            $subdata['temp'] = (string) $data->getTemp();
-            $subdata['dewp'] = $data->getDewp();
-            $subdata['stp'] = $data->getStp();
-            $subdata['slp'] = $data->getSlp();
-            $subdata['visib'] = $data->getVisib();
-            $subdata['wdsp'] = $data->getWdsp();
-            $subdata['prcp'] = $data->getFrshtt();
-            $subdata['sndp'] = $data->getSndp();
-            $subdata['cldc'] = $data->getCldc();
-            $subdata['wnddir'] = $data->getWnddir();
 
-            $weatherdata[] = $subdata;
+
+
         }
 
         // Demo: voor subscr 2 laat 1x data van 10 stations
@@ -137,7 +127,6 @@ class DownloadController extends AbstractController
         $fileContent = json_encode($weatherdata);
 
         $response = new Response($fileContent);
-
         $disposition = HeaderUtils::makeDisposition(
         ResponseHeaderBag::DISPOSITION_ATTACHMENT,
         $filename

@@ -53,6 +53,26 @@
         {% endif %}
         </tbody>
     </table>
+
+    <table class="locations table table-striped table-bordered table-hover">
+        <thead class="table-primary">
+        <tr>
+            <th scope="row">user TOKEN</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    {% if token is not empty %}
+                    <a>{{ token }}</a>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
 {#    {% endif %}#}
 {% endblock %}
 {% block footer %}
