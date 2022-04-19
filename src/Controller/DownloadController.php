@@ -50,6 +50,7 @@ class DownloadController extends AbstractController
         if ($user->getSubscription()->getId() == 1)
         {
             $station = $jtpsRepo->findOneBy(['profile'=>$id])->getStation()->getName();
+            // FindOneBy because I dont want all
             $data = $dataRepo->findOneBy(['stn'=> $station]);
 
             $subdata = [];
@@ -70,20 +71,33 @@ class DownloadController extends AbstractController
             $subdata['wnddir'] = $data->getWnddir();
 
             $weatherdata[] = $subdata;
-
         }
-
 
         // Demo: voor subscr 2 laat 1x data van 10 stations
         elseif($user->getSubscription()->getId() == 2)
         {
             $stations = $jtpsRepo->findBy(['profile'=>$id]);
+            $data[] = $dataRepo->findBy(['stn'=> $stn]);
 
-            foreach($stations as $station) {
-                $stn = $station->getStation()->getName();
-                // Create the token as an array
-                $data[] = $dataRepo->findBy(['stn'=> $stn]);
-            }
+            $subdata = [];
+
+            foreach($data as $station){
+                $subdata['stn'] = $station->getStn();
+    //          $weatherdata['date'] = (string) $dataitem->getDate();
+    //          $weatherdata['time'] = (string) $dataitem->getTime();
+                $subdata['temp'] = (string) $station->getTemp();
+                $subdata['dewp'] = $station->getDewp();
+                $subdata['stp'] = $station->getStp();
+                $subdata['slp'] = $station->getSlp();
+                $subdata['visib'] = $station->getVisib();
+                $subdata['wdsp'] = $station->getWdsp();
+                $subdata['prcp'] = $station->getFrshtt();
+                $subdata['sndp'] = $station->getSndp();
+                $subdata['cldc'] = $station->getCldc();
+                $subdata['wnddir'] = $station->getWnddir();
+
+                $weatherdata[] = $subdata;
+                }
         }
 
         // Demo: laat 100 keer data zien van 1 station
