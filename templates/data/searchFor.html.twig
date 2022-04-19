@@ -3,6 +3,7 @@
 {% block title %}Locating Data{% endblock %}
 
 {% block body %}
+
     <div class="container-xl shadow p-3 mb-5 bg-white rounded">
         <form onclick="getOption()" action={{ path('searchFor', {id: profile.id}) }} method="post">
             <p>{{ profile.email }}</p>
@@ -56,6 +57,7 @@
             document.querySelector('.input-group-text').textContent = output;
         }
     </script>
+
 
 {% endblock %}
 
