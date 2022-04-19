@@ -3,12 +3,23 @@
 {% block title %}Locating Data{% endblock %}
 
 {% block body %}
+    <style>
+        select:required:invalid {
+            color: #666;
+        }
+        option[value=""][disabled] {
+            display: none;
+        }
+        option {
+            color: #000;
+        }
+    </style>
     <div class="container-xl shadow p-3 mb-5 bg-white rounded">
 
         <form onclick="getOption()" action={{ path('search') }} method="post">
             <div class="form-group">
-                <select class="form-select mb-3 mt-3" id="selectOption" name="type">
-                    <option selected disabled >Select location type</option>
+                <select class="form-select mb-3 mt-3" id="selectOption" name="type" required>
+                    <option value="" selected disabled >Select location type</option>
                     {% for key in keys %}
                         <option> {{ key }}</option>
                     {% endfor %}
@@ -147,6 +158,5 @@
             document.querySelector('.input-group-text').textContent = output;
         }
     </script>
-
 {% endblock %}
 

@@ -35,29 +35,26 @@ class DownloadController extends AbstractController
         // Demo: Voor subscr 1 laat 10x data van 1 station
         if ($user->getSubscription()->getId() == 1)
         {
-            $profileStations = $jtpsRepo->findBy(['profile'=>$id])->getStation()->getName();
-            $weatherdata = [];
-            foreach ($profileStations as $station) {
-                $stationData = $dataRepo->findBy(['stn'=> $station]);
-                foreach ($stationData as $data) {
-                    $subdata = [];
-                    $subdata['stn'] = $data->getStn();
-//                  $weatherdata['date'] = (string) $dataitem->getDate();
-//                  $weatherdata['time'] = (string) $dataitem->getTime();
-                    $subdata['temp'] = (string) $data->getTemp();
-                    $subdata['dewp'] = $data->getDewp();
-                    $subdata['stp'] = $data->getStp();
-                    $subdata['slp'] = $data->getSlp();
-                    $subdata['visib'] = $data->getVisib();
-                    $subdata['wdsp'] = $data->getWdsp();
-                    $subdata['prcp'] = $data->getFrshtt();
-                    $subdata['sndp'] = $data->getSndp();
-                    $subdata['cldc'] = $data->getCldc();
-                    $subdata['wnddir'] = $data->getWnddir();
-                    array_push($weatherdata, $subdata);
-                }
-            }
+            $station = $jtpsRepo->findOneBy(['profile'=>$id])->getStation()->getName();
+            // FindOneBy because I dont want all
+            $data = $dataRepo->findOneBy(['stn'=> $station]);
 
+            $subdata = [];
+            $weatherdata = [];
+
+            $subdata['stn'] = $data->getStn();
+            $subdata['date'] = $data->getDate()->format('Y-m-d');
+            $subdata['time'] = $data->getTime()->format('H:i:s');
+            $subdata['temp'] =  $data->getTemp();
+            $subdata['dewp'] = $data->getDewp();
+            $subdata['stp'] = $data->getStp();
+            $subdata['slp'] = $data->getSlp();
+            $subdata['visib'] = $data->getVisib();
+            $subdata['wdsp'] = $data->getWdsp();
+            $subdata['prcp'] = $data->getFrshtt();
+            $subdata['sndp'] = $data->getSndp();
+            $subdata['cldc'] = $data->getCldc();
+            $subdata['wnddir'] = $data->getWnddir();
 
 
 
@@ -67,27 +64,38 @@ class DownloadController extends AbstractController
         elseif($user->getSubscription()->getId() == 2)
         {
             $stations = $jtpsRepo->findBy(['profile'=>$id]);
-            $data[] = $dataRepo->findBy(['stn'=> $stn]);
+            $allstations = [];
 
-            $subdata = [];
+            foreach($stations as $station) {
 
-            foreach($data as $station){
-                $subdata['stn'] = $station->getStn();
-    //          $weatherdata['date'] = (string) $dataitem->getDate();
-    //          $weatherdata['time'] = (string) $dataitem->getTime();
-                $subdata['temp'] = (string) $station->getTemp();
-                $subdata['dewp'] = $station->getDewp();
-                $subdata['stp'] = $station->getStp();
-                $subdata['slp'] = $station->getSlp();
-                $subdata['visib'] = $station->getVisib();
-                $subdata['wdsp'] = $station->getWdsp();
-                $subdata['prcp'] = $station->getFrshtt();
-                $subdata['sndp'] = $station->getSndp();
-                $subdata['cldc'] = $station->getCldc();
-                $subdata['wnddir'] = $station->getWnddir();
+                $allstations[] = $station->getStation()->getName();
+            }
 
-                $weatherdata[] = $subdata;
+            foreach($allstations as $x){
+
+                $data[] = $dataRepo->findOneBy(['stn' => $x]);
+
+                $subdata = [];
+                $weatherdata = [];
+
+                foreach ($data as $station) {
+                    $subdata['stn'] = $station->getStn();
+                    $subdata['date'] = $station->getDate()->format('Y-m-d');
+                    $subdata['time'] = $station->getTime()->format('H:i:s');
+                    $subdata['temp'] = $station->getTemp();
+                    $subdata['dewp'] = $station->getDewp();
+                    $subdata['stp'] = $station->getStp();
+                    $subdata['slp'] = $station->getSlp();
+                    $subdata['visib'] = $station->getVisib();
+                    $subdata['wdsp'] = $station->getWdsp();
+                    $subdata['prcp'] = $station->getFrshtt();
+                    $subdata['sndp'] = $station->getSndp();
+                    $subdata['cldc'] = $station->getCldc();
+                    $subdata['wnddir'] = $station->getWnddir();
+
+                    $weatherdata[] = $subdata;
                 }
+            }
         }
 
         // Demo: laat 100 keer data zien van 1 station
