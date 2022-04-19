@@ -167,8 +167,14 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/remove/{id}', name: 'remove')]
-    public function removeProfile(Profile $profile) {
+    public function removeProfile(Profile $profile, JoinTableProfileStationRepo $jtpsRepo, $id) {
         $manager = $this->doctrine->getManager();
+        $stations = $jtpsRepo->findBy(['profile' => $id]);
+        foreach ($stations as $station) {
+            $jtps = $jtpsRepo->findOneBy(array('profile' => $profile->getId(), 'station' => $station->getStation()->getName()));
+            $manager->remove($jtps);
+            $manager->flush();
+        }
         $manager->remove($profile);
         $manager->flush();
         $this->addFlash('succes', 'Profile Removed');
@@ -190,7 +196,6 @@ class AdminController extends AbstractController
     public function addStation(ProfileRepo $profileRepository, JoinTableProfileStationRepo $jtpsRepo, StationRepo $stationRepo, $id, $stn) {
         $profile = $profileRepository->findOneBy(array('id' => $id));
         $stations = $jtpsRepo->findBy(['profile' => $id]);
-
         $exist = false;
         foreach ($stations as $station) {
             if ($station->getStation()->getName()===intval($stn)) {
@@ -211,7 +216,8 @@ class AdminController extends AbstractController
 
             $this->addFlash('succes', 'Station: '.$stn.' succesfully added.');
         }
-
+        $profile = $profileRepository->findOneBy(array('id' => $id));
+        $stations = $jtpsRepo->findBy(['profile' => $id]);
         return $this->render('admin/edit.html.twig', array(
             'id' => $id,
             'profile' => $profile,
@@ -221,15 +227,14 @@ class AdminController extends AbstractController
 
     #[Route('/admin/edit/remove/{id}/{stn}', name: 'removeStation')]
     public function removeStation($id, $stn, JoinTableProfileStationRepo $jtpsRepo, ProfileRepo $profileRepository, StationRepo $stationRepo) {
-        $profile = $profileRepository->findOneBy(array('id' => $id));
-        $stations = $jtpsRepo->findBy(['profile' => $id]);
-
         $manager = $this->doctrine->getManager();
         $jtps = $jtpsRepo->findOneBy(array('profile' => $id, 'station' => $stn));
         $manager->remove($jtps);
         $manager->flush();
         $this->addFlash('succes', 'Station Removed');
         //TODO: return Url
+        $profile = $profileRepository->findOneBy(array('id' => $id));
+        $stations = $jtpsRepo->findBy(['profile' => $id]);
         return $this->render('admin/edit.html.twig', array(
             'id' => $id,
             'profile' => $profile,
