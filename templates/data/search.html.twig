@@ -16,10 +16,10 @@
     </style>
     <div class="container-xl shadow p-3 mb-5 bg-white rounded">
 
-        <form onclick="getOption()" action={{ path('search') }} method="post">
+        <form onclick="getOption()" onsubmit="return checkForm()" action={{ path('search') }} method="post">
             <div class="form-group">
-                <select class="form-select mb-3 mt-3" id="selectOption" name="type" required>
-                    <option value="" selected disabled >Select location type</option>
+                <select class="form-select mb-3 mt-3" id="selectOption" name="type">
+                    <option value="" selected disabled >Select location type: </option>
                     {% for key in keys %}
                         <option> {{ key }}</option>
                     {% endfor %}
@@ -27,7 +27,7 @@
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" > Location: </span>
+                <span class="input-group-text" ></span>
                 <input type="text" class="form-control" id="place" name="place" aria-describedby="basic-addon3">
             </div>
 
@@ -153,9 +153,17 @@
 
     <script type="text/javascript">
         function getOption() {
-            selectElement = document.querySelector('#selectOption');
-            output = selectElement.value;
+            const selectElement = document.querySelector('#selectOption');
+            const output = selectElement.value;
             document.querySelector('.input-group-text').textContent = output;
+        }
+
+        function checkForm(){
+            const e = document.getElementById("selectOption").value;//alert(e);
+            if(e===""){
+                alert("Select an item from the list");
+                return false;
+            }
         }
     </script>
 {% endblock %}
