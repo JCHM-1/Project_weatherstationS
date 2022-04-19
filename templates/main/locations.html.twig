@@ -5,30 +5,49 @@
 {% block body %}
 
     <div class="container shadow p-3 mb-5 bg-white rounded">
-
-        <table class="locations table table-striped table-bordered">
+        <div class="input-group mb-3">
+            <span class="input" ></span>
+            <input type="text" class="form-control" id="myInput" aria-describedby="basic-addon3" onkeyup="myFunction()" placeholder="Search station">
+        </div>
+        <table class="locations table table-striped table-bordered" id="stationTable">
             <thead>
             <tr class="table-primary">
-                <th scope="col">Id</th>
-                <th scope="col">StationName</th>
+                <th scope="col">Station</th>
                 <th scope="col">County</th>
-                <th scope="col">Postcode</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
                 <th scope="col">Country</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable">
             {% for location in geolocations %}
             <tr>
-                <th scope="row">{{ location.id }}</th>
                 <td>{{ location.stationName }}</td>
                 <td>{{ location.county }}</td>
-                <td>{{ location.postcode }}</td>
+                <td>{{ location.city }}</td>
+                <td>{{ location.state }}</td>
                 <td>{{ location.country }}</td>
             </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
+
+    <script src=
+            "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text()
+                        .toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
 
 
 {% endblock %}
