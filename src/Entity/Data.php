@@ -3,13 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\DataRepo;
 
 /**
  * Data
  *
  * @ORM\Table(name="data", indexes={@ORM\Index(name="stn_idx", columns={"stn"})})
- * @ORM\Entity(repositoryClass=DataRepo::class)
+ * @ORM\Entity
  */
 class Data
 {

@@ -29,7 +29,7 @@
 						<tr>
 							<th scope="row">{{ profile.id }}</th>
 							<td>{{ profile.email }}</td>
-							<td>{{ profile.subscription.id }}</td>
+							{#  <td>{{ profile.subscription.id }}</td>#}
 							<td>{{ profile.roles[0] }}</td>
 							<td>
 								<a href="{{ path('edit', {id: profile.id}) }}">Edit</a>
