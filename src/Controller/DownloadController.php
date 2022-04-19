@@ -35,11 +35,8 @@ class DownloadController extends AbstractController
         try {
 
             $decoded = JWT::decode($token, new Key($key, 'HS512'));
-            $content = (array) json_decode(json_encode($decoded, true));
-
-            echo '<pre>';
-            var_dump($decoded);
-            echo '</pre>';
+//            var_dump($decoded);
+            $id = (array) json_decode(json_encode($decoded, true));
 
         } catch (UnexpectedValueException $exception) {
 
@@ -47,9 +44,83 @@ class DownloadController extends AbstractController
 
         }
 
+        $user = $profileRepo->findOneBy(['id' => $id]);
+        // Retrieved from filtered POST data
+        // Demo: Voor subscr 1 laat 10x data van 1 station
+        if ($user->getSubscription()->getId() == 1)
+        {
+            $station = $jtpsRepo->findOneBy(['profile'=>$id])->getStation()->getName();
+            $data = $dataRepo->findOneBy(['stn'=> $station]);
+
+            $subdata = [];
+            $weatherdata = [];
+
+            $subdata['stn'] = $data->getStn();
+//          $weatherdata['date'] = (string) $dataitem->getDate();
+//          $weatherdata['time'] = (string) $dataitem->getTime();
+            $subdata['temp'] = (string) $data->getTemp();
+            $subdata['dewp'] = $data->getDewp();
+            $subdata['stp'] = $data->getStp();
+            $subdata['slp'] = $data->getSlp();
+            $subdata['visib'] = $data->getVisib();
+            $subdata['wdsp'] = $data->getWdsp();
+            $subdata['prcp'] = $data->getFrshtt();
+            $subdata['sndp'] = $data->getSndp();
+            $subdata['cldc'] = $data->getCldc();
+            $subdata['wnddir'] = $data->getWnddir();
+
+            $weatherdata[] = $subdata;
+
+        }
+
+
+        // Demo: voor subscr 2 laat 1x data van 10 stations
+        elseif($user->getSubscription()->getId() == 2)
+        {
+            $stations = $jtpsRepo->findBy(['profile'=>$id]);
+
+            foreach($stations as $station) {
+                $stn = $station->getStation()->getName();
+                // Create the token as an array
+                $data[] = $dataRepo->findBy(['stn'=> $stn]);
+            }
+        }
+
+        // Demo: laat 100 keer data zien van 1 station
+        else
+        {
+            $station = $jtpsRepo->findOneBy(['profile'=>$id]);
+            $stn = $station->getStation()->getName();
+
+            for($x = 100; $x>0; $x--){
+                $data[] = $dataRepo->findOneBy(['stn'=> $stn]);
+            }
+        }
+
+//        $weatherdata = [];
+//        $subdata = [];
+//
+//        foreach($data as $station){
+//            $subdata['stn'] = $station->getStn();
+////          $weatherdata['date'] = (string) $dataitem->getDate();
+////          $weatherdata['time'] = (string) $dataitem->getTime();
+//            $subdata['temp'] = (string) $station->getTemp();
+//            $subdata['dewp'] = $station->getDewp();
+//            $subdata['stp'] = $station->getStp();
+//            $subdata['slp'] = $station->getSlp();
+//            $subdata['visib'] = $station->getVisib();
+//            $subdata['wdsp'] = $station->getWdsp();
+//            $subdata['prcp'] = $station->getFrshtt();
+//            $subdata['sndp'] = $station->getSndp();
+//            $subdata['cldc'] = $station->getCldc();
+//            $subdata['wnddir'] = $station->getWnddir();
+//
+//            $weatherdata[] = $subdata;
+//        }
+
         $filename = 'Data.txt';
 
-        $fileContent = implode(" ", $content);
+        $fileContent = json_encode($weatherdata);
 
         $response = new Response($fileContent);
 

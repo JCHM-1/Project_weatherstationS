@@ -48,9 +48,9 @@ class DataController extends AbstractController
             $input->setPrcp($data['WEATHERDATA'][$x]['PRCP']);
             $input->setSndp($data['WEATHERDATA'][$x]['SNDP']);
 
-            if ($data['WEATHERDATA'][$x]['FRSHTT'] == "None" || $data['WEATHERDATA'][$x]['FRSHTT'] == "") {
-                $x = $dataRepo->findOneBy();
-            }
+//            if ($data['WEATHERDATA'][$x]['FRSHTT'] == "None" || $data['WEATHERDATA'][$x]['FRSHTT'] == "") {
+//                $x = $dataRepo->findOneBy();
+//            }
 
             $input->setFrshtt($data['WEATHERDATA'][$x]['FRSHTT']);
             $input->setCldc($data['WEATHERDATA'][$x]['CLDC']);

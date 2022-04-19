@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="Datatoken opzet">
+      <change afterPath="$PROJECT_DIR$/migrations/Version20220418220817.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/parameters.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/routing.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/routing.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Data.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Data.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/profiles.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/profiles.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/data/search.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/data/search.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DataController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DownloadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DownloadController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,6 +159,9 @@
       <path value="$PROJECT_DIR$/vendor/web-token/jwt-framework" />
     </include_path>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2710XJV0CY3oKp5XpnBZ0fXlJMN" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -303,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650307765590</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Datatoken opzet">
+      <created>1650316307323</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1650316307323</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

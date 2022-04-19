@@ -56,7 +56,7 @@ class AdminController extends AbstractController
                 $stations[] = $request->request->get('station10');
 
 
-                var_dump($stations);
+                //var_dump($stations);
 
                 if ($profileRepository->findOneBy(array('email' => $email))) {
                     $this->addFlash('error', 'Email already exist');
@@ -84,6 +84,7 @@ class AdminController extends AbstractController
         $manager->persist($user);
         $manager->flush();
 
+        //nieuwe stations toevoegen aan join table
         if($sub == 1 or $sub == 3){
             $jointable = new JoinTableProfileStation();
             $station = $stationRepo->findOneBy(['name'=>$station[0]]);
@@ -103,6 +104,7 @@ class AdminController extends AbstractController
 
         $this->addFlash('succes', 'Profile Added');
 
+
         $secretKey  = 'wap';
 
         try {
@@ -110,50 +112,15 @@ class AdminController extends AbstractController
         } catch (\Exception $e) {}
 
 
-        // Retrieved from filtered POST data
-        // Demo: Voor subscr 1 laat 10x data van 1 station
-        if ($user->getSubscription()->getId() == 1)
-        {
-            for($x = 10; $x>0; $x--){
-                $station = $jtpsRepo->findOneBy(['profile'=>$tokenId])->getStation()->getName();
-                var_dump($station);
-
-                $data[] = $dataRepo->findOneBy(['stn'=> $station]);
-                var_dump($data);
-            }
-        }
-
-        // Demo: voor subscr 2 laat 1x data van 10 stations
-        elseif($user->getSubscription()->getId() == 2)
-        {
-            $stations = $jtpsRepo->findBy(['profile'=>$tokenId]);
-
-            foreach($stations as $station) {
-                $stn = $station->getStation()->getName();
-                // Create the token as an array
-                $data[] = $dataRepo->findBy(['stn'=> $stn]);
-            }
-        }
-
-        // Demo: laat 100 keer data zien van 1 station
-        else
-        {
-            $station = $jtpsRepo->findOneBy(['profile'=>$tokenId]);
-            $stn = $station->getStation()->getName();
-
-            for($x = 100; $x>0; $x--){
-                $data[] = $dataRepo->findOneBy(['stn'=> $stn]);
-            }
-        }
-
-        $weatherdata = [];
-        foreach($data as $dataitem){
-            $weatherdata[] = $dataitem;
-        }
+        // Create the token as an array
+        $data = [
+            // Json Token Id: an unique identifier for the token
+            'id'  => $tokenId
+        ];
 
         // Encode the array to a JWT string.
         $token =  JWT::encode(
-            $weatherdata,       // Data to be encoded in the JWT
+            $data,       // Data to be encoded in the JWT
             $secretKey,  // The signing key
             'HS512'  // Algorithm used to sign the token, see https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40#section-3
         );
