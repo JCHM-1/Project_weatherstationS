@@ -53,17 +53,17 @@ class DownloadController extends AbstractController
                     $weatherdata[] = $subdata;
                 }
         }
-        $filename = 'Data.txt';
+//        $filename = 'Data.txt';
 
         $fileContent = json_encode($weatherdata);
 
         $response = new Response($fileContent);
-        $disposition = HeaderUtils::makeDisposition(
-        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-        $filename
-        );
-
-        $response->headers->set('Content-Disposition', $disposition);
+//        $disposition = HeaderUtils::makeDisposition(
+//        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+//        $filename
+//        );
+//
+//        $response->headers->set('Content-Disposition', $disposition);
 
 
             // return $this->render('download/index.html.twig', [
