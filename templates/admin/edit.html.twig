@@ -36,7 +36,7 @@
         {% set num = 0 %}
         {% for station in stations %}
             <tr>
-                <td> {{ station.station.name }} {% set num = num + 1 %}</td>
+                <td><a class="text-info" href="{{ path('showStations', {stn: station.station.name}) }}"> {{ station.station.name }} {% set num = num + 1 %}</a></td>
                 <td>
                     <a class="text-danger" href="{{ path('removeStation', {id: profile.id, stn: station.station.name}) }}">Remove</a>
                 </td>
