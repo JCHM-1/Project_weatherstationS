@@ -51,7 +51,21 @@ class DownloadController extends AbstractController
         }
         $fileContent = json_encode($weatherData);
         $response = new Response($fileContent);
+//        $disposition = HeaderUtils::makeDisposition(
+//        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+//        $filename
+//        );
+//
+//        $response->headers->set('Content-Disposition', $disposition);
+
+
+            // return $this->render('download/index.html.twig', [
+            //     'controller_name' => 'DownloadController',
+            //     $response
+            // ]);
+
         $response->headers->set('Access-Control-Allow-Origin', '*');
+
         return $response;
     }
 
