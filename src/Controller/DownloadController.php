@@ -2,20 +2,16 @@
 
 namespace App\Controller;
 
+use App\Repository\NLRepo;
 use Doctrine\Common\Proxy\Exception\UnexpectedValueException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\HeaderUtils;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use App\Repository\ProfileRepo;
+use App\Repository\GLRepo;
 use App\Repository\DataRepo;
-use App\Repository\StationRepo;
 use App\Repository\JoinTableProfileStationRepo;
-use Symfony\Component\HttpFoundation\Request;
 
 class DownloadController extends AbstractController
 {
@@ -25,116 +21,118 @@ class DownloadController extends AbstractController
         $key = 'wap';
         try {
             $decoded = JWT::decode($token, new Key($key, 'HS512'));
-            $id = (array) json_decode(json_encode($decoded, true));
+            $id = (array)json_decode(json_encode($decoded, true));
         } catch (UnexpectedValueException $exception) {
             echo $exception->getMessage();
         }
 
-        $weatherdata = [];
-        $profileStations = $jtpsRepo->findBy(['profile'=>$id]);
+        $weatherData = [];
+        $profileStations = $jtpsRepo->findBy(['profile' => $id]);
         foreach ($profileStations as $station) {
             $stn = $station->getStation()->getName();
-            $data = $dataRepo->findBy(['stn'=>$stn]);
-                foreach ($data as $weatherinfo) {
-                    $subdata = [];
-                    $subdata['stn'] = $weatherinfo->getStn();
-                    $subdata['date'] = $weatherinfo->getDate()->format('Y-m-d');
-                    $subdata['time'] = $weatherinfo->getTime()->format('H:i:s');
-                    $subdata['temp'] =  $weatherinfo->getTemp();
-                    $subdata['dewp'] = $weatherinfo->getDewp();
-                    $subdata['stp'] = $weatherinfo->getStp();
-                    $subdata['slp'] = $weatherinfo->getSlp();
-                    $subdata['visib'] = $weatherinfo->getVisib();
-                    $subdata['wdsp'] = $weatherinfo->getWdsp();
-                    $subdata['prcp'] = $weatherinfo->getFrshtt();
-                    $subdata['sndp'] = $weatherinfo->getSndp();
-                    $subdata['cldc'] = $weatherinfo->getCldc();
-                    $subdata['wnddir'] = $weatherinfo->getWnddir();
-                    $weatherdata[] = $subdata;
-                }
+            $data = $dataRepo->findBy(['stn' => $stn]);
+            foreach ($data as $weatherInfo) {
+                $subData = [];
+                $subData['stn'] = $weatherInfo->getStn();
+                $subData['date'] = $weatherInfo->getDate()->format('Y-m-d');
+                $subData['time'] = $weatherInfo->getTime()->format('H:i:s');
+                $subData['temp'] = $weatherInfo->getTemp();
+                $subData['dewp'] = $weatherInfo->getDewp();
+                $subData['stp'] = $weatherInfo->getStp();
+                $subData['slp'] = $weatherInfo->getSlp();
+                $subData['visib'] = $weatherInfo->getVisib();
+                $subData['wdsp'] = $weatherInfo->getWdsp();
+                $subData['prcp'] = $weatherInfo->getFrshtt();
+                $subData['sndp'] = $weatherInfo->getSndp();
+                $subData['cldc'] = $weatherInfo->getCldc();
+                $subData['wnddir'] = $weatherInfo->getWnddir();
+                $weatherData[] = $subData;
+            }
         }
-//        $filename = 'Data.txt';
-
-        $fileContent = json_encode($weatherdata);
-
+        $fileContent = json_encode($weatherData);
         $response = new Response($fileContent);
-//        $disposition = HeaderUtils::makeDisposition(
-//        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-//        $filename
-//        );
-//
-//        $response->headers->set('Content-Disposition', $disposition);
-
-
-            // return $this->render('download/index.html.twig', [
-            //     'controller_name' => 'DownloadController',
-            //     $response
-            // ]);
-
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
-
-        // return new respone status ok
-
-//        JWT::encode($filecontent
-
-//        $response = new Response($fileContent);
-//
-//
-//        $disposition = HeaderUtils::makeDisposition(
-//            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-//            $filename
-//        );
-
-//        $response->headers->set('Content-Disposition', $disposition);
-
-
-        // return $this->render('download/index.html.twig', [
-        //     'controller_name' => 'DownloadController',
-        //     $response
-        // ]);
-
     }
-//
-//    public function()
-//{
-//header("Access-Control-Allow-Origin: *");
-//header("Content-Type: application/json; charset=UTF-8");
-//header("Access-Control-Allow-Methods: POST");
-//header("Access-Control-Max-Age: 3600");
-//header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-//
-//
-//$email = '';
-//$password = '';
-//
-//$databaseService = new DatabaseService();
-//$conn = $databaseService->getConnection();
-//
-//
-//
-//$data = json_decode(file_get_contents("php://input"));
-//
-//}
 
+    #[Route('/location/{token}', name: 'app_location')]
+    public function geolocations($token, JoinTableProfileStationRepo $jtpsRepo, GLRepo $GLRepo ) {
 
-//$filename = 'Data.txt';
-//
-//$fileContent = "Hello this is the content of my file";
-//
-//$response = new Response($fileContent);
-//
-//$disposition = HeaderUtils::makeDisposition(
-//ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-//$filename
-//);
-//
-//$response->headers->set('Content-Disposition', $disposition);
-//
-//
-//    // return $this->render('download/index.html.twig', [
-//    //     'controller_name' => 'DownloadController',
-//    //     $response
-//    // ]);
-//
-//return $response;
+        $key = 'wap';
+        try {
+            $decoded = JWT::decode($token, new Key($key, 'HS512'));
+            $id = (array)json_decode(json_encode($decoded, true));
+        } catch (UnexpectedValueException $exception) {
+            echo $exception->getMessage();
+        }
+
+        $locationData = [];
+        $profileStations = $jtpsRepo->findBy(['profile' => $id]);
+        foreach ($profileStations as $station) {
+            $stn = $station->getStation()->getName();
+            $stationLocation = $GLRepo->findBy(['stationName' => $stn]);
+            foreach ($stationLocation as $stationInfo) {
+                $subData = [];
+                $subData['stn'] = $stationInfo->getStationName();
+                $subData['country_code'] = $stationInfo->getCountryCode();
+                $subData['island'] = $stationInfo->getIsland();
+                $subData['county'] = $stationInfo->getCounty();
+                $subData['place'] = $stationInfo->getPlace();
+                $subData['hamlet'] = $stationInfo->getHamlet();
+                $subData['town'] = $stationInfo->getTown();
+                $subData['municipality'] = $stationInfo->getMunicipality();
+                $subData['state_district'] = $stationInfo->getStateDistrict();
+                $subData['administrative'] = $stationInfo->getAdministrative();
+                $subData['state'] = $stationInfo->getState();
+                $subData['village'] = $stationInfo->getVillage();
+                $subData['region'] = $stationInfo->getRegion();
+                $subData['province'] = $stationInfo->getProvince();
+                $subData['city'] = $stationInfo->getCity();
+                $subData['locality'] = $stationInfo->getLocality();
+                $subData['postcode'] = $stationInfo->getPostcode();
+                $subData['country'] = $stationInfo->getCountry();
+                $locationData[] = $subData;
+            }
+
+        }
+        $fileContent = json_encode($locationData);
+        $response = new Response($fileContent);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
+    }
+
+    #[Route('/GPS/{token}', name: 'app_GPS')]
+    public function GPSlocations($token, JoinTableProfileStationRepo $jtpsRepo, NLRepo $NLRepo ) {
+
+        $key = 'wap';
+        try {
+            $decoded = JWT::decode($token, new Key($key, 'HS512'));
+            $id = (array)json_decode(json_encode($decoded, true));
+        } catch (UnexpectedValueException $exception) {
+            echo $exception->getMessage();
+        }
+
+        $GPSData = [];
+        $profileStations = $jtpsRepo->findBy(['profile' => $id]);
+        foreach ($profileStations as $station) {
+            $stn = $station->getStation()->getName();
+            $GPSLocation = $NLRepo->findBy(['stationName' => $stn]);
+            foreach ($GPSLocation as $GPSInfo) {
+                $subData = [];
+                $subData['stn_name'] = $GPSInfo->getStationName()->getName();
+                $subData['name'] = $GPSInfo->getName();
+                $subData['ad_re1'] = $GPSInfo->getAdministrativeRegion1();
+                $subData['ad_re2'] = $GPSInfo->getAdministrativeRegion2();
+                $subData['code'] = $GPSInfo->getCountryCode()->getCountryCode();
+                $subData['longitude'] = $GPSInfo->getLongitude();
+                $subData['latitude'] = $GPSInfo->getLatitude();
+                $GPSData[] = $subData;
+            }
+        }
+        $fileContent = json_encode($GPSData);
+        $response = new Response($fileContent);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
+    }
+
 }
