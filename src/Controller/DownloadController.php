@@ -87,7 +87,7 @@ class DownloadController extends AbstractController
             $stationLocation = $GLRepo->findBy(['stationName' => $stn]);
             foreach ($stationLocation as $stationInfo) {
                 $subData = [];
-                $subData['stn'] = $stationInfo->getStationName();
+                $subData['stn'] = $stationInfo->getStationName()->getName();
                 $subData['country_code'] = $stationInfo->getCountryCode();
                 $subData['island'] = $stationInfo->getIsland();
                 $subData['county'] = $stationInfo->getCounty();

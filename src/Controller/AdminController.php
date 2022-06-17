@@ -9,20 +9,11 @@ use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\Mapping\JoinTable;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 use App\Entity\Subscriptions;
 use App\Entity\Profile;
 use App\Repository\ProfileRepo;
-use App\Entity\Data;
-use App\Entity\Nearestlocation;
-use App\Entity\Station;
 use App\Repository\StationRepo;
-use App\Repository\NLRepo;
-use App\Repository\GLRepo;
 use App\Repository\DataRepo;
 use Symfony\Component\HttpFoundation\Request;
 
