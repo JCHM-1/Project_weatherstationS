@@ -41,7 +41,6 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('main');
 
-
         }
 
         return $this->render('registration/register.html.twig', [
