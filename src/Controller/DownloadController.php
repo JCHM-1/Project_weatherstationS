@@ -46,6 +46,7 @@ class DownloadController extends AbstractController
                 $subData['sndp'] = $weatherInfo->getSndp();
                 $subData['cldc'] = $weatherInfo->getCldc();
                 $subData['wnddir'] = $weatherInfo->getWnddir();
+                $subData['hum'] = $this->Berekening_Humidity($weatherInfo->getTemp(), $weatherInfo->getDewp());
                 $weatherData[] = $subData;
             }
         }
@@ -149,4 +150,15 @@ class DownloadController extends AbstractController
         return $response;
     }
 
+    public function Berekening_Humidity(?float $getTemp, ?float $getDewp)
+    {
+        $Temp = $getTemp;
+        $Tempd = $getDewp;
+        $ETemp = 6.112 * exp(17.62 * $Temp / (243.12 + $Temp));
+        $ETempd = 6.112 * exp(17.62 * $Tempd / (243.12 + $Tempd));
+        $Result = 100 * $ETempd / $ETemp;
+
+
+        return round($Result, 2);
+    }
 }
