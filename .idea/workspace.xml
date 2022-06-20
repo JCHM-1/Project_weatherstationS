@@ -5,15 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="Datatoken opzet">
+      <change afterPath="$PROJECT_DIR$/assets/images/LogoIWA.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/clouds.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20220613132929.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/clouds.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/controllers.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/parameters.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DownloadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DownloadController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/profiles.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/profiles.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,6 +163,7 @@
       <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
       <path value="$PROJECT_DIR$/vendor/spomky-labs/aes-key-wrap" />
       <path value="$PROJECT_DIR$/vendor/web-token/jwt-framework" />
+      <path value="$PROJECT_DIR$/vendor/nelmio/cors-bundle" />
     </include_path>
   </component>
   <component name="ProblemsViewState">
@@ -172,25 +177,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DatabaseDriversLRU" value="mysql" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="full.screen.before.presentation.mode" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Do/Documents/GitHub/Project_weatherstationS/assets/images",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "web-ide.project.structure",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Do\Documents\GitHub\Project_weatherstationS\assets\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Do\Documents\GitHub\Project_weatherstationS\assets" />
       <recent name="$PROJECT_DIR$/public/build" />
       <recent name="C:\Users\jaron\Documents\Hanze\Year 2\Period 3 &amp; 4\Project_weatherstationS\templates\data" />
       <recent name="C:\Users\jaron\Documents\Hanze\Year 2\Period 3 &amp; 4\Project_weatherstationS\templates\main" />
@@ -200,7 +203,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="96bf0b85-9b96-432c-b1fe-8b13efd5f7e4" name="Changes" comment="Registratie pagina" />
+      <changelist id="a8c64de0-04a1-4bc4-ad02-1611687cf110" name="Changes" comment="Datatoken opzet" />
       <created>1648472322997</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -213,6 +216,14 @@
       <workItem from="1649554486721" duration="8874000" />
       <workItem from="1649717071978" duration="9301000" />
       <workItem from="1650028519662" duration="855000" />
+      <workItem from="1655124958813" duration="1196000" />
+      <workItem from="1655126237165" duration="653000" />
+      <workItem from="1655126912117" duration="2236000" />
+      <workItem from="1655144716773" duration="27000" />
+      <workItem from="1655144761832" duration="2639000" />
+      <workItem from="1655148327769" duration="4423000" />
+      <workItem from="1655241857887" duration="851000" />
+      <workItem from="1655725831164" duration="641000" />
     </task>
     <task id="LOCAL-00001" summary="Registratie pagina">
       <created>1648765507567</created>
