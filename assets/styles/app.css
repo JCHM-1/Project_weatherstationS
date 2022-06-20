@@ -1,5 +1,5 @@
 body {
-    background-image: url("/../images/clouds.jpg");
+    background-image: url("../../public/build/clouds.jpg");
     background-color: lightgray;
 }
 
